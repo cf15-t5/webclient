@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+:root{
+  --background:#F0F0F0;
+  --blue:#0C5EFF;
+  --red:#FF7070;
+  --green:#10CC00;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.eventList{
+  margin: 20px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.eventPrice{
+  color: var(--red);
+  font-weight: 700;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.eventCardDetail{
+  font-size: 12px;
+  flex-grow: inherit;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+.eventCardDetail p{
+  margin: 0px;
+}
+.imageDetailBackground{
+  height: 60vh;
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  filter: brightness(40%);
+  filter: blur(40%);  
+}
+.imagePoster{
+  height: 60vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  object-position: 50% 50%;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.eventDetailDescription{
+  margin: 10px;
+  margin-bottom: 20vh;
+}
+.eventDetailBuy{
+  background-color: white;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  padding-block: 20px;
+  bottom: 0px;
+  width: 100%;
+}
+.eventTicket{
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.eventTicket img{
+  height: 20vh;
+  width: 100%;
+}
+a{
+  text-decoration: none;
+}
+@media screen and (min-width: 768px) {
+  .search{
+    position: absolute;
+    width: 75%;
+    top: 40%;
+    right: 12%;
+  }
+  .eventList{
+    margin: 70px 50px;
+  }
+  .eventDetailTitle{
+    width: fit-content;
+  }
+  .eventDetailDescription{
+    margin-bottom: 0px;
+  }
+  .eventDetailBuy{
+    background-color: transparent;
+    position: relative;
+    display: inline;
+    width: fit-content;
+  }
+  .eventTicket{
+    margin-inline: 15vw;
+  }
+  .eventTicket img{
+    height: 25vh;
+    width: fit-content;
+  }
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
