@@ -8,6 +8,7 @@ import HistoryTransaction from './pages/HistoryTransaction';
 import TiketPage from './pages/TiketPage';
 import Data from './pages/Admin/Data'
 import Request from './pages/Admin/Request';
+import Profile from './pages/Profile';
 function App() {
   return (
     <Router>
@@ -18,7 +19,8 @@ function App() {
           <Route path='/eventDetail' element={<EventDetail/>}/>
           <Route path='/historyTransaction' element={<HistoryTransaction/>}/>
           <Route path='/ticket' element={<TiketPage/>}/>
-          
+          <Route path='/profile' element={<Profile/>}/>
+
           <Route path='/data' element={<Data/>}/>
           <Route path='/request' element={<Request/>}/>
         </Routes>
