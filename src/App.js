@@ -9,6 +9,7 @@ import TiketPage from './pages/TiketPage';
 import Data from './pages/Admin/Data'
 import Request from './pages/Admin/Request';
 import Profile from './pages/Profile';
+import RegisterUser from './pages/RegisterUser';
 function App() {
   return (
     <Router>
@@ -20,6 +21,7 @@ function App() {
           <Route path='/historyTransaction' element={<HistoryTransaction/>}/>
           <Route path='/ticket' element={<TiketPage/>}/>
           <Route path='/profile' element={<Profile/>}/>
+          <Route path='/register' element={<RegisterUser/>}/>
 
           <Route path='/data' element={<Data/>}/>
           <Route path='/request' element={<Request/>}/>

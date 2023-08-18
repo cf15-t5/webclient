@@ -9,7 +9,7 @@ function NavigationBar(){
     EO : "EO",
     Admin : "Admin"
   }
-  const userLogin = "Apriana"
+  const userLogin = null
   const getRole = userRole.Admin
   return (
     <Navbar collapseOnSelect expand="md" className="bg-body-tertiary">
