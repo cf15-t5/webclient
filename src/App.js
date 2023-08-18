@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -10,6 +9,7 @@ import Data from './pages/Admin/Data'
 import Request from './pages/Admin/Request';
 import Profile from './pages/Profile';
 import RegisterUser from './pages/RegisterUser';
+
 function App() {
   return (
     <Router>
