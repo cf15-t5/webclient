@@ -1,6 +1,4 @@
 import imageHome from '../assets/imgHomepage.png'
-import Image from 'react-bootstrap/Image';
-import { Form,Row,Col } from 'react-bootstrap';
 import CardEvent from '../components/CardEvent';
 
 import imageEvent1 from '../assets/exposter.png'
@@ -14,7 +12,7 @@ function Homepage(){
   const EventData = [
     {
       Img:imageEvent1,
-      EventTitle:"DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
+      EventTitle:"DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG sdakkdkashdkhaskd haskhdjkashdjkash jkhdkjashdkjashjkdhasjkhdkjashdkh as",
       Date:"19 Agt 2023",
       Location:"Bandung",
       Price:"200.000",
@@ -55,45 +53,46 @@ function Homepage(){
   ]
   return(
     <section style={{height:'80vh'}}>
-      <Image src={imageHome} className='h-50 w-100 object-fit-cover' style={{objectPosition:'50% 80%'}} fluid/>
-      <div style={{width:'100vw'}}>
-        <div className='bg-white rounded search'>
-          <Form className='p-2 px-4'>
-            <Row className='mb-3'>
-              <Form.Group as={Col} md={3} controlId="formGridEvent">
-                <Form.Label>Nama Event</Form.Label>
-                <Form.Control type="text" width={100}/>
-              </Form.Group>
-              <Form.Group as={Col} controlId="formGridKategori">
-                <Form.Label>Kategori</Form.Label>
-                <Form.Select defaultValue="null">
-                  <option>Kategori</option>
-                  <option>...</option>
-                </Form.Select>
-              </Form.Group>
-              <Form.Group as={Col} controlId="formGridTanggal">
-                <Form.Label>Tanggal</Form.Label>
-                <Form.Control type="date" />
-              </Form.Group>
-              <Form.Group as={Col} controlId="formGridLokasi">
-                <Form.Label>Lokasi</Form.Label>
-                <Form.Select defaultValue="Lokasi">
-                  <option>Lokasi</option>
-                  <option>...</option>
-                </Form.Select>
-              </Form.Group>
-            </Row>
-          </Form>
+      <img src={imageHome} className='h-2/4 w-full object-cover object-center' alt='poster'/>
+      <div className='w-screen relative'>
+        <div className='bg-white w-full md:absolute mx-auto md:left-40 md:right-40 md:-top-12 md:rounded-lg md:w-fit '>
+          <form className='flex gap-5 p-5 flex-wrap md:flex-nowrap'>
+            <div className='flex-grow'>
+              <label for="nameEvent" className="block mb-2 text-sm font-medium text-gray-900">Nama Event</label>
+              <input type="text" id="nameEvent" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 d"/>
+            </div>
+            <div className='flex-grow'>
+              <label for="category" className="block mb-2 text-sm font-medium text-gray-900 ">Kategori</label>
+              <select defaultValue={null} id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                <option selected>pilih kategori</option>
+                <option value="US">United States</option>
+              </select>
+            </div>
+            <div className='flex-grow'>
+              <label for="date" className="block mb-2 text-sm font-medium text-gray-900">Tanggal</label>
+              <input type="date" id="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 d"/>
+            </div>
+            <div className='flex-grow'>
+              <label for="location" className="block mb-2 text-sm font-medium text-gray-900 ">Kategori</label>
+              <select defaultValue={null} id="location" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                <option selected>pilih kategori</option>
+                <option value="US">United States</option>
+              </select>
+            </div>
+          </form>
         </div>
       </div>
-      <div className='eventList'> 
-      {EventData.map((event)=>{
-        return(
-          <Link to={'/eventDetail'}>
-            <CardEvent {...event}/>
-          </Link>
-        )
-      })}
+      <div className='md:px-16 py-3 md:py-20'> 
+        <div className='flex flex-wrap justify-center gap-5'>
+          {EventData.map((event)=>{
+            return(
+              <Link to={'/eventDetail'}>
+                <CardEvent {...event}/>
+              </Link>
+            )
+          })}
+        </div>
+        
       </div>
     </section>  
   )
