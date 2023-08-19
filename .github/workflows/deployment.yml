@@ -39,10 +39,9 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_PORT }}
           script: |
-            cd webclient/
+            cd ./webclient
             rm -rf build
             git pull
-            npm i
+            npm install
             npm run build
             pm2 restart seticket
-            # Replace the following line with your
