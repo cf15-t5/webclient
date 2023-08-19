@@ -15,13 +15,13 @@ const Register = () => {
     console.log(data);
   };
   return (
-    <div className="flex flex-col sm:flex-row justify-center items-center w-full min-h-screen bg-white font-sans">
+    <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white font-sans">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
         <img src={RegisterImage} className="h-full object-cover" />
       </div>
       <div className="flex flex-col items-center justify-center w-full sm:w-[50%] p-5">
         <form onSubmit={submitRegister} className="w-full">
-          <p className="font-bold text-[24px] mb-5">Daftar</p>
+          <p className="font-bold text-[24px] pb-5">Daftar</p>
           <div className="space-y-3">
             <input
               type="text"
@@ -52,7 +52,7 @@ const Register = () => {
             />
             <input
               type="password"
-              placeholder="Comfirm Password"
+              placeholder="Confirm Password"
               className="w-full p-2.5 rounded-lg bg-slate-100"
               value={data.confirmPassword}
               onChange={(e) => {
@@ -63,12 +63,12 @@ const Register = () => {
               type="submit"
               className="w-full text-center bg-primary-500 rounded-md text-white py-2 px-6"
             >
-              Masuk
+              Daftar
             </button>
             <p>
               Sudah punya akun?{" "}
               <a className="text-primary-500" href="/register">
-                Daftar
+                Masuk
               </a>
             </p>
           </div>

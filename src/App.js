@@ -10,6 +10,7 @@ import Request from "./pages/Admin/Request";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import EORegister from "./pages/EORegister";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/eo-register" element={<EORegister />} />
 
           <Route path="/data" element={<Data />} />
           <Route path="/request" element={<Request />} />

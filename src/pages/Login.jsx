@@ -13,7 +13,7 @@ const Login = () => {
     console.log(data);
   };
   return (
-    <div className="flex flex-col sm:flex-row justify-center items-center w-full min-h-screen bg-white font-sans">
+    <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white font-sans">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
         <img src={LoginImage} className="h-full object-cover" />
       </div>
