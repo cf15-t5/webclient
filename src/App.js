@@ -1,33 +1,34 @@
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Homepage from './pages/Homepage';
-import EventDetail from './pages/EventDetail';
-import HistoryTransaction from './pages/HistoryTransaction';
-import TiketPage from './pages/TiketPage';
-import Data from './pages/Admin/Data'
-import Request from './pages/Admin/Request';
-import Profile from './pages/Profile';
-import RegisterUser from './pages/RegisterUser';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Homepage from "./pages/Homepage";
+import EventDetail from "./pages/EventDetail";
+import HistoryTransaction from "./pages/HistoryTransaction";
+import TiketPage from "./pages/TiketPage";
+import Data from "./pages/Admin/Data";
+import Request from "./pages/Admin/Request";
+import Profile from "./pages/Profile";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <Router>
-      <div className='App'>
-        <Navbar/>
+      <div className="App">
+        <Navbar />
         <Routes>
-          <Route path='/' element={<Homepage/>}/>
-          <Route path='/eventDetail' element={<EventDetail/>}/>
-          <Route path='/historyTransaction' element={<HistoryTransaction/>}/>
-          <Route path='/ticket' element={<TiketPage/>}/>
-          <Route path='/profile' element={<Profile/>}/>
-          <Route path='/register' element={<RegisterUser/>}/>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/eventDetail" element={<EventDetail />} />
+          <Route path="/historyTransaction" element={<HistoryTransaction />} />
+          <Route path="/ticket" element={<TiketPage />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
-          <Route path='/data' element={<Data/>}/>
-          <Route path='/request' element={<Request/>}/>
+          <Route path="/data" element={<Data />} />
+          <Route path="/request" element={<Request />} />
         </Routes>
       </div>
-      
     </Router>
   );
 }

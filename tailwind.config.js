@@ -7,14 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily:{
-        montserrat :'Montserrat'
+      fontFamily: {
+        montserrat: "Montserrat",
       },
-      colors:{
+      colors: {
         "primary-500": "#3E54D3",
-      }
+        "primary-100": "#ECF1FF",
+      },
     },
   },
   plugins: [],
-}
-
+};
