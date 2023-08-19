@@ -12,14 +12,11 @@ const EORegister = () => {
 
   const [isRequestSent, setIsRequestSent] = useState(false);
 
-  const passwordIsSame = (password,confPassword) => {
-    if(password==confPassword) return true
-    return false
-  }
+
 
   const submitRegister = async (e) => {
     e.preventDefault();
-    if (passwordIsSame(data.password,data.confirmPassword)){
+    if (data.password===data.confirmPassword){
       setIsRequestSent(true);
       console.log(data);
     }else{
@@ -29,7 +26,7 @@ const EORegister = () => {
   return (
     <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white font-sans">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
-        <img src={RegisterImage} className="h-full object-cover" />
+        <img src={RegisterImage} className="h-full object-cover" alt="imageRegister"/>
       </div>
       <div className="flex flex-col flex-grow items-center justify-center w-full sm:w-[50%] p-5 px-20 mt-10">
         <p className="font-bold text-[24px] mb-5">Pengajuan Permohonan</p>
@@ -42,7 +39,7 @@ const EORegister = () => {
               kepada pengguna kami.
             </p>
             <button className="text-[14px] w-full flex flex-row justify-center items-center gap-2 p-2 bg-primary-100 rounded-md mt-5">
-              <img src={EOLogoRegister} className="w-[28px] h-auto" />
+              <img src={EOLogoRegister} className="w-[28px] h-auto" alt="iconEI" />
               Pengajuan Sedang Diproses
             </button>
           </div>
@@ -51,7 +48,7 @@ const EORegister = () => {
             <div className="space-y-3">
               <label 
                 for="companyName" 
-                class="block text-sm font-medium">
+                className="block text-sm font-medium">
                   Nama Perusahaan
               </label>
               <input
@@ -66,7 +63,7 @@ const EORegister = () => {
               />
               <label 
                 for="email" 
-                class="block text-sm font-medium">
+                className="block text-sm font-medium">
                   Email
               </label>
               <input
@@ -81,7 +78,7 @@ const EORegister = () => {
               />
               <label 
                 for="password" 
-                class="block text-sm font-medium">
+                className="block text-sm font-medium">
                   Password
               </label>
               <input
@@ -96,7 +93,7 @@ const EORegister = () => {
               />
               <label 
                 for="confPassword" 
-                class="block text-sm font-medium">
+                className="block text-sm font-medium">
                   Confirm Password
               </label>
               <input

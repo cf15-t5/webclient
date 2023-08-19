@@ -8,7 +8,7 @@ function TiketPage() {
       <div className='lg:mx-48 my-10'>
         <Tiket/>
         <Tiket/>
-        </div>
+      </div>
     </section>
   )
 }

@@ -2,29 +2,41 @@ import React, { useState } from "react";
 import LoginImage from "../assets/imgHomepage.png";
 import EOLogoRegister from "../assets/eoRegister.png";
 import { NavLink } from "react-router-dom";
+import axios from "../api/axios";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
 
-  const submitLogin = async (e) => {
+  const [data, setData] = useState({
+    email: "admin3@app.com",
+    password: "password",
+  });
+  console.log(data)
+  const [loading,setLoading] = useState(false)
+
+  const Login= async (e)=>{
     e.preventDefault();
-    console.log(data);
-  };
+    setLoading(true)
+    axios.post("/auth/login",data)
+    .then((res)=>console.log(res.data))
+    .catch((err)=>{
+      console.log(err.response)
+    })
+    .finally(()=>{setLoading(false);toast.success("Berhasil Login")})
+  }
+
   return (
     <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white font-sans">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
         <img src={LoginImage} className="h-full object-cover" alt="loginImage"/>
       </div>
       <div className="flex flex-col flex-grow items-center justify-center w-full sm:w-[50%] p-5 px-20">
-        <form onSubmit={submitLogin} className="w-full">
+        <form onSubmit={Login} className="w-full">
           <p className="font-bold text-[24px] mb-5">Masuk</p>
           <div className="space-y-3">
             <label 
               for="email" 
-              class="block text-sm font-medium">
+              className="block text-sm font-medium">
                 Email
             </label>
             <input
@@ -40,7 +52,7 @@ const Login = () => {
             />
             <label 
               for="password" 
-              class="block text-sm font-medium">
+              className="block text-sm font-medium">
                 Password
             </label>
             <input
@@ -56,9 +68,9 @@ const Login = () => {
             />
             <button 
               type="submit" 
-              class="w-full btn-primary"
+              className="w-full btn-primary"
             >
-              Masuk
+              {loading?"Loading...":"Masuk"}
             </button>
             <p>
               Belum punya akun?{" "}

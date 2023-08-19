@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
 import EventDetail from "./pages/EventDetail";
@@ -11,11 +12,15 @@ import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import EORegister from "./pages/EORegister";
+import MyEvent from "./pages/EO/MyEvent";
+import CreateEvent from "./pages/EO/CreateEvent";
+
 
 function App() {
   return (
     <Router>
       <div className="App">
+        
         <Routes>
           <Route path="/" element={<Navbar/>}>
             <Route index element={<Homepage />} />
@@ -26,6 +31,9 @@ function App() {
 
             <Route path="/data" element={<Data />} />
             <Route path="/request" element={<Request />} />
+
+            <Route path="/myEvent" element={<MyEvent/>} />
+            <Route path="/createEvent" element={<CreateEvent/>} />
           </Route>
           
           <Route path="/register" element={<Register />} />

@@ -6,7 +6,6 @@ function Profile() {
   return (
     <section className='my-3 mx-5'>
       <h5>Detail Akun</h5>
-      <hr/>
       <div className="grid grid-cols-3 gap-4 md:justify-start">
         <div className='col-span-3 md:col-span-1'>
           <Wallet/>
