@@ -12,17 +12,26 @@ const EORegister = () => {
 
   const [isRequestSent, setIsRequestSent] = useState(false);
 
+  const passwordIsSame = (password,confPassword) => {
+    if(password==confPassword) return true
+    return false
+  }
+
   const submitRegister = async (e) => {
     e.preventDefault();
-    setIsRequestSent(true);
-    console.log(data);
+    if (passwordIsSame(data.password,data.confirmPassword)){
+      setIsRequestSent(true);
+      console.log(data);
+    }else{
+      console.log("failed")
+    }
   };
   return (
     <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white font-sans">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
         <img src={RegisterImage} className="h-full object-cover" />
       </div>
-      <div className="flex flex-col items-center justify-center w-full sm:w-[50%] p-5 mt-10">
+      <div className="flex flex-col flex-grow items-center justify-center w-full sm:w-[50%] p-5 px-20 mt-10">
         <p className="font-bold text-[24px] mb-5">Pengajuan Permohonan</p>
         {isRequestSent ? (
           <div>
@@ -38,9 +47,15 @@ const EORegister = () => {
             </button>
           </div>
         ) : (
-          <form onSubmit={submitRegister} className="w-full">
+          <form onSubmit={submitRegister} className="w-full ">
             <div className="space-y-3">
+              <label 
+                for="companyName" 
+                class="block text-sm font-medium">
+                  Nama Perusahaan
+              </label>
               <input
+                id="companyName"
                 type="text"
                 placeholder="Nama Perusahaan"
                 className="w-full p-2.5 rounded-lg bg-slate-100"
@@ -49,7 +64,13 @@ const EORegister = () => {
                   setData({ ...data, namaPerusahaan: e.target.value });
                 }}
               />
+              <label 
+                for="email" 
+                class="block text-sm font-medium">
+                  Email
+              </label>
               <input
+                id="email"
                 type="email"
                 placeholder="Email"
                 className="w-full p-2.5 rounded-lg bg-slate-100"
@@ -58,7 +79,13 @@ const EORegister = () => {
                   setData({ ...data, email: e.target.value });
                 }}
               />
+              <label 
+                for="password" 
+                class="block text-sm font-medium">
+                  Password
+              </label>
               <input
+                id="password"
                 type="password"
                 placeholder="Password"
                 className="w-full p-2.5 rounded-lg bg-slate-100"
@@ -67,7 +94,13 @@ const EORegister = () => {
                   setData({ ...data, password: e.target.value });
                 }}
               />
+              <label 
+                for="confPassword" 
+                class="block text-sm font-medium">
+                  Confirm Password
+              </label>
               <input
+                id="confPassword"
                 type="password"
                 placeholder="Confirm Password"
                 className="w-full p-2.5 rounded-lg bg-slate-100"
@@ -78,7 +111,7 @@ const EORegister = () => {
               />
               <button
                 type="submit"
-                className="w-full text-center bg-primary-500 rounded-md text-white py-2 px-6"
+                className="w-full btn-primary "
               >
                 Ajukan
               </button>

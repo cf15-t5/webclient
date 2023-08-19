@@ -16,21 +16,23 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav className="relative">
-          <Navbar />
-        </nav>
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/eventDetail" element={<EventDetail />} />
-          <Route path="/historyTransaction" element={<HistoryTransaction />} />
-          <Route path="/ticket" element={<TiketPage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<Navbar/>}>
+            <Route index element={<Homepage />} />
+            <Route path="/eventDetail" element={<EventDetail />} />
+            <Route path="/historyTransaction" element={<HistoryTransaction />} />
+            <Route path="/ticket" element={<TiketPage />} />
+            <Route path="/profile" element={<Profile />} />
+
+            <Route path="/data" element={<Data />} />
+            <Route path="/request" element={<Request />} />
+          </Route>
+          
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/eo-register" element={<EORegister />} />
 
-          <Route path="/data" element={<Data />} />
-          <Route path="/request" element={<Request />} />
+          
         </Routes>
       </div>
     </Router>
