@@ -19,9 +19,8 @@ jobs:
           node-version: '18'
 
       - name: Install Node.js Dependencies
-        working-directory: ./webclient
         run: |
-          npm i
+          npm install
 
       - name: Build React Application
         working-directory: ./webclient
