@@ -15,7 +15,9 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <nav className="relative">
+          <Navbar />
+        </nav>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/eventDetail" element={<EventDetail />} />

@@ -1,22 +1,29 @@
-import Card from 'react-bootstrap/Card';
+// import Card from 'react-bootstrap/Card';
 
+function CardEvent({ Img, EventTitle, Date, Location, Price, Status }) {
 
+    const truncateTitle = (title) => {
+        const maxTitle = 55;
+        if (title.length > maxTitle) {
+          return title.substring(0, maxTitle) + "...";
+        }
+        return title;
+    };
 
-function CardEvent({Img,EventTitle,Date,Location,Price,Status}) {
   return (
-    <Card style={{ width: '18rem', height:'100%' }}>
-      <Card.Img variant="top" className='object-fit-cover' style={{height:'25vh'}} src={Img} />
-      <Card.Body className='d-flex flex-column '>
-        <Card.Title><h6 className='fw-bold mb-0'>{EventTitle}</h6></Card.Title>
-        <Card.Text className='eventCardDetail'>
-          <p>{Date}</p>
-          <p className='mb-3'>{Location}</p>
-          <h5 className='eventPrice mt-auto mb-0'>IDR {Price}</h5>
-          <p style={{color:"var(--green)"}}>{Status}</p>
-        </Card.Text>
-      </Card.Body>
-    </Card>
-  )
+    <div class="w-72 bg-white border rounded-lg shadow flex flex-col">
+        <img class="rounded-t-lg object-cover h-40 w-full" src={Img} alt="poster" />
+        <div class="p-3">
+            <h5 class="mb-2 text-base font-bold tracking-tight">
+            {truncateTitle(EventTitle)}
+            </h5>
+            <p class="text-sm">{Date}</p>
+            <p class="mb-3 text-sm">{Location}</p>
+            <h6 className="text-red-300 font-bold text-lg mt-10">IDR {Price}</h6>
+            <p className="text-green-400 text-sm font-bold">{Status}</p>
+        </div>
+    </div>
+  );
 }
 
-export default CardEvent
+export default CardEvent;

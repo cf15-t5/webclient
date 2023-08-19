@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from 'react-bootstrap';
 import axios from '../api/axios';
 
 function RegisterUser() {
@@ -22,7 +21,7 @@ function RegisterUser() {
   return (
     <div>
       RegisterUser
-      <Button onClick={Register}>{loading?"LOADING..":"SUBMIT"}</Button>
+      <button onClick={Register} class="text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">{loading?"LOADING..":"SUBMIT"}</button>
     </div>
   )
 }
