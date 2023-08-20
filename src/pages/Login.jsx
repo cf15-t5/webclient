@@ -6,38 +6,46 @@ import axios from "../api/axios";
 import { toast } from "react-hot-toast";
 
 const Login = () => {
-
   const [data, setData] = useState({
     email: "admin3@app.com",
     password: "password",
   });
-  console.log(data)
-  const [loading,setLoading] = useState(false)
+  console.log(data);
+  const [loading, setLoading] = useState(false);
 
-  const Login= async (e)=>{
+  const Login = async (e) => {
     e.preventDefault();
-    setLoading(true)
-    axios.post("/auth/login",data)
-    .then((res)=>console.log(res.data))
-    .catch((err)=>{
-      console.log(err.response)
-    })
-    .finally(()=>{setLoading(false);toast.success("Berhasil Login")})
-  }
+    setLoading(true);
+    axios
+      .post("/auth/login", data)
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Berhasil Login");
+      })
+      .catch((err) => {
+        console.log(err.response);
+        toast.error("Error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
-    <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white font-sans">
+    <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
-        <img src={LoginImage} className="h-full object-cover" alt="loginImage"/>
+        <img
+          src={LoginImage}
+          className="h-full object-cover"
+          alt="loginImage"
+        />
       </div>
       <div className="flex flex-col flex-grow items-center justify-center w-full sm:w-[50%] p-5 px-20">
         <form onSubmit={Login} className="w-full">
           <p className="font-bold text-[24px] mb-5">Masuk</p>
           <div className="space-y-3">
-            <label 
-              for="email" 
-              className="block text-sm font-medium">
-                Email
+            <label for="email" className="block text-sm font-medium">
+              Email
             </label>
             <input
               id="email"
@@ -50,10 +58,8 @@ const Login = () => {
               }}
               required
             />
-            <label 
-              for="password" 
-              className="block text-sm font-medium">
-                Password
+            <label for="password" className="block text-sm font-medium">
+              Password
             </label>
             <input
               id="password"
@@ -66,24 +72,29 @@ const Login = () => {
               }}
               required
             />
-            <button 
-              type="submit" 
-              className="w-full btn-primary"
-            >
-              {loading?"Loading...":"Masuk"}
+            <button type="submit" className="w-full btn-primary">
+              {loading ? "Loading..." : "Masuk"}
             </button>
             <p>
               Belum punya akun?{" "}
-              <NavLink to="/register" className="text-primary-500 font-semibold" >
+              <NavLink
+                to="/register"
+                className="text-primary-500 font-semibold"
+              >
                 Daftar
               </NavLink>
             </p>
           </div>
-          <NavLink 
-            to={'/eo-register'} 
-            className="text-[14px] w-full flex flex-row justify-center items-center gap-2 p-2 bg-primary-100 rounded-md text-primary-500 mt-20 hover:bg-slate-100">
-              <img src={EOLogoRegister} className="w-[28px] h-auto" alt="iconEORegister"/>
-              Klik untuk Pendaftaran sebagai Event Organizer
+          <NavLink
+            to={"/eo-register"}
+            className="text-[14px] w-full flex flex-row justify-center items-center gap-2 p-2 bg-primary-100 rounded-md text-primary-500 mt-20 hover:bg-slate-100"
+          >
+            <img
+              src={EOLogoRegister}
+              className="w-[28px] h-auto"
+              alt="iconEORegister"
+            />
+            Klik untuk Pendaftaran sebagai Event Organizer
           </NavLink>
         </form>
       </div>

@@ -12,21 +12,23 @@ const EORegister = () => {
 
   const [isRequestSent, setIsRequestSent] = useState(false);
 
-
-
   const submitRegister = async (e) => {
     e.preventDefault();
-    if (data.password===data.confirmPassword){
+    if (data.password === data.confirmPassword) {
       setIsRequestSent(true);
       console.log(data);
-    }else{
-      console.log("failed")
+    } else {
+      console.log("failed");
     }
   };
   return (
-    <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white font-sans">
+    <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
-        <img src={RegisterImage} className="h-full object-cover" alt="imageRegister"/>
+        <img
+          src={RegisterImage}
+          className="h-full object-cover"
+          alt="imageRegister"
+        />
       </div>
       <div className="flex flex-col flex-grow items-center justify-center w-full sm:w-[50%] p-5 px-20 mt-10">
         <p className="font-bold text-[24px] mb-5">Pengajuan Permohonan</p>
@@ -39,17 +41,19 @@ const EORegister = () => {
               kepada pengguna kami.
             </p>
             <button className="text-[14px] w-full flex flex-row justify-center items-center gap-2 p-2 bg-primary-100 rounded-md mt-5">
-              <img src={EOLogoRegister} className="w-[28px] h-auto" alt="iconEI" />
+              <img
+                src={EOLogoRegister}
+                className="w-[28px] h-auto"
+                alt="iconEI"
+              />
               Pengajuan Sedang Diproses
             </button>
           </div>
         ) : (
           <form onSubmit={submitRegister} className="w-full ">
             <div className="space-y-3">
-              <label 
-                for="companyName" 
-                className="block text-sm font-medium">
-                  Nama Perusahaan
+              <label for="companyName" className="block text-sm font-medium">
+                Nama Perusahaan
               </label>
               <input
                 id="companyName"
@@ -61,10 +65,8 @@ const EORegister = () => {
                   setData({ ...data, namaPerusahaan: e.target.value });
                 }}
               />
-              <label 
-                for="email" 
-                className="block text-sm font-medium">
-                  Email
+              <label for="email" className="block text-sm font-medium">
+                Email
               </label>
               <input
                 id="email"
@@ -76,10 +78,8 @@ const EORegister = () => {
                   setData({ ...data, email: e.target.value });
                 }}
               />
-              <label 
-                for="password" 
-                className="block text-sm font-medium">
-                  Password
+              <label for="password" className="block text-sm font-medium">
+                Password
               </label>
               <input
                 id="password"
@@ -91,10 +91,8 @@ const EORegister = () => {
                   setData({ ...data, password: e.target.value });
                 }}
               />
-              <label 
-                for="confPassword" 
-                className="block text-sm font-medium">
-                  Confirm Password
+              <label for="confPassword" className="block text-sm font-medium">
+                Confirm Password
               </label>
               <input
                 id="confPassword"
@@ -106,10 +104,7 @@ const EORegister = () => {
                   setData({ ...data, confirmPassword: e.target.value });
                 }}
               />
-              <button
-                type="submit"
-                className="w-full btn-primary "
-              >
+              <button type="submit" className="w-full btn-primary ">
                 Ajukan
               </button>
             </div>
