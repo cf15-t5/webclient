@@ -4,25 +4,33 @@ import EOLogoRegister from "../assets/eoRegister.png";
 import { NavLink } from "react-router-dom";
 import axios from "../api/axios";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
+  const navigate = useNavigate()
   const [data, setData] = useState({
     email: "admin3@app.com",
-    password: "password",
+    password: "password"
   });
   console.log(data)
   const [loading,setLoading] = useState(false)
-
-  const Login= async (e)=>{
+  const Login = async (e)=>{
     e.preventDefault();
     setLoading(true)
-    axios.post("/auth/login",data)
-    .then((res)=>console.log(res.data))
+    axios.post("/auth/login",data,{
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((res) => {
+      localStorage.setItem("SE_TIKET", res.data.data.token);
+      toast.success("Berhasil Login");
+      console.log(res.data)
+      navigate('/')
+      window.location.reload()
+    })
     .catch((err)=>{
       console.log(err.response)
     })
-    .finally(()=>{setLoading(false);toast.success("Berhasil Login")})
+    .finally(()=>{setLoading(false)})
   }
 
   return (

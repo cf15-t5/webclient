@@ -1,16 +1,16 @@
-import React from "react";
+import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import useAuth from "../context/AuthContext";
 
 function NavigationBar() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const userRole = {
-    User: "User",
+    User: "USER",
     EO: "EO",
-    Admin: "Admin",
+    Admin: "ADMIN",
   };
-
-  const userLogin = null;
-  const getRole = userRole.EO;
+  const { getRole } = useAuth()
+  const userLoginRole = getRole()
   return (
     <>
       <nav className="bg-white relative w-full z-20 top-0 left-0 border-b border-gray-200 ">
@@ -26,7 +26,7 @@ function NavigationBar() {
             </span>
           </div>
           <div className="flex md:order-2 bg-pri">
-            {!userLogin?
+            {!userLoginRole?
             <div className="flex">
               <NavLink to={'/login'}>
                 <button className="hidden sm:block text-black hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3">
@@ -39,7 +39,7 @@ function NavigationBar() {
                 </button>
               </NavLink>
               
-            </div> : <NavLink to={'/profile'} className='self-center mr-3'><p>Halo, {userLogin}</p></NavLink>}
+            </div> : <NavLink to={'/profile'} className='self-center mr-3'><p>Halo, Name</p></NavLink>}
 
             <button
               onClick={() => setOpen(!open)}
@@ -73,7 +73,7 @@ function NavigationBar() {
                 className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
               >
               </NavLink>
-              {getRole===userRole.Admin?
+              {userLoginRole===userRole.Admin?
               <>
                 <NavLink
                 to="/data"
@@ -90,7 +90,7 @@ function NavigationBar() {
                   Permintaan
                 </NavLink>
               </>:null}
-              {getRole===userRole.EO?
+              {userLoginRole===userRole.EO?
               <>
                 <NavLink
                 to="/myEvent"

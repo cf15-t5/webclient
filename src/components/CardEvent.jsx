@@ -1,4 +1,3 @@
-// import Card from 'react-bootstrap/Card';
 
 function CardEvent({ Img, EventTitle, Date, Location, Price, Status }) {
 
