@@ -63,17 +63,15 @@ function NavigationBar() {
             </button>
           </div>
           <div
-            className={`items-center justify-between ${
-              open ? "opacity-100 max-h-96 transition-all ease-in-out duration-300" : "opacity-0 md:opacity-100 max-h-0 transition-all ease-in-out duration-300"
-            } w-full md:flex md:w-auto md:order-1`}
+            className={`items-center justify-between 
+              ${open ? "opacity-100 max-h-96 transition-all ease-in-out duration-300" : "opacity-0 md:opacity-100 max-h-0 transition-all ease-in-out duration-300"} w-full md:flex md:w-auto md:order-1 `}
           >
             <div className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
               <NavLink
                 to="/"
                 onClick={()=>setOpen(false)}
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
+                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
               >
-                Home
               </NavLink>
               {getRole===userRole.Admin?
               <>
@@ -127,7 +125,7 @@ function NavigationBar() {
           </div>
         </div>
       </nav>
-      <div className="bg-gray-200 p-4 px-8">
+      <div className="bg-gray-200">
         <Outlet/>
       </div>
     </>

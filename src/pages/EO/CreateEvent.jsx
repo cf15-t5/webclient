@@ -10,7 +10,7 @@ function CreateEvent() {
             <div className="flex items-center justify-center w-full">
               <label
                 for="dropzone-file"
-                className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer hover:bg-gray-300 bg-gray-200 "
+                className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer hover:bg-gray-300 bg-gray-100 "
               >
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <svg
@@ -40,101 +40,103 @@ function CreateEvent() {
               </label>
             </div>
             <div>
-              <label for="eventName" className="block text-sm font-medium">
+              <label for="eventName" className="block mb-2 text-sm font-medium">
                 Nama Event
               </label>
               <input
                 id="eventName"
                 type="text"
                 placeholder="Nama Event"
-                className="w-full p-2.5 rounded-lg border outline-none border-gray-300 bg-gray-200   focus:border-blue-500"
+                className="input-field"
                 required
               />
             </div>
             <div>
-              <label for="category" className="block text-sm font-medium">
+              <label for="category" className="block mb-2 text-sm font-medium">
                 Pilih Kategori
               </label>
               <select
                 id="category"
                 defaultValue={null}
-                className=" w-full p-2.5 rounded-lg border outline-none border-gray-300 bg-gray-200   focus:border-blue-500"
+                className="input-field"
+                required
               >
-                <option selected>pilih kategori</option>
+                <option selected value={null}>Pilih kategori</option>
                 <option value="US">United States</option>
               </select>
             </div>
             <div>
-              <label for="city" className="block text-sm font-medium">
+              <label for="city" className="block mb-2 text-sm font-medium">
                 Kota
               </label>
               <select
                 id="city"
                 defaultValue={null}
-                className="w-full p-2.5 rounded-lg border outline-none border-gray-300 bg-gray-200   focus:border-blue-500 "
+                className="input-field"
+                required
               >
-                <option selected>Kota</option>
+                <option selected value={null}>Pilih kota</option>
                 <option value="US">United States</option>
               </select>
             </div>
             <div>
-              <label for="subdistrict" className="block text-sm font-medium">
+              <label for="subdistrict" className="block mb-2 text-sm font-medium">
                 Kecamatan
               </label>
               <select
                 id="subdistrict"
                 defaultValue={null}
-                className="w-full p-2.5 rounded-lg border outline-none border-gray-300 bg-gray-200   focus:border-blue-500"
+                className="input-field"
               >
-                <option selected>Kecamatan</option>
+                <option selected value={null}>Pilih kecamatan</option>
                 <option value="US">United States</option>
               </select>
             </div>
             <div>
-              <label for="detailAddress" className="block text-sm font-medium">
+              <label for="detailAddress" className="block mb-2 text-sm font-medium">
                 Alamat Detail
               </label>
               <input
                 id="detailAddress"
                 type="text"
                 placeholder="Alamat Detail"
-                className="w-full p-2.5 rounded-lg border outline-none border-gray-300 bg-gray-200   focus:border-blue-500"
+                className="input-field"
                 required
               />
             </div>
             <div>
-              <label for="eventDate" className="block text-sm font-medium">
+              <label for="eventDate" className="block mb-2 text-sm font-medium">
                 Tanggal
               </label>
               <input
                 id="eventDate"
                 type="date"
                 placeholder="Tanggal Event"
-                className="w-full p-2.5 rounded-lg border outline-none border-gray-300 bg-gray-200   focus:border-blue-500"
+                className="input-field"
                 required
               />
             </div>
             <div>
-              <label for="eventPrice" className="block text-sm font-medium">
+              <label for="eventPrice" className="block mb-2 text-sm font-medium">
                 Harga
               </label>
               <input
                 id="eventPrive"
                 type="text"
                 placeholder="Harga"
-                className="w-full p-2.5 rounded-lg border outline-none border-gray-300 bg-gray-200   focus:border-blue-500"
+                className="input-field"
                 required
               />
             </div>
             <div>
-              <label for="ticket" className="block text-sm font-medium">
+              <label for="ticket" className="block mb-2 text-sm font-medium">
                 Jumlah Tiket
               </label>
               <input
                 id="ticket"
                 type="text"
                 placeholder="Jumlah Tiket"
-                className="w-full p-2.5 rounded-lg border outline-none border-gray-300 bg-gray-200   focus:border-blue-500"
+                className="input-field"
                 required
               />
             </div>
