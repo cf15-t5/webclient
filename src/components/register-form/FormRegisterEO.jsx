@@ -27,11 +27,9 @@ function FormRegisterEO({setIsRequestSent}) {
         password:data.password,
         role:"EVENT_ORGANIZER"
       })
-      .then((res) => console.log(res.data))
       .then(()=>toast.success("Permintaan berhasil diajukan"))
       .then(()=>setIsRequestSent(true))
       .catch((err) => {
-        console.log(err.response);
         if(!Array.isArray(err.response.data.data)) return toast.error(err.response.data.data)
         toast.error("Something Wrong")
       })
