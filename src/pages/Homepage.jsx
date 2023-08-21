@@ -1,62 +1,9 @@
 import imageHome from "../assets/imgHomepage.png";
-import CardEvent from "../components/CardEvent";
 
-import imageEvent1 from "../assets/exposter.png";
-import imageEvent2 from "../assets/imgHomepage.png";
-import imageEvent3 from "../assets/exposter2.png";
-import imageEvent4 from "../assets/exposter3.jpeg";
-import imageEvent5 from "../assets/exposter4.jpeg";
-import { NavLink } from "react-router-dom";
+import EventList from "../Lists/EventList";
 
 function Homepage() {
-  const EventData = [
-    {
-      id:1,
-      Img: imageEvent1,
-      EventTitle:
-        "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG sdakkdkashdkhaskd haskhdjkashdjkash jkhdkjashdkjashjkdhasjkhdkjashdkh as",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-    {
-      id:2,
-      Img: imageEvent2,
-      EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-    {
-      id:3,
-      Img: imageEvent3,
-      EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-    {
-      id:4,
-      Img: imageEvent4,
-      EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-    {
-      id:5,
-      Img: imageEvent5,
-      EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-  ];
+  
   return (
     <section style={{ height: "80vh" }}>
       <img
@@ -129,15 +76,7 @@ function Homepage() {
         </div>
       </div>
       <div className="md:px-16 py-3 md:py-20">
-        <div className="flex flex-wrap justify-center gap-5">
-          {EventData.map((event) => {
-            return (
-              <NavLink to={"/eventDetail"} key={event.id}>
-                <CardEvent {...event} />
-              </NavLink>
-            );
-          })}
-        </div>
+        <EventList/>
       </div>
     </section>
   );

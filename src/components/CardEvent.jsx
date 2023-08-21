@@ -1,13 +1,13 @@
 
 function CardEvent({ Img, EventTitle, Date, Location, Price, Status }) {
 
-    const truncateTitle = (title) => {
-        const maxTitle = 55;
-        if (title.length > maxTitle) {
-          return title.substring(0, maxTitle) + "...";
-        }
-        return title;
-    };
+  const truncateTitle = (title) => {
+      const maxTitle = 55;
+      if (title.length > maxTitle) {
+        return title.substring(0, maxTitle) + "...";
+      }
+      return title;
+  };
 
   return (
     <div class="w-72 bg-white border rounded-lg shadow flex flex-col">

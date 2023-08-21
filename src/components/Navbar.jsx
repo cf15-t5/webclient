@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../context/AuthContext";
 
@@ -14,7 +14,6 @@ function NavigationBar() {
   const { getData } = useAuth()
   const userLogin = getData()
   const FirstNameUser = userLogin.data?.name.split(" ")[0]
-  console.log(userLogin)
   return (
     <>
       <nav className="bg-white relative w-full z-20 top-0 left-0 border-b border-gray-200 ">
@@ -77,7 +76,7 @@ function NavigationBar() {
                 className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
               >
               </NavLink>
-              {userLogin?.data.role===userRole.Admin?
+              {userLogin.data?.role===userRole.Admin?
               <>
                 <NavLink
                 to="/data"
@@ -94,7 +93,7 @@ function NavigationBar() {
                   Permintaan
                 </NavLink>
               </>:null}
-              {userLogin?.data.role===userRole.EO?
+              {userLogin.data?.role===userRole.EO?
               <>
                 <NavLink
                 to="/myEvent"
