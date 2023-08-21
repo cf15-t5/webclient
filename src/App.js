@@ -15,7 +15,7 @@ import EORegister from "./pages/EORegister";
 import MyEvent from "./pages/EO/MyEvent";
 import CreateEvent from "./pages/EO/CreateEvent";
 import { AuthContextProvider } from "./context/AuthContext";
-
+import EventApproval from "./pages/Admin/EventApproval";
 
 function App() {
   return (
@@ -23,25 +23,27 @@ function App() {
       <div className="App">
         <AuthContextProvider>
           <Routes>
-            <Route path="/" element={<Navbar/>}>
+            <Route path="/" element={<Navbar />}>
               <Route index element={<Homepage />} />
               <Route path="/eventDetail" element={<EventDetail />} />
-              <Route path="/historyTransaction" element={<HistoryTransaction />} />
+              <Route
+                path="/historyTransaction"
+                element={<HistoryTransaction />}
+              />
               <Route path="/ticket" element={<TiketPage />} />
               <Route path="/profile" element={<Profile />} />
 
               <Route path="/data" element={<Data />} />
               <Route path="/request" element={<Request />} />
+              <Route path="/eventApproval" element={<EventApproval />} />
 
-              <Route path="/myEvent" element={<MyEvent/>} />
-              <Route path="/createEvent" element={<CreateEvent/>} />
+              <Route path="/myEvent" element={<MyEvent />} />
+              <Route path="/createEvent" element={<CreateEvent />} />
             </Route>
-            
+
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/eo-register" element={<EORegister />} />
-
-            
           </Routes>
         </AuthContextProvider>
       </div>

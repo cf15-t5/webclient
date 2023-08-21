@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const EventRequestCard = ({
   eventName,
@@ -8,7 +9,10 @@ const EventRequestCard = ({
   approvalStatus,
 }) => {
   return (
-    <button className="flex flex-col justify-start items-center bg-white w-[300px] rounded-md shadow-md overflow-hidden">
+    <Link
+      to="/eventApproval"
+      className="flex flex-col justify-start items-center bg-white w-[300px] rounded-md shadow-md overflow-hidden"
+    >
       <img
         src={imageUrl}
         alt={eventName}
@@ -33,7 +37,7 @@ const EventRequestCard = ({
           )}
         </p>
       </div>
-    </button>
+    </Link>
   );
 };
 
