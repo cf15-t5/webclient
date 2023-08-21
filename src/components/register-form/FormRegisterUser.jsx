@@ -31,11 +31,9 @@ function FormRegisterUser() {
         password:data.password,
         role:"USER"
       })
-      .then((res) => console.log(res.data))
       .then(()=>toast.success("Berhasil Buat Akun"))
       .then(()=>navigate('/login'))
       .catch((err) => {
-        console.log(err.response);
         if(!Array.isArray(err.response.data.data)) return toast.error(err.response.data.data)
         toast.error("Something Wrong")
       })
