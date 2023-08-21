@@ -9,26 +9,23 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate()
   const [data, setData] = useState({
-    email: "admin3@app.com",
-    password: "password"
+    email: "",
+    password: ""
   });
-  console.log(data)
+
   const [loading,setLoading] = useState(false)
   const Login = async (e)=>{
     e.preventDefault();
     setLoading(true)
-    axios.post("/auth/login",data,{
-      headers: { "Content-Type": "application/json" },
-    })
+    axios.post("/auth/login",data)
     .then((res) => {
       localStorage.setItem("SE_TIKET", res.data.data.token);
       toast.success("Berhasil Login");
-      console.log(res.data)
       navigate('/')
-      window.location.reload()
     })
     .catch((err)=>{
       console.log(err.response)
+      toast.error("Gagal Masuk")
     })
     .finally(()=>{setLoading(false)})
   }
