@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import RegisterImage from "../assets/imgHomepage.png";
 import EOLogoRegister from "../assets/eoRegisterWaiting.png";
-import FormRegisterEO from "../components/register-form/FormRegisterEO";
 
 const EORegister = () => {
+  const [data, setData] = useState({
+    namaPerusahaan: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   const [isRequestSent, setIsRequestSent] = useState(false);
 
+  const submitRegister = async (e) => {
+    e.preventDefault();
+    if (data.password === data.confirmPassword) {
+      setIsRequestSent(true);
+      console.log(data);
+    } else {
+      console.log("failed");
+    }
+  };
   return (
     <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
@@ -35,7 +50,65 @@ const EORegister = () => {
             </button>
           </div>
         ) : (
-          <FormRegisterEO setIsRequestSent={setIsRequestSent}/>
+          <form onSubmit={submitRegister} className="w-full ">
+            <div className="space-y-3">
+              <label for="companyName" className="block text-sm font-medium">
+                Nama Perusahaan
+              </label>
+              <input
+                id="companyName"
+                type="text"
+                placeholder="Nama Perusahaan"
+                className="w-full p-2.5 rounded-lg bg-slate-100"
+                value={data.namaPerusahaan}
+                onChange={(e) => {
+                  setData({ ...data, namaPerusahaan: e.target.value });
+                }}
+              />
+              <label for="email" className="block text-sm font-medium">
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                className="w-full p-2.5 rounded-lg bg-slate-100"
+                value={data.email}
+                onChange={(e) => {
+                  setData({ ...data, email: e.target.value });
+                }}
+              />
+              <label for="password" className="block text-sm font-medium">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                className="w-full p-2.5 rounded-lg bg-slate-100"
+                value={data.password}
+                onChange={(e) => {
+                  setData({ ...data, password: e.target.value });
+                }}
+              />
+              <label for="confPassword" className="block text-sm font-medium">
+                Confirm Password
+              </label>
+              <input
+                id="confPassword"
+                type="password"
+                placeholder="Confirm Password"
+                className="w-full p-2.5 rounded-lg bg-slate-100"
+                value={data.confirmPassword}
+                onChange={(e) => {
+                  setData({ ...data, confirmPassword: e.target.value });
+                }}
+              />
+              <button type="submit" className="w-full btn-primary ">
+                Ajukan
+              </button>
+            </div>
+          </form>
         )}
       </div>
     </div>
