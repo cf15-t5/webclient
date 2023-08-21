@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "../api/axios";
+import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState({ loggedIn: false });
+  const [currentUser, setCurrentUser] = useState({ loggedIn: false , data:null });
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (localStorage.getItem("SE_TIKET")) {
@@ -12,7 +14,7 @@ export function AuthContextProvider({ children }) {
       axios
         .get(`/auth/me`)
         .then((res) => {
-          setCurrentUser({ loggedIn: true, role: res.data.data.role });
+          setCurrentUser({ loggedIn: true, data: res.data.data });
         })
         .catch((err) => {
           if (err.response?.status === 401) {
@@ -29,18 +31,18 @@ export function AuthContextProvider({ children }) {
   function signOut() {
     setCurrentUser({ loggedIn: false });
     localStorage.removeItem("SE_TIKET");
-    window.location.href("/");
+    navigate('/')
+    window.location.reload()
   }
 
-  function getRole() {
-    return currentUser.role;
+  function getData() {
+    return currentUser;
   }
 
   const value = {
     signOut,
-    getRole,
+    getData,
   };
-
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}

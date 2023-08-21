@@ -6,11 +6,12 @@ import imageEvent2 from "../assets/imgHomepage.png";
 import imageEvent3 from "../assets/exposter2.png";
 import imageEvent4 from "../assets/exposter3.jpeg";
 import imageEvent5 from "../assets/exposter4.jpeg";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Homepage() {
   const EventData = [
     {
+      id:1,
       Img: imageEvent1,
       EventTitle:
         "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG sdakkdkashdkhaskd haskhdjkashdjkash jkhdkjashdkjashjkdhasjkhdkjashdkh as",
@@ -20,6 +21,7 @@ function Homepage() {
       Status: "Tersedia Sekarang",
     },
     {
+      id:2,
       Img: imageEvent2,
       EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
       Date: "19 Agt 2023",
@@ -28,6 +30,7 @@ function Homepage() {
       Status: "Tersedia Sekarang",
     },
     {
+      id:3,
       Img: imageEvent3,
       EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
       Date: "19 Agt 2023",
@@ -36,6 +39,7 @@ function Homepage() {
       Status: "Tersedia Sekarang",
     },
     {
+      id:4,
       Img: imageEvent4,
       EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
       Date: "19 Agt 2023",
@@ -44,6 +48,7 @@ function Homepage() {
       Status: "Tersedia Sekarang",
     },
     {
+      id:5,
       Img: imageEvent5,
       EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
       Date: "19 Agt 2023",
@@ -87,7 +92,7 @@ function Homepage() {
                 id="category"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
-                <option selected>pilih kategori</option>
+                <option >pilih kategori</option>
                 <option value="US">United States</option>
               </select>
             </div>
@@ -116,7 +121,7 @@ function Homepage() {
                 id="location"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
-                <option selected>pilih kategori</option>
+                <option >pilih kategori</option>
                 <option value="US">United States</option>
               </select>
             </div>
@@ -127,9 +132,9 @@ function Homepage() {
         <div className="flex flex-wrap justify-center gap-5">
           {EventData.map((event) => {
             return (
-              <Link to={"/eventDetail"}>
+              <NavLink to={"/eventDetail"} key={event.id}>
                 <CardEvent {...event} />
-              </Link>
+              </NavLink>
             );
           })}
         </div>
