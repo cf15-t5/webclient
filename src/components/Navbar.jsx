@@ -13,7 +13,7 @@ function NavigationBar() {
 
   const { getData } = useAuth()
   const userLogin = getData()
-  const FirstNameUser = userLogin.data?.name.split(" ")[0]
+  const FirstNameUser = userLogin?.name.split(" ")[0]
   return (
     <>
       <nav className="bg-white relative w-full z-20 top-0 left-0 border-b border-gray-200 ">
@@ -29,7 +29,7 @@ function NavigationBar() {
             </span>
           </NavLink>
           <div className="flex md:order-2 bg-pri">
-            {!userLogin.loggedIn?
+            {!userLogin?
             <div className="flex">
               <NavLink to={'/login'}>
                 <button className="hidden sm:block text-black hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3">
@@ -76,7 +76,7 @@ function NavigationBar() {
                 className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
               >
               </NavLink>
-              {userLogin.data?.role===userRole.Admin?
+              {userLogin?.role===userRole.Admin?
               <>
                 <NavLink
                 to="/data"
@@ -93,7 +93,7 @@ function NavigationBar() {
                   Permintaan
                 </NavLink>
               </>:null}
-              {userLogin.data?.role===userRole.EO?
+              {userLogin?.role===userRole.EO?
               <>
                 <NavLink
                 to="/myEvent"

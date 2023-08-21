@@ -36,7 +36,7 @@ export function AuthContextProvider({ children }) {
   }
 
   function getData() {
-    return currentUser;
+    return currentUser.data;
   }
 
   const value = {
