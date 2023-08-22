@@ -44,5 +44,5 @@ export function formatToIDRCurrency(number) {
 }
 
 export function formatPosterURL(posterUrl) {
-  return process.env.REACT_APP_SERVER_URL + posterUrl.replace(/public/, "");
+  return process.env.REACT_APP_SERVER_URL + posterUrl?.replace(/public/, "");
 }
