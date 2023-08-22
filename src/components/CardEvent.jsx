@@ -9,9 +9,9 @@ function CardEvent({ Img, EventTitle, Date, Location, Price, Ticket }) {
       return title;
   };
   return (
-    <div className="w-72 bg-white border rounded-lg shadow flex flex-col">
+    <div className="w-72  bg-white border rounded-lg shadow flex flex-col">
         <img className="rounded-t-lg object-cover h-40 w-full" src={Img}  alt="poster" />
-        <div className="p-3">
+        <div className="p-3 flex flex-col">
             <h5 className="mb-2 text-base font-bold tracking-tight">
             {truncateTitle(EventTitle)}
             </h5>

@@ -3,9 +3,8 @@ import imageHome from "../assets/imgHomepage.png";
 import EventList from "../Lists/EventList";
 
 function Homepage() {
-  
   return (
-    <section style={{ height: "80vh" }}>
+    <section className="h-[80vh]">
       <img
         src={imageHome}
         className="h-2/4 w-full object-cover object-center"
@@ -75,7 +74,7 @@ function Homepage() {
           </form>
         </div>
       </div>
-      <div className="bg-gray-100 md:px-16 py-3 md:py-20">
+      <div className="md:px-16 py-3 md:py-20 bg-gray-200">
         <EventList/>
       </div>
     </section>

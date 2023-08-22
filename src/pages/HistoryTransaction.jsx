@@ -3,7 +3,7 @@ import React from 'react'
 function HistoryTransaction() {
   return (
     <section className='m-3 mx-5'>
-      <h5>Riwayat Transaksi</h5>
+      <h5 className='text-xl border-b-2 border-gray-300'>Riwayat Transaksi</h5>
     </section>
   )
 }

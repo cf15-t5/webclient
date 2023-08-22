@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 function CreateEvent() {
   const [loading,setLoading] = useState(false)
-  
+
   const [data,setData] = useState({
     title:"",
     price:"",
@@ -59,7 +59,7 @@ function CreateEvent() {
   }
 
   return (
-    <section>
+    <section className="m-3 mx-5">
       <h5 className="text-xl border-b-2 border-gray-300">Buat Event</h5>
       <div className="bg-white mt-5 md:mx-20 rounded-xl">
         <form onSubmit={submitCreateEvent} className=" p-10 md:px-20 flex flex-col">
@@ -100,18 +100,6 @@ function CreateEvent() {
                   onChange={(e)=>{hanndleChange("poster", e.target.files[0])}} 
                 />
               </label>
-            </div>
-            <div className="hidden">
-              <label for="poster" className="block mb-2 text-sm font-medium">
-                Poster
-              </label>
-              <input
-                id="poster"
-                type="file"
-                placeholder="poster"
-                className="input-field"
-                onChange={(e)=>{setData({...data, poster:e.target.value})}}
-              />
             </div>
             <div>
               <label for="eventName" className="block mb-2 text-sm font-medium">
@@ -219,7 +207,7 @@ function CreateEvent() {
                 type="number"
                 placeholder="Jumlah Tiket"
                 className="input-field"
-                onChange={(e)=>{{hanndleChange("ticket",e.target.value)}}}
+                onChange={(e)=>{hanndleChange("ticket",e.target.value)}}
                 required
               />
             </div>
@@ -232,7 +220,7 @@ function CreateEvent() {
                 rows="4" 
                 className="input-field " 
                 placeholder="Deskipsi Event"
-                onChange={(e)=>{{hanndleChange("description",e.target.value)}}}
+                onChange={(e)=>{hanndleChange("description",e.target.value)}}
                 required
                 />
             </div>

@@ -128,7 +128,7 @@ function NavigationBar() {
           </div>
         </div>
       </nav>
-      <div className="bg-gray-200">
+      <div className="bg-gray-200 min-h-screen">
         <Outlet/>
       </div>
     </>
