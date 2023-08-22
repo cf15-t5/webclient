@@ -1,7 +1,7 @@
 import React from 'react'
-import iconProfile from '../assets/iconProfile.png'
+import iconProfile from '../assets/iconBuilding.png'
 
-function DetailAkun({name,email}) {
+function DetailAkunEO({name,email}) {
   return (
     <div className='bg-white p-4 rounded-xl flex justify-center flex-col'>
       <div className='self-center'>
@@ -9,7 +9,7 @@ function DetailAkun({name,email}) {
       </div>
       <form>
         <div class="mb-6">
-          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Nama</label>
+          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Nama Perusahaan</label>
           <input type="text" id="name" class="input-field"value={name} required/>
         </div>
         <div class="mb-6">
@@ -25,4 +25,4 @@ function DetailAkun({name,email}) {
   )
 }
 
-export default DetailAkun
+export default DetailAkunEO

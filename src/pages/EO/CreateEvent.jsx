@@ -1,42 +1,104 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "../../api/axios";
+import IconFileUp from "../../assets/IconFileUp";
+import { toast } from "react-hot-toast";
 
 function CreateEvent() {
+  const [loading,setLoading] = useState(false)
+
+  const [data,setData] = useState({
+    title:"",
+    price:"",
+    description:"",
+    date:"",
+    ticket:"",
+    poster:"",
+    address:{
+      city:"",
+      sub:"",
+      detail:""
+    },
+    category:""
+  })
+
+  const formattedAddress = `${data.address["detail"]}, ${data.address["sub"]}, ${data.address["city"]}`;
+
+  const hanndleChange = (field, value) =>{
+    setData((prevData) => ({
+      ...prevData,
+      [field]: value
+    }));
+  }
+
+  const formData = new FormData()
+  formData.append("title",data.title)
+  formData.append("price",data.price)
+  formData.append("description",data.description)
+  formData.append("date_of_event",data.date)
+  formData.append("number_of_ticket",data.ticket)
+  formData.append("address",formattedAddress)
+  formData.append("poster",data.poster);
+  formData.append("category_id",data.category)
+
+  async function submitCreateEvent(e){
+    e.preventDefault()
+    setLoading(true)
+    //Show Data
+    // for (const pair of formData.entries()) {
+    //   console.log(pair[0], pair[1]);
+    // }
+    axios
+      .post('/events/',formData)
+      .then((res)=>console.log(res.data))
+      .then(()=>toast.success("Event Berhasil dibuat"))
+      .catch((err)=>{
+        console.log(err.response.data)
+        toast.error("Gagal Membuat Event")
+      })
+      .finally(()=>setLoading(false))
+  }
+
   return (
-    <section>
+    <section className="m-3 mx-5">
       <h5 className="text-xl border-b-2 border-gray-300">Buat Event</h5>
       <div className="bg-white mt-5 md:mx-20 rounded-xl">
-        <form className=" p-10 md:px-20 flex flex-col">
+        <form onSubmit={submitCreateEvent} className=" p-10 md:px-20 flex flex-col">
           <div className="space-y-5">
-            <div className="flex items-center justify-center w-full">
+            <div className="items-center justify-center w-full">
               <label
                 for="dropzone-file"
                 className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer hover:bg-gray-300 bg-gray-100 "
               >
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg
-                    className="w-8 h-8 mb-4 text-gray-500"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 16"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                    />
-                  </svg>
-                  <p className="mb-2 text-sm text-gray-500">
-                    <span className="font-semibold">Click to upload</span> or drag and
-                    drop
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p>
+                  {data.poster?
+                    <div>
+                      <h1>Berhasil Upload</h1>
+                      <h2 className="text-sm text-gray-600">File Details:</h2>
+                      <p className="text-xs text-gray-500">File Name: {data.poster.name}</p>
+            
+                      <p className="text-xs text-gray-500">File Type: {data.poster.type}</p>
+                      <p className="text-xs text-gray-500">
+                          Last Modified:{" "}
+                          {data.poster.lastModifiedDate.toDateString()}
+                      </p>
+                    </div>:
+                    <>
+                      <IconFileUp/>
+                      <p className="mb-2 text-sm text-gray-500">
+                        <span className="font-semibold">Click to upload</span>
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        SVG, PNG, JPG 
+                      </p>
+                    </>
+                  }
                 </div>
-                <input id="dropzone-file" type="file" className="hidden" />
+                <input 
+                  id="dropzone-file" 
+                  type="file" 
+                  className="hidden" 
+                  onChange={(e)=>{hanndleChange("poster", e.target.files[0])}} 
+                />
               </label>
             </div>
             <div>
@@ -48,6 +110,7 @@ function CreateEvent() {
                 type="text"
                 placeholder="Nama Event"
                 className="input-field"
+                onChange={(e)=>hanndleChange("title",e.target.value)}
                 required
               />
             </div>
@@ -59,10 +122,11 @@ function CreateEvent() {
                 id="category"
                 defaultValue={null}
                 className="input-field"
+                onChange={(e)=>{hanndleChange("category",e.target.value)}}
                 required
               >
-                <option selected value={null}>Pilih kategori</option>
-                <option value="US">United States</option>
+                <option value={null}>Pilih kategori</option>
+                <option value="1">United States</option>
               </select>
             </div>
             <div>
@@ -73,9 +137,10 @@ function CreateEvent() {
                 id="city"
                 defaultValue={null}
                 className="input-field"
+                onChange={(e)=>{hanndleChange("address",{...data.address,city:e.target.value})}}
                 required
               >
-                <option selected value={null}>Pilih kota</option>
+                <option value={null}>Pilih kota</option>
                 <option value="US">United States</option>
               </select>
             </div>
@@ -87,8 +152,10 @@ function CreateEvent() {
                 id="subdistrict"
                 defaultValue={null}
                 className="input-field"
+                onChange={(e)=>{hanndleChange("address",{...data.address,sub:e.target.value})}}
+                required
               >
-                <option selected value={null}>Pilih kecamatan</option>
+                <option value={null}>Pilih kecamatan</option>
                 <option value="US">United States</option>
               </select>
             </div>
@@ -101,6 +168,7 @@ function CreateEvent() {
                 type="text"
                 placeholder="Alamat Detail"
                 className="input-field"
+                onChange={(e)=>{hanndleChange("address",{...data.address,detail:e.target.value})}}
                 required
               />
             </div>
@@ -113,6 +181,7 @@ function CreateEvent() {
                 type="date"
                 placeholder="Tanggal Event"
                 className="input-field"
+                onChange={(e)=>{hanndleChange("date",e.target.value)}}
                 required
               />
             </div>
@@ -122,9 +191,10 @@ function CreateEvent() {
               </label>
               <input
                 id="eventPrive"
-                type="text"
+                type="number"
                 placeholder="Harga"
                 className="input-field"
+                onChange={(e)=>{hanndleChange("price",e.target.value)}}
                 required
               />
             </div>
@@ -134,16 +204,30 @@ function CreateEvent() {
               </label>
               <input
                 id="ticket"
-                type="text"
+                type="number"
                 placeholder="Jumlah Tiket"
                 className="input-field"
+                onChange={(e)=>{hanndleChange("ticket",e.target.value)}}
                 required
               />
             </div>
+            <div>
+              <label for="description" className="block mb-2 text-sm font-medium">
+                Deskirpsi
+              </label>
+              <textarea 
+                id="description" 
+                rows="4" 
+                className="input-field " 
+                placeholder="Deskipsi Event"
+                onChange={(e)=>{hanndleChange("description",e.target.value)}}
+                required
+                />
+            </div>
           </div>
           <div className="self-end">
-            <button type="submit" className="mt-9 btn-primary">Buat Event</button>
-            <button type="submit" className="mt-9 ms-1 hover:bg-gray-300 p-2 px-4 border border-black rounded-lg">Batal</button>
+            <button type="submit" className="mt-9 btn-primary">{loading?"Loading..":"Buat Event"}</button>
+            <button type="reset" className="mt-9 ms-1 hover:bg-gray-300 p-2 px-4 border border-black rounded-lg">Batal</button>
           </div>
           
         </form>

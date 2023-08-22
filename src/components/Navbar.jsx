@@ -4,18 +4,21 @@ import useAuth from "../context/AuthContext";
 
 function NavigationBar() {
   const [open, setOpen] = useState(false);
+
   const userRole = {
     User: "USER",
-    EO: "EO",
+    EO: "EVENT_ORGANIZER",
     Admin: "ADMIN",
   };
-  const { getRole } = useAuth()
-  const userLoginRole = getRole()
+
+  const { getData } = useAuth()
+  const userLogin = getData()
+  const FirstNameUser = userLogin?.name.split(" ")[0]
   return (
     <>
       <nav className="bg-white relative w-full z-20 top-0 left-0 border-b border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <div className="flex items-center">
+          <NavLink to={'/'} className="flex items-center">
             <img
               src="https://flowbite.com/docs/images/logo.svg"
               className="h-8 mr-3"
@@ -24,9 +27,9 @@ function NavigationBar() {
             <span className="self-center text-2xl font-semibold whitespace-nowrap ">
               SeTiket
             </span>
-          </div>
+          </NavLink>
           <div className="flex md:order-2 bg-pri">
-            {!userLoginRole?
+            {!userLogin?
             <div className="flex">
               <NavLink to={'/login'}>
                 <button className="hidden sm:block text-black hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3">
@@ -39,7 +42,7 @@ function NavigationBar() {
                 </button>
               </NavLink>
               
-            </div> : <NavLink to={'/profile'} className='self-center mr-3'><p>Halo, Name</p></NavLink>}
+            </div> : <NavLink to={'/profile'} className='self-center mr-3'><p>Halo, {FirstNameUser}</p></NavLink>}
 
             <button
               onClick={() => setOpen(!open)}
@@ -73,7 +76,7 @@ function NavigationBar() {
                 className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
               >
               </NavLink>
-              {userLoginRole===userRole.Admin?
+              {userLogin?.role===userRole.Admin?
               <>
                 <NavLink
                 to="/data"
@@ -90,7 +93,7 @@ function NavigationBar() {
                   Permintaan
                 </NavLink>
               </>:null}
-              {userLoginRole===userRole.EO?
+              {userLogin?.role===userRole.EO?
               <>
                 <NavLink
                 to="/myEvent"
@@ -125,7 +128,7 @@ function NavigationBar() {
           </div>
         </div>
       </nav>
-      <div className="bg-gray-200">
+      <div className="bg-gray-200 min-h-screen">
         <Outlet/>
       </div>
     </>

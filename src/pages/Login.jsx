@@ -22,6 +22,7 @@ const Login = () => {
       localStorage.setItem("SE_TIKET", res.data.data.token);
       toast.success("Berhasil Login");
       navigate('/')
+      window.location.reload()
     })
     .catch((err)=>{
       console.log(err.response)
