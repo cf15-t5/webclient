@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react";
 import { truncateTitle,formatToIDRCurrency,dateToDDMonthYYYY,formatPosterURL } from "../utils/stringProcess";
 
-function CardEvent({ Img, EventTitle, Date, Location, Price, Ticket }) {  
+function CardEvent({ Img, EventTitle, Date, Location, Price, Ticket }) {
+  const [statusStyle,setStatusStyle] = useState("text-green-400")  
+  const [status,setStatus] = useState("Tersedia Sekarang")
+  useEffect(()=>{
+    const checkStatus = (Ticket) => {
+      if(Ticket<0){
+        setStatus("Tidak Tersedia")
+        setStatusStyle("text-red-400")
+      }
+    }
+    checkStatus(Ticket)
+  },[Ticket])
+  
+  console.log(statusStyle)
   return (
     <div className="w-72  bg-white border rounded-lg shadow flex flex-col">
       <img className="rounded-t-lg object-cover h-40 w-full" src={formatPosterURL(Img)}  alt="poster" />
@@ -11,7 +25,7 @@ function CardEvent({ Img, EventTitle, Date, Location, Price, Ticket }) {
           <p className="text-sm">{dateToDDMonthYYYY(Date)}</p>
           <p className="mb-3 text-sm">{Location}</p>
           <h6 className="text-red-300 font-bold text-lg mt-10">IDR {formatToIDRCurrency(Price)}</h6>
-          <p className="text-green-400 text-sm font-bold">{Ticket!==0?"Tersedia Sekarang":"Habis"}</p>
+          <p className={`${statusStyle} text-sm font-bold`}>{status}</p>
       </div>
     </div>
   );
