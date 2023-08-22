@@ -75,7 +75,7 @@ function Homepage() {
           </form>
         </div>
       </div>
-      <div className="md:px-16 py-3 md:py-20">
+      <div className="bg-gray-100 md:px-16 py-3 md:py-20">
         <EventList/>
       </div>
     </section>

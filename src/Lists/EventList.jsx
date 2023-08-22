@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CardEvent from '../components/CardEvent'
 import { NavLink } from 'react-router-dom'
+
 // import axios from 'axios';
 import axios from '../api/axios';
 
@@ -68,13 +69,20 @@ function EventList() {
     .then(res=>setEventData(res.data.data))
     .catch((err)=>console.log(err.response))
   },[])
-  console.log(eventData)
+  
   return (
-    <div className="flex flex-wrap justify-center gap-5">
+    <div className="flex flex-wrap justify-center gap-5 ">
       {eventData.map((event) => {
+        const formattedDate = event.date_of_event.split(" ").slice(1,4).join(" ")
         return (
           <NavLink to={"/eventDetail"} key={event.id}>
-            <CardEvent EventTitle={event.title} />
+            <CardEvent 
+              Img={`https://api-seticket.aprnna.me/${event.poster.slice(7)}`} 
+              EventTitle={event.title} 
+              Date={formattedDate}   
+              Price={event.price} 
+              Location={event.address} 
+              Ticket={event.number_of_ticke}/>
           </NavLink>
         );
       })}
