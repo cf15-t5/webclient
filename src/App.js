@@ -36,7 +36,10 @@ function App() {
 
               <Route path="/data" element={<Data />} />
               <Route path="/request" element={<Request />} />
-              <Route path="/eventApproval" element={<EventApproval />} />
+              <Route
+                path="/request/event/:event_id"
+                element={<EventApproval />}
+              />
 
               <Route path="/myEvent" element={<MyEvent />} />
               <Route path="/createEvent" element={<CreateEvent />} />

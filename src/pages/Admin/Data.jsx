@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DataCard from "../../components/DataCard";
+import axios from "../../api/axios";
 
 // DUMMY
 const dummyDataEOs = [
@@ -50,6 +51,15 @@ function Data() {
       tabId: 1,
     },
   ];
+
+  useEffect(() => {
+    axios
+      .get("/users")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     // fetch data here
