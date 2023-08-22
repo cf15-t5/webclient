@@ -22,7 +22,6 @@ function EventDetail() {
   if(loading){
     return <h1 className='text-center mt-10'>Loading</h1>
   }
-  console.log(eventDetail.date_of_event)
   return (
     <section className='relative bg-white' style={{minHeight:'90vh'}}>
 

@@ -13,8 +13,6 @@ function CardEvent({ Img, EventTitle, Date, Location, Price, Ticket }) {
     }
     checkStatus(Ticket)
   },[Ticket])
-  
-  console.log(statusStyle)
   return (
     <div className="w-72  bg-white border rounded-lg shadow flex flex-col">
       <img className="rounded-t-lg object-cover h-40 w-full" src={formatPosterURL(Img)}  alt="poster" />

@@ -40,7 +40,7 @@ export function formatToIDRCurrency(number) {
     currency: "IDR",
   });
 
-  return formattedCurrency;
+  return formattedCurrency.split(",")[0];
 }
 
 export function formatPosterURL(posterUrl) {

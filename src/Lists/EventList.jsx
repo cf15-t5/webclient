@@ -10,7 +10,6 @@ function EventList() {
     .then(res=>setEventData(res.data.data))
     .catch((err)=>console.log(err.response))
   },[])
-  console.log(eventData)
   return (
     <div className="flex flex-wrap justify-center gap-5 h-full">
       {eventData?.map((event) => {
