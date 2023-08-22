@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 // DUMMY DATA
 const dummyEventData = {
@@ -12,10 +13,11 @@ const dummyEventData = {
   imageUrl: "./dummy/exposter.png",
   hargaTiket: 200000,
   jumlahTiket: 20,
-  approvalStatus: null,
+  terjual: 0,
+  peserta: 0,
 };
 
-const EventApproval = () => {
+const MyEventDetail = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -24,14 +26,9 @@ const EventApproval = () => {
   }, []);
 
   // Function
-  const handleApproveButton = () => {
-    // do something here
-    toast.success("Approved!");
-  };
-
-  const handleRejectButton = () => {
-    // do something here
-    toast.success("Rejected!");
+  const handleDeleteEvent = () => {
+    // something
+    toast.success("Berhasil menghapus event!");
   };
 
   if (data === null) {
@@ -67,14 +64,6 @@ const EventApproval = () => {
             <ul className=" space-y-3 pt-5 list-none">
               <li className="flex flex-row gap-3 items-center">
                 <img
-                  src="./icons/building2.png"
-                  alt={data.namaPerusahaan}
-                  className="w-[17px]"
-                />
-                {data.namaPerusahaan}
-              </li>
-              <li className="flex flex-row gap-3 items-center">
-                <img
                   src="./icons/calendar.png"
                   alt={data.namaPerusahaan}
                   className="w-[17px]"
@@ -90,31 +79,27 @@ const EventApproval = () => {
                 {data.lokasi}
               </li>
             </ul>
+            <div className="flex flex-row pt-3">
+              <input
+                placeholder="Tiket Kode"
+                className="outline-none px-5 bg-gray-300 placeholder:text-gray-500"
+              />
+              <button className="px-4 py-2 bg-primary-500 text-white font-bold">
+                Cek In
+              </button>
+            </div>
           </div>
 
           {/* APPROVAL INFO */}
-          <div className="flex flex-col justify-start items-center">
-            <p className="font-medium">Menyetujui?</p>
-            {data.approvalStatus === null ? (
-              <div className="flex flex-row justify-center items-center gap-2 text-white font-medium text-[14px]">
-                <button
-                  className="bg-green-500 py-1 w-[80px] rounded-md hover:scale-105 active:scale-95 transition-all"
-                  onClick={handleApproveButton}
-                >
-                  Ya
-                </button>
-                <button
-                  className="bg-red-500 py-1 w-[80px] rounded-md hover:scale-105 active:scale-95 transition-all"
-                  onClick={handleRejectButton}
-                >
-                  Tidak
-                </button>
-              </div>
-            ) : data.approvalStatus ? (
-              <p className="text-green-400 text-[14px] font-bold">Disetujui</p>
-            ) : (
-              <p className="text-red-400 text-[14px] font-bold">Ditolak</p>
-            )}
+          <div className="flex flex-col justify-start items-end">
+            <p>Tiket yang terjual</p>
+            <p className="font-bold">
+              {data.terjual}/{data.jumlahTiket}
+            </p>
+            <p>Informasi Peserta</p>
+            <p className="font-bold">
+              {data.terjual}/{data.jumlahTiket}
+            </p>
           </div>
         </div>
 
@@ -125,19 +110,20 @@ const EventApproval = () => {
         </div>
 
         {/* HARGA TIKET */}
-        <div className="flex flex-row justify-start items-center w-full py-5 gap-10 text-[20px] font-bold">
-          <div className="flex flex-row justify-start items-center gap-2">
-            <p>Harga Tiket</p>
-            <p className="text-green-500">IDR {data.hargaTiket}</p>
-          </div>
-          <div className="flex flex-row justify-start items-center gap-2">
-            <p>Jumlah Tiket</p>
-            <p className="text-green-500">{data.jumlahTiket}</p>
-          </div>
+        <div className="flex flex-row justify-end items-center w-full py-5 gap-3 text-white">
+          <Link to="/editEvent" className="bg-primary-500 py-2 px-4 rounded-md">
+            Edit Event
+          </Link>
+          <button
+            onClick={() => handleDeleteEvent()}
+            className="bg-red-500 py-2 px-4 rounded-md"
+          >
+            Hapus Event
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default EventApproval;
+export default MyEventDetail;
