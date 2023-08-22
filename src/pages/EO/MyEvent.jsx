@@ -1,42 +1,16 @@
-// import React, { useEffect, useState } from "react";
 import { useEffect, useState } from "react";
 import MyEventCard from "../../components/MyEventCard";
 import axios from "../../api/axios";
-
-// DUMMY
-
-const dummyDataEvents = [
-  {
-    name: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-    imageUrl: "./dummy/exposter.png",
-    eventDate: "19 Agt 2023",
-    location: "Bandung",
-    price: 200000,
-    jumlahTiket: 20,
-    terjual: 0,
-    peserta: 0,
-  },
-  {
-    name: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-    imageUrl: "./dummy/exposter.png",
-    eventDate: "19 Agt 2023",
-    location: "Bandung",
-    price: 200000,
-    jumlahTiket: 20,
-    terjual: 0,
-    peserta: 0,
-  },
-];
 
 function MyEvent() {
   const [data, setData] = useState();
 
   useEffect(() => {
-    setData(dummyDataEvents);
     axios
       .get("/events/my")
       .then((res) => {
-        console.log(res);
+        console.log(res.data.data);
+        setData(res.data.data);
       })
       .catch((err) => {
         console.log(err);
