@@ -1,36 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {
+  dateToDDMonthYYYY,
+  formatPosterURL,
+  truncateTitle,
+} from "../utils/stringProcess";
 
 const EventRequestCard = ({
-  eventName,
-  imageUrl,
-  eventDate,
-  location,
-  approvalStatus,
+  title,
+  event_id,
+  poster_path,
+  date_of_event,
+  address,
+  status,
 }) => {
   return (
     <Link
-      to="/eventApproval"
+      to={`/request/event/${event_id}`}
       className="flex flex-col justify-start items-center bg-white w-[300px] rounded-md shadow-md overflow-hidden"
     >
       <img
-        src={imageUrl}
-        alt={eventName}
+        src={formatPosterURL(poster_path)}
+        alt={title}
         className="w-full h-[150px] object-cover"
       />
       <div className="flex flex-col justify-between items-start w-full h-full p-3 gap-3 text-left">
         <div className="flex flex-col justify-center items-start">
-          <p className="font-bold leading-4">{eventName}</p>
-          <div className="py-1">
-            <p>{eventDate}</p>
-            <p>{location}</p>
+          <p className="font-bold leading-4">{truncateTitle(title)}</p>
+          <div className="py-1 text-[14px]">
+            <p>{dateToDDMonthYYYY(date_of_event)}</p>
+            <p>{address}</p>
           </div>
         </div>
         <p className="font-bold">
           Status :{" "}
-          {approvalStatus === null ? (
+          {status === "PENDING" ? (
             <span className="text-primary-500">Butuh Persetujuan</span>
-          ) : approvalStatus ? (
+          ) : status === "APPROVED" ? (
             <span className="text-green-400">Disetujui</span>
           ) : (
             <span className="text-red-400">Ditolak</span>

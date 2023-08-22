@@ -16,7 +16,6 @@ const MyEventDetail = () => {
     axios
       .get(`/events/${event_id}`)
       .then((res) => {
-        console.log(res.data.data);
         setData(res.data.data);
       })
       .catch((err) => {
