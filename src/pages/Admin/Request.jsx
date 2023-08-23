@@ -4,31 +4,10 @@ import EORequestCard from "../../components/EORequestCard";
 import EventRequestCard from "../../components/EventRequestCard";
 import axios from "../../api/axios";
 
-// DUMMY
-const dummyDataEOs = [
-  {
-    eventName: "Pocketful Of Dreams",
-    email: "POCD02@gmail.com",
-    dateOfRequest: "17 Agustus 1945",
-    approvalStatus: false,
-  },
-  {
-    eventName: "Pocketful Of Truth",
-    email: "POCD02@gmail.com",
-    dateOfRequest: "17 Agustus 1945",
-    approvalStatus: true,
-  },
-  {
-    eventName: "Pocketful Of Lies",
-    email: "POCD02@gmail.com",
-    dateOfRequest: "101010",
-    approvalStatus: null,
-  },
-];
-
 function Request() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [data, setData] = useState([]);
+  const [loading, setloading] = useState(false);
 
   const tabList = [
     {
@@ -42,23 +21,38 @@ function Request() {
   ];
 
   useEffect(() => {
-    // fetch data here
-    if (selectedTab === 0) {
-      // EOs
-      setData(dummyDataEOs);
-    } else if (selectedTab === 1) {
-      // Events
-      axios
-        .get(`/events/`)
-        .then((res) => {
-          console.log(res.data.data);
-          setData(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally();
+    async function fetchData() {
+      // fetch data here
+      setloading(true);
+      if (selectedTab === 0) {
+        // EOs
+        axios
+          .get(`/users/`)
+          .then((res) => {
+            const users = [...res.data.data];
+            const EOs = users.filter((user) => user.role === "EVENT_ORGANIZER");
+            setData(EOs);
+          })
+          .catch((err) => {
+            console.log(err);
+            setData([]);
+          });
+      } else if (selectedTab === 1) {
+        // Events
+        axios
+          .get(`/events/`)
+          .then((res) => {
+            setData([...res.data.data]);
+          })
+          .catch((err) => {
+            console.log(err);
+            setData([]);
+          });
+      }
+      setloading(false);
     }
+
+    fetchData();
   }, [selectedTab]);
 
   return (
@@ -68,7 +62,10 @@ function Request() {
         {tabList.map((tab, index) => (
           <button
             key={index}
-            onClick={() => setSelectedTab(tab.tabId)}
+            onClick={() => {
+              setSelectedTab(tab.tabId);
+              setData([]);
+            }}
             className={` ${
               selectedTab === tab.tabId
                 ? "bg-white border-t-2 border-r-2 border-l-2 border-black border-opacity-[15%]"
@@ -81,22 +78,28 @@ function Request() {
       </div>
 
       {/* DATA */}
-      {data.length !== 0 ? (
-        selectedTab === 0 ? (
-          <div className="flex flex-col justify-center items-center w-full gap-3">
-            {data.map((eventData, index) => (
-              <EORequestCard key={index} {...eventData} />
-            ))}
-          </div>
-        ) : selectedTab === 1 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
-            {data.map((eventData, index) => (
-              <EventRequestCard key={index} {...eventData} />
-            ))}
-          </div>
-        ) : null
+      {loading ? (
+        <p>Loading...</p>
+      ) : data ? (
+        data.length !== 0 ? (
+          selectedTab === 0 ? (
+            <div className="flex flex-col justify-center items-center w-full gap-3">
+              {data.map((eventData, index) => (
+                <EORequestCard key={index} {...eventData} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
+              {data.map((eventData, index) => (
+                <EventRequestCard key={index} {...eventData} />
+              ))}
+            </div>
+          )
+        ) : (
+          <p>Nothing to show here</p>
+        )
       ) : (
-        <p>Nothing to show</p>
+        <p>Nothing to show here</p>
       )}
     </div>
   );

@@ -27,7 +27,10 @@ function App() {
             <Route path="/" element={<Navbar />}>
               <Route index element={<Homepage />} />
               <Route path="/event/:id" element={<EventDetail />} />
-              <Route path="/historyTransaction" element={<HistoryTransaction />} />
+              <Route
+                path="/historyTransaction"
+                element={<HistoryTransaction />}
+              />
               <Route path="/eventDetail" element={<EventDetail />} />
               <Route path="/ticket" element={<TiketPage />} />
               <Route path="/profile" element={<Profile />} />

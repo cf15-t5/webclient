@@ -40,6 +40,7 @@ const dummyDataUsers = [
 function Data() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [data, setData] = useState();
+  const [displayData, setdisplayData] = useState([]);
 
   const tabList = [
     {
@@ -53,24 +54,37 @@ function Data() {
   ];
 
   useEffect(() => {
-    axios
-      .get("/users")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
+    async function fetchData() {
+      // fetch data here
+      // setloading(true);
+
+      axios
+        .get(`/users/`)
+        .then((res) => {
+          setData([...res.data.data]);
+        })
+        .catch((err) => {
+          console.log(err);
+          setData([]);
+        });
+
+      // setloading(false);
+    }
+
+    fetchData();
   }, []);
 
   useEffect(() => {
-    // fetch data here
     if (selectedTab === 0) {
       // EOs
-      setData(dummyDataEOs);
+      const EOs = data?.filter((user) => user.role === "EVENT_ORGANIZER");
+      setdisplayData(EOs);
     } else if (selectedTab === 1) {
-      // Events
-      setData(dummyDataUsers);
+      // Users
+      const Users = data?.filter((user) => user.role === "USER");
+      setdisplayData(Users);
     }
-  }, [selectedTab]);
+  }, [selectedTab, data]);
 
   return (
     <div className="flex flex-col w-full min-h-screen py-5 px-5 sm:px-12 gap-5">
@@ -93,19 +107,11 @@ function Data() {
 
       {/* DATA */}
       {data ? (
-        selectedTab === 0 ? (
-          <div className="flex flex-col justify-center items-center w-full gap-3">
-            {data.map((eventData, index) => (
-              <DataCard key={index} {...eventData} isUser={false} />
-            ))}
-          </div>
-        ) : selectedTab === 1 ? (
-          <div className="flex flex-col justify-center items-center w-full gap-3">
-            {data.map((eventData, index) => (
-              <DataCard key={index} {...eventData} isUser={true} />
-            ))}
-          </div>
-        ) : null
+        <div className="flex flex-col justify-center items-center w-full gap-3">
+          {displayData?.map((eventData, index) => (
+            <DataCard key={index} {...eventData} />
+          ))}
+        </div>
       ) : (
         <p>Nothing to show</p>
       )}

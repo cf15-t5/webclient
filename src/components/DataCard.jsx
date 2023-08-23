@@ -2,14 +2,14 @@ import React from "react";
 import EODefaultProfile from "../assets/iconBuilding.png";
 import UserDefaultProfile from "../assets/iconProfile.png";
 
-const DataCard = ({ nama, email, imageUrl = null, isUser }) => {
+const DataCard = ({ name, email, imageUrl = null, role }) => {
   return (
     <div className="flex flex-row justify-between items-center bg-white w-full rounded-md py-4 px-4 shadow-md">
       <div className="flex flex-row justify-center items-center gap-4">
         <img
           src={
             imageUrl === null
-              ? isUser
+              ? role === "USER"
                 ? UserDefaultProfile
                 : EODefaultProfile
               : imageUrl
@@ -18,7 +18,7 @@ const DataCard = ({ nama, email, imageUrl = null, isUser }) => {
           className="w-[40px]"
         />
         <div className="flex flex-col justify-center items-start text-[14px]">
-          <p>Nama : {nama}</p>
+          <p>Nama : {name}</p>
           <p>Email : {email}</p>
         </div>
       </div>
