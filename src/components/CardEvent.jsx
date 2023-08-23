@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { truncateTitle,formatToIDRCurrency,dateToDDMonthYYYY,formatPosterURL } from "../utils/stringProcess";
+import { truncateTitle,formatToIDRCurrency,dateToDDMonthYYYY,formatPosterURL, getAddressCity } from "../utils/stringProcess";
 
 function CardEvent({ Img, EventTitle, Date, Location, Price, Ticket }) {
   const [statusStyle,setStatusStyle] = useState("text-green-400")  
@@ -21,7 +21,7 @@ function CardEvent({ Img, EventTitle, Date, Location, Price, Ticket }) {
           {truncateTitle(EventTitle)}
           </h5>
           <p className="text-sm">{dateToDDMonthYYYY(Date)}</p>
-          <p className="mb-3 text-sm">{Location}</p>
+          <p className="mb-3 text-sm">{getAddressCity(Location)}</p>
           <h6 className="text-red-300 font-bold text-lg mt-10">IDR {formatToIDRCurrency(Price)}</h6>
           <p className={`${statusStyle} text-sm font-bold`}>{status}</p>
       </div>
