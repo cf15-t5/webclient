@@ -25,7 +25,7 @@ const EORequestCard = ({ name, email, dateOfRequest, status }) => {
           <p>Tanggal Pengajuan : {dateOfRequest}</p>
         </div>
       </div>
-      {status === "PENDING" ? (
+      {status === "INACTIVE" ? (
         <div className="flex flex-row justify-center items-center gap-2">
           <button
             className="hover:scale-105 active:scale-95 transition-all"

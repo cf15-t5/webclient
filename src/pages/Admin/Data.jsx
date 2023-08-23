@@ -2,41 +2,6 @@ import { useEffect, useState } from "react";
 import DataCard from "../../components/DataCard";
 import axios from "../../api/axios";
 
-// DUMMY
-const dummyDataEOs = [
-  {
-    nama: "Pocketful Of Dreams",
-    email: "POCD02@gmail.com",
-  },
-  {
-    nama: "Pocketful Of Truth",
-    email: "POCD03@gmail.com",
-  },
-  {
-    nama: "Pocketful Of Lies",
-    email: "POCD03@gmail.com",
-  },
-];
-
-const dummyDataUsers = [
-  {
-    nama: "John",
-    email: "John22@gmail.com",
-  },
-  {
-    nama: "Farhan",
-    email: "Farhan@gmail.com",
-  },
-  {
-    nama: "Fahrezy",
-    email: "Fahrezy@gmail.com",
-  },
-  {
-    nama: "Compi",
-    email: "Compi@gmail.com",
-  },
-];
-
 function Data() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [data, setData] = useState();
@@ -55,9 +20,6 @@ function Data() {
 
   useEffect(() => {
     async function fetchData() {
-      // fetch data here
-      // setloading(true);
-
       axios
         .get(`/users/`)
         .then((res) => {
@@ -67,8 +29,6 @@ function Data() {
           console.log(err);
           setData([]);
         });
-
-      // setloading(false);
     }
 
     fetchData();
@@ -77,7 +37,9 @@ function Data() {
   useEffect(() => {
     if (selectedTab === 0) {
       // EOs
-      const EOs = data?.filter((user) => user.role === "EVENT_ORGANIZER");
+      const EOs = data?.filter(
+        (user) => user.role === "EVENT_ORGANIZER" && user.status === "ACTIVE"
+      );
       setdisplayData(EOs);
     } else if (selectedTab === 1) {
       // Users

@@ -30,7 +30,10 @@ function Request() {
           .get(`/users/`)
           .then((res) => {
             const users = [...res.data.data];
-            const EOs = users.filter((user) => user.role === "EVENT_ORGANIZER");
+            const EOs = users.filter(
+              (user) =>
+                user.role === "EVENT_ORGANIZER" && user.status === "INACTIVE"
+            );
             setData(EOs);
           })
           .catch((err) => {

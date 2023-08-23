@@ -24,7 +24,7 @@ export function dateToDDMonthYYYY(dateString) {
   ];
 
   return `${dateObj.getDate()} ${
-    monthNames[dateObj.getMonth() + 1]
+    monthNames[dateObj.getMonth()]
   } ${dateObj.getFullYear()}`;
 }
 
