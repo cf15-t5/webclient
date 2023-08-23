@@ -1,59 +1,10 @@
 import imageHome from "../assets/imgHomepage.png";
-import CardEvent from "../components/CardEvent";
 
-import imageEvent1 from "../assets/exposter.png";
-import imageEvent2 from "../assets/imgHomepage.png";
-import imageEvent3 from "../assets/exposter2.png";
-import imageEvent4 from "../assets/exposter3.jpeg";
-import imageEvent5 from "../assets/exposter4.jpeg";
-import { Link } from "react-router-dom";
+import EventList from "../Lists/EventList";
 
 function Homepage() {
-  const EventData = [
-    {
-      Img: imageEvent1,
-      EventTitle:
-        "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG sdakkdkashdkhaskd haskhdjkashdjkash jkhdkjashdkjashjkdhasjkhdkjashdkh as",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-    {
-      Img: imageEvent2,
-      EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-    {
-      Img: imageEvent3,
-      EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-    {
-      Img: imageEvent4,
-      EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-    {
-      Img: imageEvent5,
-      EventTitle: "DEWA 19 Feat Allstar ( Stadium Tour ) - BANDUNG",
-      Date: "19 Agt 2023",
-      Location: "Bandung",
-      Price: "200.000",
-      Status: "Tersedia Sekarang",
-    },
-  ];
   return (
-    <section style={{ height: "80vh" }}>
+    <section className="h-[80vh]">
       <img
         src={imageHome}
         className="h-2/4 w-full object-cover object-center"
@@ -87,7 +38,7 @@ function Homepage() {
                 id="category"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
-                <option selected>pilih kategori</option>
+                <option >pilih kategori</option>
                 <option value="US">United States</option>
               </select>
             </div>
@@ -116,23 +67,15 @@ function Homepage() {
                 id="location"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
-                <option selected>pilih kategori</option>
+                <option >pilih kategori</option>
                 <option value="US">United States</option>
               </select>
             </div>
           </form>
         </div>
       </div>
-      <div className="md:px-16 py-3 md:py-20">
-        <div className="flex flex-wrap justify-center gap-5">
-          {EventData.map((event) => {
-            return (
-              <Link to={"/eventDetail"}>
-                <CardEvent {...event} />
-              </Link>
-            );
-          })}
-        </div>
+      <div className="md:px-16 py-3 md:py-20 bg-gray-200">
+        <EventList/>
       </div>
     </section>
   );

@@ -1,27 +1,30 @@
-// import Card from 'react-bootstrap/Card';
+import { useEffect, useState } from "react";
+import { truncateTitle,formatToIDRCurrency,dateToDDMonthYYYY,formatPosterURL, sliceAddress } from "../utils/stringProcess";
 
-function CardEvent({ Img, EventTitle, Date, Location, Price, Status }) {
-
-    const truncateTitle = (title) => {
-        const maxTitle = 55;
-        if (title.length > maxTitle) {
-          return title.substring(0, maxTitle) + "...";
-        }
-        return title;
-    };
-
+function CardEvent({ Img, EventTitle, Date_of_event, Location, Price, Ticket }) {
+  const [statusStyle,setStatusStyle] = useState("text-green-400")  
+  const [status,setStatus] = useState("Tersedia Sekarang")
+  useEffect(()=>{
+    const checkStatus = (Ticket) => {
+      if(Ticket<0){
+        setStatus("Tidak Tersedia")
+        setStatusStyle("text-red-400")
+      }
+    }
+    checkStatus(Ticket)
+  },[Ticket])
   return (
-    <div class="w-72 bg-white border rounded-lg shadow flex flex-col">
-        <img class="rounded-t-lg object-cover h-40 w-full" src={Img} alt="poster" />
-        <div class="p-3">
-            <h5 class="mb-2 text-base font-bold tracking-tight">
-            {truncateTitle(EventTitle)}
-            </h5>
-            <p class="text-sm">{Date}</p>
-            <p class="mb-3 text-sm">{Location}</p>
-            <h6 className="text-red-300 font-bold text-lg mt-10">IDR {Price}</h6>
-            <p className="text-green-400 text-sm font-bold">{Status}</p>
-        </div>
+    <div className="w-72  bg-white border rounded-lg shadow flex flex-col">
+      <img className="rounded-t-lg object-cover h-40 w-full" src={formatPosterURL(Img)}  alt="poster" />
+      <div className="p-3 flex flex-col">
+          <h5 className="mb-2 text-base font-bold tracking-tight">
+          {truncateTitle(EventTitle)}
+          </h5>
+          <p className="text-sm">{dateToDDMonthYYYY(Date_of_event)}</p>
+          <p className="mb-3 text-sm">{sliceAddress(Location).city}</p>
+          <h6 className="text-red-300 font-bold text-lg mt-10">IDR {formatToIDRCurrency(Price)}</h6>
+          <p className={`${statusStyle} text-sm font-bold`}>{status}</p>
+      </div>
     </div>
   );
 }
