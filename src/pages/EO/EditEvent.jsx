@@ -24,12 +24,14 @@ function EditEvent() {
     axios
     .get(`/events/${id}`)
     .then((res)=>{
-      handleChange("title",res.data.data.title)
-      handleChange("price",res.data.data.price)
-      handleChange("description",res.data.data.description)
-      handleChange("ticket",res.data.data.number_of_ticket)
-      handleChange("category",res.data.data.category.name)
-      handleChange("address",res.data.data.address)
+      setValue({
+        title:res.data.data.title,
+        price:res.data.data.price,
+        description:res.data.data.description,
+        ticket:res.data.data.number_of_ticket,
+        address:res.data.data.address,
+        category:res.data.data.category.name
+      })
     })
     .catch((err)=>console.log(err.response))
   },[id])
@@ -59,7 +61,7 @@ function EditEvent() {
     setLoading(true)
     const formData = new FormData()
     formData.append("title",value.title)
-    formData.append("poster",value.poster)
+    // formData.append("poster",value.poster)
     formData.append("price",value.price)
     formData.append("description",value.description)
     formData.append("number_of_ticket",value.ticket)
