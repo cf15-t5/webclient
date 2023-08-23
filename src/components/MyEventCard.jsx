@@ -4,7 +4,7 @@ import {
   dateToDDMonthYYYY,
   formatPosterURL,
   formatToIDRCurrency,
-  getAddressCity,
+  sliceAddress,
   truncateTitle,
 } from "../utils/stringProcess";
 
@@ -34,7 +34,7 @@ const MyEventCard = ({
           <p className="font-bold leading-4">{truncateTitle(title)}</p>
           <div className="pt-1">
             <p>{dateToDDMonthYYYY(date_of_event)}</p>
-            <p>{getAddressCity(address)}</p>
+            <p>{sliceAddress(address).city}</p>
           </div>
         </div>
 

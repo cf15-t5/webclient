@@ -127,7 +127,7 @@ const MyEventDetail = () => {
 
         {/* HARGA TIKET */}
         <div className="flex flex-row justify-end items-center w-full py-5 gap-3 text-white">
-          <Link to="/editEvent" className="bg-primary-500 py-2 px-4 rounded-md">
+          <Link to={`/editEvent/${event_id}`} className="bg-primary-500 py-2 px-4 rounded-md">
             Edit Event
           </Link>
           <button

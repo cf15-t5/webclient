@@ -51,7 +51,14 @@ export function capitalizeFirstLetter(string) {
   if(string) return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
 }
 
-export function getAddressCity(address){
-  const city = address.split(",")[2]
-  return city
+export function sliceAddress(address){
+  if(address) {
+    const [detail,sub,city,prov] = address.split(",")
+    return {
+      detail:detail,
+      sub:sub,
+      city:city,
+      prov:prov
+    }
+  }
 }
