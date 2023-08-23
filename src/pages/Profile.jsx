@@ -7,10 +7,9 @@ import DetailAkunEO from '../components/DetailAkunEO'
 function Profile() {
   const { getData,signOut} = useAuth()
   const userLogin = getData()
-  console.log(userLogin)
 
   return (
-    <section className='my-3 mx-5'>
+    <section className='p-3 mx-5'>
       <h5>Detail Akun</h5>
       <div className="grid grid-cols-3 gap-4 md:justify-start">
         <div className='col-span-3 md:col-span-1'>
