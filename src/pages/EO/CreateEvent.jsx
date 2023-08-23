@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import IconFileUp from "../../assets/IconFileUp";
 import { toast } from "react-hot-toast";
+import { ProvinceData,CityData,SubdistrictData } from "../../api/IndonesianData";
+import { capitalizeFirstLetter } from "../../utils/stringProcess";
 
 function CreateEvent() {
   const [loading,setLoading] = useState(false)
-
+  const [category,setCategory] = useState([])
   const [data,setData] = useState({
     title:"",
     price:"",
@@ -14,22 +16,51 @@ function CreateEvent() {
     ticket:"",
     poster:"",
     address:{
-      city:"",
-      sub:"",
+      idProvince:"",
+      idCity:"",
+      idSub:"",
       detail:""
     },
     category:""
   })
-
-  const formattedAddress = `${data.address["detail"]}, ${data.address["sub"]}, ${data.address["city"]}`;
-
-  const hanndleChange = (field, value) =>{
+  const getName=(data,id)=>{
+    const name = data.find((item)=>item.id == id)?.name
+    return capitalizeFirstLetter(name)
+  }
+  
+  const provName = getName(ProvinceData(),data.address['idProvince'])
+  const cityName = getName(CityData(data.address['idProvince']), data.address['idCity'])
+  const subName = getName(SubdistrictData(data.address['idCity']),data.address['idSub'])
+  const formattedAddress = `${data.address["detail"]}, ${subName}, ${cityName}, ${provName}`;
+  
+  const handleChange = (field, value) =>{
     setData((prevData) => ({
       ...prevData,
       [field]: value
     }));
   }
 
+  const handleAddressChange = (field,value) => {
+    setData(prevData => ({
+      ...prevData,
+      address: {
+        ...prevData.address,
+        [field]: value
+      }
+    }));
+  };
+
+  useEffect(()=>{
+    axios
+    .get('/categories/')
+    .then((res)=>{
+      console.log(res.data)
+      setCategory(res.data.data)
+    })
+    .catch((err)=>console.log(err.response))
+  },[])
+
+  console.log(category)
   const formData = new FormData()
   formData.append("title",data.title)
   formData.append("price",data.price)
@@ -57,7 +88,6 @@ function CreateEvent() {
       })
       .finally(()=>setLoading(false))
   }
-
   return (
     <section className="m-3 mx-5">
       <h5 className="text-xl border-b-2 border-gray-300">Buat Event</h5>
@@ -97,7 +127,7 @@ function CreateEvent() {
                   id="dropzone-file" 
                   type="file" 
                   className="hidden" 
-                  onChange={(e)=>{hanndleChange("poster", e.target.files[0])}} 
+                  onChange={(e)=>{handleChange("poster", e.target.files[0])}} 
                 />
               </label>
             </div>
@@ -110,7 +140,7 @@ function CreateEvent() {
                 type="text"
                 placeholder="Nama Event"
                 className="input-field"
-                onChange={(e)=>hanndleChange("title",e.target.value)}
+                onChange={(e)=>handleChange("title",e.target.value)}
                 required
               />
             </div>
@@ -120,13 +150,34 @@ function CreateEvent() {
               </label>
               <select
                 id="category"
-                defaultValue={null}
                 className="input-field"
-                onChange={(e)=>{hanndleChange("category",e.target.value)}}
+                onChange={(e)=>{handleChange("category",e.target.value)}}
                 required
               >
                 <option value={null}>Pilih kategori</option>
-                <option value="1">United States</option>
+                {category.map((item)=>{
+                  return(
+                    <option key={item.category_id} value={item.category_id}>{item.name}</option>
+                  )
+                })}
+              </select>
+            </div>
+            <div>
+              <label for="province" className="block mb-2 text-sm font-medium">
+                Provinsi
+              </label>
+              <select
+                id="province"
+                className="input-field"
+                onChange={(e)=>handleAddressChange("idProvince",e.target.value)}
+                required
+              >
+                <option value={""}>Pilih Provinsi</option>
+                {ProvinceData().map((prov)=>{
+                  return(
+                    <option key={prov.id} value={prov.id}>{prov.name}</option>
+                  )
+                })}
               </select>
             </div>
             <div>
@@ -135,13 +186,16 @@ function CreateEvent() {
               </label>
               <select
                 id="city"
-                defaultValue={null}
                 className="input-field"
-                onChange={(e)=>{hanndleChange("address",{...data.address,city:e.target.value})}}
+                onChange={(e)=>{handleAddressChange("idCity",e.target.value)}}
                 required
               >
                 <option value={null}>Pilih kota</option>
-                <option value="US">United States</option>
+                {CityData(data.address['idProvince']).map((city)=>{
+                  return (
+                    <option key={city.id} value={city.id}>{city.name}</option>
+                  )
+                })}
               </select>
             </div>
             <div>
@@ -150,13 +204,16 @@ function CreateEvent() {
               </label>
               <select
                 id="subdistrict"
-                defaultValue={null}
                 className="input-field"
-                onChange={(e)=>{hanndleChange("address",{...data.address,sub:e.target.value})}}
+                onChange={(e)=>{handleAddressChange("idSub",e.target.value)}}
                 required
               >
                 <option value={null}>Pilih kecamatan</option>
-                <option value="US">United States</option>
+                {SubdistrictData(data.address['idCity']).map((sub)=>{
+                  return (
+                    <option key={sub.id} value={sub.id}>{sub.name}</option>
+                  )
+                })}
               </select>
             </div>
             <div>
@@ -168,7 +225,7 @@ function CreateEvent() {
                 type="text"
                 placeholder="Alamat Detail"
                 className="input-field"
-                onChange={(e)=>{hanndleChange("address",{...data.address,detail:e.target.value})}}
+                onChange={(e)=>{handleAddressChange("detail",e.target.value)}}
                 required
               />
             </div>
@@ -181,7 +238,7 @@ function CreateEvent() {
                 type="date"
                 placeholder="Tanggal Event"
                 className="input-field"
-                onChange={(e)=>{hanndleChange("date",e.target.value)}}
+                onChange={(e)=>{handleChange("date",e.target.value)}}
                 required
               />
             </div>
@@ -194,7 +251,7 @@ function CreateEvent() {
                 type="number"
                 placeholder="Harga"
                 className="input-field"
-                onChange={(e)=>{hanndleChange("price",e.target.value)}}
+                onChange={(e)=>{handleChange("price",e.target.value)}}
                 required
               />
             </div>
@@ -207,7 +264,7 @@ function CreateEvent() {
                 type="number"
                 placeholder="Jumlah Tiket"
                 className="input-field"
-                onChange={(e)=>{hanndleChange("ticket",e.target.value)}}
+                onChange={(e)=>{handleChange("ticket",e.target.value)}}
                 required
               />
             </div>
@@ -220,7 +277,7 @@ function CreateEvent() {
                 rows="4" 
                 className="input-field " 
                 placeholder="Deskipsi Event"
-                onChange={(e)=>{hanndleChange("description",e.target.value)}}
+                onChange={(e)=>{handleChange("description",e.target.value)}}
                 required
                 />
             </div>

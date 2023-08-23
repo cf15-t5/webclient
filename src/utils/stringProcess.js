@@ -46,3 +46,7 @@ export function formatToIDRCurrency(number) {
 export function formatPosterURL(posterUrl) {
   return process.env.REACT_APP_SERVER_URL + posterUrl?.replace(/public/, "");
 }
+
+export function capitalizeFirstLetter(string) {
+  if(string) return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
+}

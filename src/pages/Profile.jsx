@@ -7,7 +7,6 @@ import DetailAkunEO from '../components/DetailAkunEO'
 function Profile() {
   const { getData,signOut} = useAuth()
   const userLogin = getData()
-  console.log(userLogin)
 
   return (
     <section className='my-3 mx-5'>
