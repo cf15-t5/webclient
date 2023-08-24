@@ -7,6 +7,7 @@ import {
   formatPosterURL,
   formatToIDRCurrency,
   dateToDDMonthYYYY,
+  capitalizeFirstLetter,
 } from "../utils/stringProcess";
 import { toast } from "react-hot-toast";
 
@@ -30,8 +31,12 @@ function EventDetail() {
         toast.success("Pembelian Berhasil");
       })
       .catch((err) => {
-        toast.error("Silahkan login terlebih dahulu");
-        // navigate("/login");
+        if (err.response.status === 500) {
+          toast.error("Silahkan login terlebih dahulu");
+          navigate("/login");
+        } else {
+          toast.error(capitalizeFirstLetter(err.response.data.data));
+        }
       })
       .finally(() => setLoading(false));
   }
