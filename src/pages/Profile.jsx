@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Wallet from '../components/Wallet'
 import DetailAkun from '../components/DetailAkun'
 import iconLogout from '../assets/iconLogout.png'
