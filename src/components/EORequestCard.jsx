@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-// import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
-const EORequestCard = ({ name, email, dateOfRequest, user_id }) => {
+const EORequestCard = ({ name, email, dateOfRequest, user_id, status }) => {
   const [loadingApprove, setloadingApprove] = useState(false);
-  const [statusUpdate, setstatusUpdate] = useState(null);
+  const navigate = useNavigate();
 
   const handleApproveButton = () => {
     // do something here
@@ -18,7 +18,7 @@ const EORequestCard = ({ name, email, dateOfRequest, user_id }) => {
       .post("/auth/verify", data)
       .then(() => {
         toast.success("Berhasil menyetujui");
-        setstatusUpdate(true);
+        navigate(0);
       })
       .catch((err) => {
         toast.error("Proses gagal");
@@ -37,7 +37,7 @@ const EORequestCard = ({ name, email, dateOfRequest, user_id }) => {
       .post("/auth/verify", data)
       .then(() => {
         toast.success("Berhasil menolak");
-        setstatusUpdate(false);
+        navigate(0);
       })
       .catch((err) => {
         toast.error("Proses gagal");
@@ -45,7 +45,7 @@ const EORequestCard = ({ name, email, dateOfRequest, user_id }) => {
       .finally(setloadingApprove(false));
   };
   return (
-    <div className="flex flex-row justify-between items-center bg-white w-full rounded-md py-2 px-4 shadow-md">
+    <div className="flex flex-row justify-between items-center bg-white w-full rounded-md py-2 px-4">
       <div className="flex flex-row justify-center items-center gap-4">
         <img
           src="/icons/building-logo.png"
@@ -58,7 +58,7 @@ const EORequestCard = ({ name, email, dateOfRequest, user_id }) => {
           <p>Tanggal Pengajuan : {dateOfRequest}</p>
         </div>
       </div>
-      {statusUpdate === null ? (
+      {status === "INACTIVE" ? (
         <div className="flex flex-row justify-center items-center gap-2">
           {loadingApprove ? (
             <div>Loading</div>
@@ -87,7 +87,7 @@ const EORequestCard = ({ name, email, dateOfRequest, user_id }) => {
             </>
           )}
         </div>
-      ) : statusUpdate ? (
+      ) : status === "ACTIVE" ? (
         <p className="text-green-400 text-[14px] font-bold">Disetujui</p>
       ) : (
         <p className="text-red-400 text-[14px] font-bold">Ditolak</p>

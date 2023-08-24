@@ -6,7 +6,10 @@ import axios from "../../api/axios";
 
 function Request() {
   const [selectedTab, setSelectedTab] = useState(0);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    pending: [],
+    nonPending: [],
+  });
   const [loading, setloading] = useState(false);
 
   const tabList = [
@@ -30,11 +33,18 @@ function Request() {
           .get(`/users/`)
           .then((res) => {
             const users = [...res.data.data];
-            const EOs = users.filter(
+            const PendingEOs = users.filter(
               (user) =>
                 user.role === "EVENT_ORGANIZER" && user.status === "INACTIVE"
             );
-            setData(EOs);
+            const NonPendingEOs = users.filter(
+              (user) =>
+                user.role === "EVENT_ORGANIZER" && user.status !== "INACTIVE"
+            );
+            setData({
+              pending: [...PendingEOs],
+              nonPending: [...NonPendingEOs],
+            });
           })
           .catch((err) => {
             console.log(err);
@@ -45,7 +55,17 @@ function Request() {
         axios
           .get(`/events/`)
           .then((res) => {
-            setData([...res.data.data]);
+            const events = [...res.data.data];
+            const PendingEvent = events.filter(
+              (event) => event.status === "PENDING"
+            );
+            const NonPendingEvent = events.filter(
+              (event) => event.status !== "PENDING"
+            );
+            setData({
+              pending: [...PendingEvent],
+              nonPending: [...NonPendingEvent],
+            });
           })
           .catch((err) => {
             console.log(err);
@@ -87,16 +107,44 @@ function Request() {
         data.length !== 0 ? (
           selectedTab === 0 ? (
             <div className="flex flex-col justify-center items-center w-full gap-3">
-              {data.map((eventData, index) => (
-                <EORequestCard key={index} {...eventData} />
-              ))}
+              {data.pending.length !== 0 ? (
+                data.pending.map((eventData, index) => (
+                  <EORequestCard key={index} {...eventData} />
+                ))
+              ) : (
+                <p>Tidak ada permintaan untuk Event Organizer</p>
+              )}
+              <div className="border-b-2 border-black border-opacity-10 w-full" />
+              {data.nonPending.length !== 0 ? (
+                data.nonPending.map((eventData, index) => (
+                  <EORequestCard key={index} {...eventData} />
+                ))
+              ) : (
+                <p>Tidak ada riwayat untuk Event Organizer</p>
+              )}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
-              {data.map((eventData, index) => (
-                <EventRequestCard key={index} {...eventData} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
+                {data.pending.length !== 0 ? (
+                  data.pending.map((eventData, index) => (
+                    <EventRequestCard key={index} {...eventData} />
+                  ))
+                ) : (
+                  <p>Tidak ada permintaan untuk Event</p>
+                )}
+              </div>
+              <div className="border-b-2 border-black border-opacity-10 w-full" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
+                {data.nonPending.length !== 0 ? (
+                  data.nonPending.map((eventData, index) => (
+                    <EventRequestCard key={index} {...eventData} />
+                  ))
+                ) : (
+                  <p>Tidak ada riwayat untuk Event</p>
+                )}
+              </div>
+            </>
           )
         ) : (
           <p>Nothing to show here</p>
