@@ -31,7 +31,12 @@ const AccountInformation = () => {
       axios
         .get(`/transactions/${user_id}`)
         .then((res) => {
-          setTransactionHistory(res.data.data);
+          const history = [...res.data.data].sort((a, b) => {
+            const dateA = new Date(a.created_at);
+            const dateB = new Date(b.created_at);
+            return dateB - dateA;
+          });
+          setTransactionHistory(history);
         })
         .catch((err) => {
           console.log(err);
@@ -44,11 +49,11 @@ const AccountInformation = () => {
 
   const handleChangeDateOrder = (str) => {
     setdateOrder(str);
-    changeOrder();
+    changeOrder(str);
   };
 
-  const changeOrder = () => {
-    if (dateOrder === "Terlama") {
+  const changeOrder = (str) => {
+    if (str === "Terlama") {
       let newTransaction = [...transactionHistory];
       newTransaction.sort((a, b) => {
         const dateA = new Date(a.created_at);
@@ -171,7 +176,7 @@ const AccountInformation = () => {
                     setValue={handleChangeDateOrder}
                   />
                 </div>
-                <div className="flex flex-col w-full gap-2 h-[50vh] overflow-y-auto">
+                <div className="flex flex-col w-full gap-2 h-[50vh] overflow-y-auto bg-gray-100 rounded-lg p-5">
                   {transactionHistory.map((history, index) => (
                     <TransactionCard {...history} key={index} />
                   ))}

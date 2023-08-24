@@ -29,17 +29,17 @@ function TransactionCard(props) {
       <div className="flex flex-row justify-center items-center gap-4">
         <img
           src={
-            props.type == "buy" ? formatPosterURL(data.poster_path) : iconMoney
+            props.type === "buy" ? formatPosterURL(data.poster_path) : iconMoney
           }
           alt="poster"
           className={
-            props.type == "buy"
+            props.type === "buy"
               ? "h-24 w-[10vw] object-cover rounded"
               : "ms-10 w-[40px] "
           }
         />
         <div className="flex flex-col justify-center items-start py-4 px-2  text-sm">
-          {props.type == "buy" ? (
+          {props.type === "buy" ? (
             <div>
               <h1 className="font-bold text-lg">{data.title}</h1>
               <p>Tanggal Event : {dateToDDMonthYYYY(data.date_of_event)}</p>
@@ -51,7 +51,7 @@ function TransactionCard(props) {
                 {capitalizeFirstLetter(props.type)}
               </p>
               <p className=" text-red-300 font-semibold">
-                IDR {formatToIDRCurrency(props.nominal)}
+                {formatToIDRCurrency(props.nominal)}
               </p>
             </div>
           )}
