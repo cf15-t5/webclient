@@ -18,6 +18,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import EventApproval from "./pages/Admin/EventApproval";
 import MyEventDetail from "./pages/EO/MyEventDetail";
 import EditEvent from "./pages/EO/EditEvent";
+import Categories from "./pages/Admin/Categories";
 import AccountInformation from "./pages/Admin/AccountInformation";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 
@@ -54,6 +55,7 @@ function App() {
               </Route>
 
               <Route element={<ProtectedRoutes role={["ADMIN"]} />}>
+                <Route path="/categories" element={<Categories />} />
                 <Route path="/data" element={<Data />} />
                 <Route path="/data/:user_id" element={<AccountInformation />} />
                 <Route path="/request" element={<Request />} />
