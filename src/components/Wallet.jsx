@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from '../api/axios'
 import { toast } from 'react-hot-toast'
 import useAuth from '../context/AuthContext'

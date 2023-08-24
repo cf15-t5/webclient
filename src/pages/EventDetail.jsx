@@ -9,6 +9,7 @@ function EventDetail() {
   const { id } = useParams()
   const [eventDetail,setEventDetail] = useState([])
   const [loading,setLoading] = useState(false)
+
   useEffect(()=>{
     setLoading(true)
     axios
@@ -22,6 +23,7 @@ function EventDetail() {
   if(loading){
     return <h1 className='text-center mt-10'>Loading</h1>
   }
+
   return (
     <section className='relative bg-white' style={{minHeight:'90vh'}}>
 
@@ -53,7 +55,7 @@ function EventDetail() {
 
           <div className='bg-white fixed flex justify-between p-3 bottom-0 w-full md:bg-transparent md:relative md:inline md:w-fit'>
             <h4 className='text-red-400 font-bold ms-2 md:ms-0 my-auto text-2xl mb-2'>IDR {formatToIDRCurrency(eventDetail.price)}</h4>
-            <button className='bg-primary-500 text-white rounded-xl p-2 px-4 me-2 md:me-0 text-sm'>Beli Sekarang</button>
+            <button className='btn-primary md:me-0 text-sm'>Beli Sekarang</button>
           </div>
         </div>
 

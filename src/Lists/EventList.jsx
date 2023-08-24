@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react'
 import CardEvent from '../components/CardEvent'
 import { NavLink } from 'react-router-dom'
 import axios from '../api/axios';
+import { toast } from 'react-hot-toast';
 function EventList() {
-  const [eventData,setEventData] = useState([])
+  const [ loading , setLoading ] = useState(true)
+  const [ eventData, setEventData ] = useState([])
   useEffect(()=>{
     axios
     .get('/events/')
     .then(res=>setEventData(res.data.data))
-    .catch((err)=>console.log(err.response))
+    .catch((err)=>{
+      console.log(err.response)
+      toast.error("Error Fetch Data")
+    })
+    .finally(()=>setLoading(false))  
   },[])
+  if(loading) return <p className='text-center'>Loading....</p>
   return (
     <div className="flex flex-wrap justify-center gap-5 h-full">
       {eventData?.map((event) => {
