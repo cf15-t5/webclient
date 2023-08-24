@@ -91,7 +91,6 @@ function TiketPage() {
         }
   ]
 
-  console.log(selected)
   return (
     <section className='py-3 px-5'>
       <h5 className='text-xl border-b-2 border-gray-300'>Upcoming Event</h5>

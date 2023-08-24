@@ -28,14 +28,14 @@ function App() {
       <div className="App">
         <AuthContextProvider>
           <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/eo-register" element={<EORegister />} />
             <Route path="/" element={<Navbar />}>
               <Route index element={<Homepage />} />
               <Route path="/event/:id" element={<EventDetail />} />
               <Route path="/eventDetail" element={<EventDetail />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/eo-register" element={<EORegister />} />
-
+              
               <Route element={<ProtectedRoutes
                     role={["USER", "ADMIN", "EVENT_ORGANIZER"]}/>
                 }>

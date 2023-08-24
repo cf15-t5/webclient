@@ -63,7 +63,7 @@ function Wallet() {
           placeholder=" "
         />
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-3">
         <button
           type="button"
           onClick={() => topUp()}
