@@ -7,18 +7,17 @@ function TransactionCard(props) {
   const [data,setData] = useState([])
 
   useEffect(()=>{
-    axios
-    .get(`/events/${props?.ticket?.event_id}`)
-    .then((res)=>{
-      console.log(res.data.data)
-      setData(res.data.data)
-    })
-    .catch((err)=>{
-      console.log(err.data)
-    })
+    if(props?.ticket?.event_id){
+      axios
+      .get(`/events/${props?.ticket?.event_id}`)
+      .then((res)=>{
+        setData(res.data.data)
+      })
+      .catch((err)=>{
+        console.log(err.data)
+      })
+    }
   },[props?.ticket?.event_id])
-  
-  console.log(props)
 
   return (
     <div className="flex flex-row justify-between items-center bg-white w-full rounded-md shadow-md">
@@ -40,7 +39,6 @@ function TransactionCard(props) {
             <p className=' text-red-300 font-semibold'>IDR {formatToIDRCurrency(props.nominal)}</p>
           </div>
           }
-          
         </div>
       </div>
     </div>
