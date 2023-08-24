@@ -18,6 +18,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import EventApproval from "./pages/Admin/EventApproval";
 import MyEventDetail from "./pages/EO/MyEventDetail";
 import EditEvent from "./pages/EO/EditEvent";
+import Categories from "./pages/Admin/Categories";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="/ticket" element={<TiketPage />} />
               <Route path="/profile" element={<Profile />} />
 
+              <Route path="/categories" element={<Categories />} />
               <Route path="/data" element={<Data />} />
               <Route path="/request" element={<Request />} />
               <Route path="/request/event/:event_id" element={<EventApproval />}/>
