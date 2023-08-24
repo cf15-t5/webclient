@@ -15,7 +15,7 @@ function Homepage() {
           <form className="flex gap-5 p-5 flex-wrap md:flex-nowrap">
             <div className="flex-grow">
               <label
-                for="nameEvent"
+                htmlFor="nameEvent"
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Nama Event
@@ -28,7 +28,7 @@ function Homepage() {
             </div>
             <div className="flex-grow">
               <label
-                for="category"
+                htmlFor="category"
                 className="block mb-2 text-sm font-medium text-gray-900 "
               >
                 Kategori
@@ -38,13 +38,13 @@ function Homepage() {
                 id="category"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
-                <option >pilih kategori</option>
+                <option>pilih kategori</option>
                 <option value="US">United States</option>
               </select>
             </div>
             <div className="flex-grow">
               <label
-                for="date"
+                htmlFor="date"
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Tanggal
@@ -57,7 +57,7 @@ function Homepage() {
             </div>
             <div className="flex-grow">
               <label
-                for="location"
+                htmlFor="location"
                 className="block mb-2 text-sm font-medium text-gray-900 "
               >
                 Kategori
@@ -67,7 +67,7 @@ function Homepage() {
                 id="location"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
-                <option >pilih kategori</option>
+                <option>pilih kategori</option>
                 <option value="US">United States</option>
               </select>
             </div>
@@ -75,7 +75,7 @@ function Homepage() {
         </div>
       </div>
       <div className="md:px-16 py-3 md:py-20 bg-gray-200">
-        <EventList/>
+        <EventList />
       </div>
     </section>
   );

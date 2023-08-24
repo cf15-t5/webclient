@@ -19,6 +19,7 @@ import EventApproval from "./pages/Admin/EventApproval";
 import MyEventDetail from "./pages/EO/MyEventDetail";
 import EditEvent from "./pages/EO/EditEvent";
 import AccountInformation from "./pages/Admin/AccountInformation";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
 
 function App() {
   return (
@@ -29,31 +30,46 @@ function App() {
             <Route path="/" element={<Navbar />}>
               <Route index element={<Homepage />} />
               <Route path="/event/:id" element={<EventDetail />} />
-              <Route
-                path="/historyTransaction"
-                element={<HistoryTransaction />}
-              />
               <Route path="/eventDetail" element={<EventDetail />} />
-              <Route path="/ticket" element={<TiketPage />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/eo-register" element={<EORegister />} />
 
-              <Route path="/data" element={<Data />} />
-              <Route path="/data/:user_id" element={<AccountInformation />} />
-              <Route path="/request" element={<Request />} />
               <Route
-                path="/request/event/:event_id"
-                element={<EventApproval />}
-              />
+                element={
+                  <ProtectedRoutes
+                    role={["USER", "ADMIN", "EVENT_ORGANIZER"]}
+                  />
+                }
+              >
+                <Route path="/profile" element={<Profile />} />
+              </Route>
 
-              <Route path="/myEvent" element={<MyEvent />} />
-              <Route path="/createEvent" element={<CreateEvent />} />
-              <Route path="/editEvent/:id" element={<EditEvent />} />
-              <Route path="/myEvent/:event_id" element={<MyEventDetail />} />
+              <Route element={<ProtectedRoutes role={["USER"]} />}>
+                <Route path="/ticket" element={<TiketPage />} />
+                <Route
+                  path="/historyTransaction"
+                  element={<HistoryTransaction />}
+                />
+              </Route>
+
+              <Route element={<ProtectedRoutes role={["ADMIN"]} />}>
+                <Route path="/data" element={<Data />} />
+                <Route path="/data/:user_id" element={<AccountInformation />} />
+                <Route path="/request" element={<Request />} />
+                <Route
+                  path="/request/event/:event_id"
+                  element={<EventApproval />}
+                />
+              </Route>
+
+              <Route element={<ProtectedRoutes role={["EVENT_ORGANIZER"]} />}>
+                <Route path="/myEvent" element={<MyEvent />} />
+                <Route path="/createEvent" element={<CreateEvent />} />
+                <Route path="/editEvent/:id" element={<EditEvent />} />
+                <Route path="/myEvent/:event_id" element={<MyEventDetail />} />
+              </Route>
             </Route>
-
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/eo-register" element={<EORegister />} />
           </Routes>
         </AuthContextProvider>
       </div>
