@@ -2,7 +2,6 @@ import React from 'react'
 import { dateToDDMonthYYYY, formatPosterURL } from '../utils/stringProcess'
 
 function Tiket(props) {
-  console.log(props)
   return (
     <div className='bg-white flex flex-wrap text-sm justify-center rounded my-3 md:flex-nowrap'>
       <div className='w-[200px]'>
