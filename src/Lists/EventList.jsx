@@ -18,7 +18,7 @@ function EventList() {
             <CardEvent 
               Img={event.poster_path} 
               EventTitle={event.title} 
-              Date={event.date_of_event}   
+              Date_of_event={event.date_of_event}   
               Price={event.price} 
               Location={event.address} 
               Ticket={event.number_of_ticket}/>
