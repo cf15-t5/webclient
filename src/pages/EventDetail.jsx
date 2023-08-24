@@ -4,6 +4,7 @@ import iconDate from '../assets/Vector.png'
 import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
 import { formatPosterURL,formatToIDRCurrency,dateToDDMonthYYYY } from '../utils/stringProcess'
+import { toast } from 'react-hot-toast'
 
 function EventDetail() {
   const { id } = useParams()
@@ -11,21 +12,29 @@ function EventDetail() {
   const [loading,setLoading] = useState(false)
 
   useEffect(()=>{
-    setLoading(true)
     axios
     .get(`/events/${id}`)
     .then((res)=>{
       setEventDetail(res.data.data)
       console.log(res.data)
     })
-    .finally(()=>setLoading(false))
   },[id])
-  if(loading){
-    return <h1 className='text-center mt-10'>Loading</h1>
-  }
 
+  function BuyTicket(){
+    setLoading(true)
+    axios
+    .post('/tickets/',{event_id:id})
+    .then(()=>{
+      toast.success("Pembelian Berhasil")
+    })
+    .catch((err)=>{
+      console.log(err.response)
+      toast.error(err.response.data.data)
+    })
+    .finally(()=>setLoading(false))
+  }
   return (
-    <section className='relative bg-white' style={{minHeight:'90vh'}}>
+    <section className='relative pb-[100px] md:pb-10 '>
 
       {/* Event Poster */}
       <img src={formatPosterURL(eventDetail?.poster_path)} className='w-full  h-72 object-cover object-center brightness-50' alt='backgroundPoster'/>
@@ -33,7 +42,7 @@ function EventDetail() {
         <img src={formatPosterURL(eventDetail?.poster_path)} className='object-contain h-full' alt='poster'/>
       </div>  
 
-      <div className=' md:py-3 md:px-20'>
+      <div className=' md:py-3 md:px-20 '>
 
         {/* Event Info  */}
         <div className='flex justify-between border-b-2 border-gray-400'>
@@ -55,7 +64,7 @@ function EventDetail() {
 
           <div className='bg-white fixed flex justify-between p-3 bottom-0 w-full md:bg-transparent md:relative md:inline md:w-fit'>
             <h4 className='text-red-400 font-bold ms-2 md:ms-0 my-auto text-2xl mb-2'>IDR {formatToIDRCurrency(eventDetail.price)}</h4>
-            <button className='btn-primary md:me-0 text-sm'>Beli Sekarang</button>
+            <button onClick={()=>BuyTicket()} className='text-sm btn-primary md:me-0 md:w-full'>{loading?"Loading...":"Beli Sekarang"}</button>
           </div>
         </div>
 
