@@ -18,6 +18,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import EventApproval from "./pages/Admin/EventApproval";
 import MyEventDetail from "./pages/EO/MyEventDetail";
 import EditEvent from "./pages/EO/EditEvent";
+import AccountInformation from "./pages/Admin/AccountInformation";
 
 function App() {
   return (
@@ -37,8 +38,12 @@ function App() {
               <Route path="/profile" element={<Profile />} />
 
               <Route path="/data" element={<Data />} />
+              <Route path="/data/:user_id" element={<AccountInformation />} />
               <Route path="/request" element={<Request />} />
-              <Route path="/request/event/:event_id" element={<EventApproval />}/>
+              <Route
+                path="/request/event/:event_id"
+                element={<EventApproval />}
+              />
 
               <Route path="/myEvent" element={<MyEvent />} />
               <Route path="/createEvent" element={<CreateEvent />} />

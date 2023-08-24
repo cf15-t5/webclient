@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import { dateToDDMonthYYYY } from "../utils/stringProcess";
 
-const EORequestCard = ({ name, email, dateOfRequest, user_id, status }) => {
+const EORequestCard = ({ name, email, created_at, user_id, status }) => {
   const [loadingApprove, setloadingApprove] = useState(false);
   const navigate = useNavigate();
 
@@ -55,7 +56,7 @@ const EORequestCard = ({ name, email, dateOfRequest, user_id, status }) => {
         <div className="flex flex-col justify-center items-start text-[14px]">
           <p>Nama Perusahaan : {name}</p>
           <p>Email : {email}</p>
-          <p>Tanggal Pengajuan : {dateOfRequest}</p>
+          <p>Tanggal Pengajuan : {dateToDDMonthYYYY(created_at)}</p>
         </div>
       </div>
       {status === "INACTIVE" ? (

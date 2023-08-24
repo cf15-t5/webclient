@@ -37,10 +37,20 @@ function Request() {
               (user) =>
                 user.role === "EVENT_ORGANIZER" && user.status === "INACTIVE"
             );
+            PendingEOs.sort((a, b) => {
+              const dateA = new Date(a.created_at);
+              const dateB = new Date(b.created_at);
+              return dateB - dateA;
+            });
             const NonPendingEOs = users.filter(
               (user) =>
                 user.role === "EVENT_ORGANIZER" && user.status !== "INACTIVE"
             );
+            NonPendingEOs.sort((a, b) => {
+              const dateA = new Date(a.created_at);
+              const dateB = new Date(b.created_at);
+              return dateB - dateA;
+            });
             setData({
               pending: [...PendingEOs],
               nonPending: [...NonPendingEOs],
