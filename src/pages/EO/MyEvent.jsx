@@ -15,7 +15,7 @@ function MyEvent() {
         console.log(err);
       });
   }, []);
-
+  
   return (
     <div className="flex flex-col w-full min-h-screen py-5 px-5 sm:px-12 gap-5">
       {/* TAB */}
@@ -26,8 +26,8 @@ function MyEvent() {
       {/* DATA */}
       {data ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
-          {data.map((eventData, index) => (
-            <MyEventCard key={index} {...eventData} />
+          {data.map((eventData) => (
+            <MyEventCard key={eventData.event_id} {...eventData} />
           ))}
         </div>
       ) : (
