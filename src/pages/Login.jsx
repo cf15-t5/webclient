@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import LoginImage from "../assets/imgHomepage.png";
-import EOLogoRegister from "../assets/eoRegister.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { toast } from "react-hot-toast";
@@ -92,7 +91,7 @@ const Login = () => {
             className="text-[14px] w-full flex flex-row justify-center items-center gap-2 p-2 bg-primary-100 rounded-md text-primary-500 mt-20 hover:bg-slate-100"
           >
             <img
-              src={EOLogoRegister}
+              src="/icons/eoRegister.png"
               className="w-[28px] h-auto"
               alt="iconEORegister"
             />

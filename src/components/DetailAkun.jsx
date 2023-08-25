@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import iconProfileUser from '../assets/iconProfile.png'
-import iconProfileEO from '../assets/iconBuilding.png'
 import axios from '../api/axios'
 import { toast } from 'react-hot-toast'
 import { NavLink } from 'react-router-dom'
@@ -59,7 +57,7 @@ function DetailAkun() {
     <div className='bg-white p-4 rounded-xl flex justify-center flex-col'>
       <div className='self-center'>
         <img 
-          src={isCompany(data.role)?iconProfileEO:iconProfileUser} 
+          src={isCompany(data.role)?"/icons/building-logo.png":"/icons/iconProfile.png"} 
           className='my-4 h-20' alt='iconProfile'
         />
       </div>

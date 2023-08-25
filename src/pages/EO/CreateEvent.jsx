@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
-import IconFileUp from "../../assets/IconFileUp";
 import { toast } from "react-hot-toast";
 import { ProvinceData,CityData,SubdistrictData } from "../../api/IndonesianData";
 import { capitalizeFirstLetter } from "../../utils/stringProcess";
@@ -119,7 +118,7 @@ function CreateEvent() {
                       </p>
                     </div>:
                     <>
-                      <IconFileUp/>
+                      <img src="/icons/iconFileUp.svg"/>
                       <p className="mb-2 text-sm text-gray-500">
                         <span className="font-semibold">Click to upload</span>
                       </p>

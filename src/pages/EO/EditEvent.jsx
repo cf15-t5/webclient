@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
-import IconFileUp from "../../assets/IconFileUp";
 import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import {
@@ -9,6 +8,7 @@ import {
   SubdistrictData,
 } from "../../api/IndonesianData";
 import { capitalizeFirstLetter } from "../../utils/stringProcess";
+
 function EditEvent() {
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -153,7 +153,7 @@ function EditEvent() {
                     </div>
                   ) : (
                     <>
-                      <IconFileUp />
+                      <img src="/icons/iconFileUp.svg"/>
                       <p className="mb-2 text-sm text-gray-500">
                         <span className="font-semibold">Click to upload</span>
                       </p>
