@@ -1,6 +1,6 @@
 import React from "react";
-import EventRequestCard from "../components/EventRequestCard";
 import EORequestList from "./EORequestList";
+import EventRequestList from "./EventRequestList";
 
 const RequestList = ({ loading, data, selectedTab }) => {
   if (loading) {
@@ -11,7 +11,7 @@ const RequestList = ({ loading, data, selectedTab }) => {
       if (selectedTab === 0) {
         return <EORequestList data={data} />;
       } else {
-        return <EventRequestCard data={data} />;
+        return <EventRequestList data={data} />;
       }
     } else {
       return <p>Nothing to show here</p>;

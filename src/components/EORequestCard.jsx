@@ -92,7 +92,9 @@ const EORequestCard = ({ name, email, created_at, user_id, status }) => {
       {status === "ACTIVE" ? (
         <p className="text-green-400 text-[14px] font-bold">Disetujui</p>
       ) : (
-        <p className="text-red-400 text-[14px] font-bold">Ditolak</p>
+        status === "REJECTED" && (
+          <p className="text-red-400 text-[14px] font-bold">Ditolak</p>
+        )
       )}
     </div>
   );

@@ -56,7 +56,7 @@ function Request() {
           })
           .catch((err) => {
             console.log(err);
-            setData([]);
+            setData({ pending: [], nonPending: [] });
           });
       } else if (selectedTab === 1) {
         // Events
@@ -77,7 +77,7 @@ function Request() {
           })
           .catch((err) => {
             console.log(err);
-            setData([]);
+            setData({ pending: [], nonPending: [] });
           });
       }
       setloading(false);

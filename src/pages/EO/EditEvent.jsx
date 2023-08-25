@@ -153,7 +153,7 @@ function EditEvent() {
                     </div>
                   ) : (
                     <>
-                      <img src="/icons/iconFileUp.svg"/>
+                      <img src="/icons/iconFileUp.svg" alt="icon" />
                       <p className="mb-2 text-sm text-gray-500">
                         <span className="font-semibold">Click to upload</span>
                       </p>
