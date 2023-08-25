@@ -10,7 +10,7 @@ function Wallet() {
   const { getData } = useAuth();
 
   function topUp() {
-    if (value < 0) return toast.error("Nominal tidak Valid");
+    if (value < 0 || !value) return toast.error("Nominal tidak Valid");
     setLoading(true);
     axios
       .post("/users/topup", { nominal: value })
@@ -26,7 +26,7 @@ function Wallet() {
   }
 
   function withdraw() {
-    if (value < 0) return toast.error("Nominal tidak Valid");
+    if (value < 0 || !value) return toast.error("Nominal tidak Valid");
     setLoading(true);
     axios
       .post("/users/withdraw", { nominal: value })
