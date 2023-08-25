@@ -16,8 +16,8 @@ const MyEventCard = ({
   address,
   price,
   number_of_ticket,
-  ticket_count = 0,
-  attendances_count = 0,
+  ticket_count,
+  attendances_count,
 }) => {
   return (
     <Link

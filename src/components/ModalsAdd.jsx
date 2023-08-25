@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ModalsAdd({title,onSubmit,setShow,value,setValue,id}) {
+function ModalsAdd({title,onSubmit,setShow,value,setValue}) {
   return (
     <div className="fixed z-20 mt-24 inset-0 flex items-start justify-center backdrop-filter backdrop-blur-sm">
       <div className="bg-white p-5 rounded-md w-[400px]">
@@ -8,7 +8,7 @@ function ModalsAdd({title,onSubmit,setShow,value,setValue,id}) {
       <form onSubmit={onSubmit}>
         <input className='input-field' onChange={(e)=>setValue(e.target.value)} placeholder={value}/>
         <div className=' mt-4 text-end'>
-          <button type='submit' className="btn-primary py-1 px-3">Simpan</button>
+          <button type='submit' className="btn-primary py-1 px-3">Submit</button>
           <button onClick={() => setShow(false)} className="bg-transparent text-black ms-2 py-1 px-3 hover:bg-gray-300 rounded-lg">Batal</button>
         </div>
       </form>

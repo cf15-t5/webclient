@@ -8,6 +8,7 @@ const MyEventDetail = () => {
   const [data, setData] = useState(null);
   const [loadingPage, setloadingPage] = useState(false);
   const [loadingDelete, setloadingDelete] = useState(false);
+  const [kode,setKode] =useState('')
   const navigate = useNavigate();
   const { event_id } = useParams();
 
@@ -38,6 +39,8 @@ const MyEventDetail = () => {
       })
       .finally(setloadingDelete(false));
   };
+
+  
 
   if (loadingPage) {
     return (
@@ -93,28 +96,17 @@ const MyEventDetail = () => {
                 {data.address}
               </li>
             </ul>
-
-            {/* INI NGAPAIN?? */}
-            <div className="flex flex-row pt-3">
-              <input
-                placeholder="Tiket Kode"
-                className="outline-none px-5 bg-gray-300 placeholder:text-gray-500"
-              />
-              <button className="px-4 py-2 bg-primary-500 text-white font-bold">
-                Cek In
-              </button>
-            </div>
           </div>
 
           {/* APPROVAL INFO */}
           <div className="flex flex-col justify-start items-end">
             <p>Tiket yang terjual</p>
             <p className="font-bold">
-              {(data.terjual = 0)}/{data.number_of_ticket}
+              {data.ticket_count}/{data.number_of_ticket}
             </p>
             <p>Informasi Peserta</p>
             <p className="font-bold">
-              {(data.peserta = 0)}/{data.number_of_ticket}
+              {data.attendances_count}/{data.number_of_ticket}
             </p>
           </div>
         </div>
