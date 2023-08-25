@@ -1,7 +1,7 @@
 import React from "react";
 import EventRequestCard from "../components/EventRequestCard";
 
-export const EventRequestList = ({ data }) => {
+const EventRequestList = ({ data }) => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
@@ -26,3 +26,5 @@ export const EventRequestList = ({ data }) => {
     </>
   );
 };
+
+export default EventRequestList;

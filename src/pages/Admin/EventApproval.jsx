@@ -155,7 +155,9 @@ const EventApproval = () => {
             {data.status === "APPROVED" ? (
               <p className="text-green-400 text-[14px] font-bold">Disetujui</p>
             ) : (
-              <p className="text-red-400 text-[14px] font-bold">Ditolak</p>
+              data.status === "REJECTED" && (
+                <p className="text-red-400 text-[14px] font-bold">Ditolak</p>
+              )
             )}
           </div>
         </div>

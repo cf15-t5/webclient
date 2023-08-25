@@ -40,7 +40,9 @@ const EventRequestCard = ({
           {status === "APPROVED" ? (
             <span className="text-green-400">Disetujui</span>
           ) : (
-            <span className="text-red-400">Ditolak</span>
+            status === "REJECTED" && (
+              <span className="text-red-400">Ditolak</span>
+            )
           )}
         </p>
       </div>
