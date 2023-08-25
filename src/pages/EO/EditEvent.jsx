@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import IconFileUp from "../../assets/IconFileUp";
 import { toast } from "react-hot-toast";
-import { sliceAddress } from "../../utils/stringProcess";
 import { NavLink, useParams } from "react-router-dom";
 import { ProvinceData,CityData,SubdistrictData } from "../../api/IndonesianData";
 import { capitalizeFirstLetter } from "../../utils/stringProcess";
@@ -19,9 +18,9 @@ function EditEvent() {
     ticket:"",
     poster:"",
     address:{
-      idProvince:"",
-      idCity:"",
-      idSub:"",
+      Province:"",
+      City:"",
+      Sub:"",
       detail:""
     },
     idCategory:""
@@ -52,12 +51,6 @@ function EditEvent() {
     .catch((err)=>console.log(err.response))
   },[])
 
-  const getName=(data,id)=>{
-    const name = data.find((item)=>item.id === id)?.name
-    return capitalizeFirstLetter(name)
-  }
-  
-
   const handleChange = (field, value) =>{
     setData((prevData) => ({
       ...prevData,
@@ -83,45 +76,39 @@ function EditEvent() {
     ticket,
     poster,
     idCategory,
-    address: { idProvince, idCity, idSub, detail }
+    address: { province, city, sub, detail }
   } = data;
-  console.log(idProvince, idCity, idSub, detail)
+
   const formData = new FormData()
-  
   
   async function submitUpdateEvent(e){
     e.preventDefault()
-    setLoading(true)
-    if (idProvince && idCity && idSub && detail) {
-      console.log("MASUKKKKK")
-      const provName = getName(ProvinceData(), idProvince);
-      const cityName = getName(CityData(idProvince), idCity);
-      const subName = getName(SubdistrictData(idCity), idSub);
-      const formattedAddress = `${detail}, ${subName}, ${cityName}, ${provName}`;
+    if (detail || province || city || sub ){
+      if (!detail || !province || !city || !sub ) return toast.error("Lokasi tidak lengkap")
+      const formattedAddress = `${capitalizeFirstLetter(detail)}, ${capitalizeFirstLetter(sub.name)}, ${capitalizeFirstLetter(city.name)}, ${capitalizeFirstLetter(province.name)}`;
       formData.append("address", formattedAddress);
     }
-    
-    if (title) formData.append("title", title);
-    if (price) formData.append("price", price);
-    if (description) formData.append("description", description);
-    if (date) formData.append("date_of_event", date);
-    if (ticket) formData.append("number_of_ticket", ticket);
-    if (poster) formData.append("poster", poster);
-    if (category) formData.append("category_id", idCategory);
-
+    setLoading(true)
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("number_of_ticket", ticket);
+    if(poster) formData.append("poster", poster);
+    if(category) formData.append("category_id", idCategory);
+    if(date) formData.append("date_of_event", date);
     // Show Data
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
-    // axios
-    //   .put(`/events/${id}`,formData)
-    //   .then((res)=>console.log(res.data))
-    //   .then(()=>toast.success("Event Berhasil Diupdate"))
-    //   .catch((err)=>{
-    //     console.log(err.response.data)
-    //     toast.error("Gagal Membuat Event")
-    //   })
-    //   .finally(()=>setLoading(false))
+    // for (const pair of formData.entries()) {
+    //   console.log(pair[0], pair[1]);
+    // }
+    axios
+      .put(`/events/${id}`,formData)
+      .then((res)=>console.log(res.data))
+      .then(()=>toast.success("Event Berhasil Diupdate"))
+      .catch((err)=>{
+        console.log(err.response.data)
+        toast.error("Event Gagal Di update")
+      })
+      .finally(()=>setLoading(false))
   }
 
   return (
@@ -204,12 +191,12 @@ function EditEvent() {
               <select
                 id="province"
                 className="input-field"
-                onChange={(e)=>handleAddressChange("idProvince",e.target.value)}
+                onChange={(e)=>handleAddressChange("province",JSON.parse(e.target.value))}
               >
                 <option value={""}>Pilih Provinsi</option>
                 {ProvinceData().map((prov)=>{
                   return(
-                    <option key={prov.id} value={prov.id}>{prov.name}</option>
+                    <option key={prov.id} value={JSON.stringify(prov)}>{prov.name}</option>
                   )
                 })}
               </select>
@@ -221,12 +208,12 @@ function EditEvent() {
               <select
                 id="city"
                 className="input-field"
-                onChange={(e)=>{handleAddressChange("idCity",e.target.value)}}
+                onChange={(e)=>{handleAddressChange("city",JSON.parse(e.target.value))}}
               >
                 <option value={null}>Pilih kota</option>
-                {CityData(data.address['idProvince']).map((city)=>{
+                {CityData(province?.id).map((city)=>{
                   return (
-                    <option key={city.id} value={city.id}>{city.name}</option>
+                    <option key={city.id} value={JSON.stringify(city)}>{city.name}</option>
                   )
                 })}
               </select>
@@ -238,12 +225,12 @@ function EditEvent() {
               <select
                 id="subdistrict"
                 className="input-field"
-                onChange={(e)=>{handleAddressChange("idSub",e.target.value)}}
+                onChange={(e)=>{handleAddressChange("sub",JSON.parse(e.target.value))}}
               >
                 <option value={null}>Pilih kecamatan</option>
-                {SubdistrictData(data.address['idCity']).map((sub)=>{
+                {SubdistrictData(city?.id).map((sub)=>{
                   return (
-                    <option key={sub.id} value={sub.id}>{sub.name}</option>
+                    <option key={sub.id} value={JSON.stringify(sub)}>{sub.name}</option>
                   )
                 })}
               </select>
@@ -280,6 +267,7 @@ function EditEvent() {
                 id="eventPrive"
                 type="number"
                 placeholder="Harga"
+                value={price}
                 className="input-field"
                 onChange={(e)=>{handleChange("price",e.target.value)}}
               />
@@ -293,6 +281,7 @@ function EditEvent() {
                 type="number"
                 placeholder="Jumlah Tiket"
                 className="input-field"
+                value={ticket}
                 onChange={(e)=>{handleChange("ticket",e.target.value)}}
               />
             </div>
@@ -305,6 +294,7 @@ function EditEvent() {
                 rows="4" 
                 className="input-field " 
                 placeholder="Deskipsi Event"
+                value={description}
                 onChange={(e)=>{handleChange("description",e.target.value)}}
                 />
             </div>
