@@ -34,9 +34,10 @@ const EventRequestCard = ({
         </div>
         <p className="font-bold">
           Status :{" "}
-          {status === "PENDING" ? (
+          {status === "PENDING" && (
             <span className="text-primary-500">Butuh Persetujuan</span>
-          ) : status === "APPROVED" ? (
+          )}
+          {status === "APPROVED" ? (
             <span className="text-green-400">Disetujui</span>
           ) : (
             <span className="text-red-400">Ditolak</span>

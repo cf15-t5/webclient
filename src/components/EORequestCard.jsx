@@ -59,7 +59,7 @@ const EORequestCard = ({ name, email, created_at, user_id, status }) => {
           <p>Tanggal Pengajuan : {dateToDDMonthYYYY(created_at)}</p>
         </div>
       </div>
-      {status === "INACTIVE" ? (
+      {status === "INACTIVE" && (
         <div className="flex flex-row justify-center items-center gap-2">
           {loadingApprove ? (
             <div>Loading</div>
@@ -88,7 +88,8 @@ const EORequestCard = ({ name, email, created_at, user_id, status }) => {
             </>
           )}
         </div>
-      ) : status === "ACTIVE" ? (
+      )}
+      {status === "ACTIVE" ? (
         <p className="text-green-400 text-[14px] font-bold">Disetujui</p>
       ) : (
         <p className="text-red-400 text-[14px] font-bold">Ditolak</p>

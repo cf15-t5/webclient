@@ -63,7 +63,6 @@ function Homepage() {
                 Kategori
               </label>
               <select
-                defaultValue={""}
                 value={filter.kategori}
                 id="location"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
@@ -72,8 +71,8 @@ function Homepage() {
                 }}
               >
                 <option value={""}>Pilih kategori</option>
-                {listKategori.map((kategori, index) => (
-                  <option key={index} value={kategori.name}>
+                {listKategori.map((kategori) => (
+                  <option key={kategori.category_id} value={kategori.name}>
                     {kategori.name}
                   </option>
                 ))}

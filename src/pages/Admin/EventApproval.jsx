@@ -134,7 +134,7 @@ const EventApproval = () => {
           {/* APPROVAL INFO */}
           <div className="flex flex-col justify-start items-center">
             <p className="font-medium">Menyetujui?</p>
-            {data.status === "PENDING" ? (
+            {data.status === "PENDING" && (
               <div className="flex flex-row justify-center items-center gap-2 text-white font-medium text-[14px]">
                 <button
                   disabled={loadingApprove}
@@ -151,7 +151,8 @@ const EventApproval = () => {
                   Tidak
                 </button>
               </div>
-            ) : data.status === "APPROVED" ? (
+            )}
+            {data.status === "APPROVED" ? (
               <p className="text-green-400 text-[14px] font-bold">Disetujui</p>
             ) : (
               <p className="text-red-400 text-[14px] font-bold">Ditolak</p>
