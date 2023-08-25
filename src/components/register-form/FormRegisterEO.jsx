@@ -27,8 +27,10 @@ function FormRegisterEO({setIsRequestSent}) {
         password:data.password,
         role:"EVENT_ORGANIZER"
       })
-      .then(()=>toast.success("Permintaan berhasil diajukan"))
-      .then(()=>setIsRequestSent(true))
+      .then(()=>{
+        toast.success("Permintaan berhasil diajukan")
+        setIsRequestSent(true)
+      })
       .catch((err) => {
         if(!Array.isArray(err.response.data.data)) return toast.error(err.response.data.data)
         toast.error("Something Wrong")
