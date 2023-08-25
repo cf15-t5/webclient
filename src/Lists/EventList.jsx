@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import axios from "../api/axios";
 import { toast } from "react-hot-toast";
 import { isDateExceed } from "../utils/dateProcess";
+
 function EventList({ filter }) {
   const [loading, setLoading] = useState(true);
   const [eventData, setEventData] = useState([]);
@@ -13,7 +14,12 @@ function EventList({ filter }) {
     axios
       .get("/events/")
       .then((res) => {
-        setEventData(res.data.data);
+        const events = res.data.data
+        const eventApprove = events.filter(
+          (event) => event.status === "APPROVED"
+        );
+        setEventData(eventApprove);
+
       })
       .catch((err) => {
         console.log(err.response);

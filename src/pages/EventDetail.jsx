@@ -24,6 +24,7 @@ function EventDetail() {
   }, [id]);
 
   function BuyTicket() {
+    if(eventDetail.status !== "APPROVED") return toast.error("Event tidak bisa dibeli")
     setLoading(true);
     axios
       .post("/tickets/", { event_id: id })

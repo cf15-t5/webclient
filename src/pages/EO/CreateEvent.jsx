@@ -4,11 +4,12 @@ import IconFileUp from "../../assets/IconFileUp";
 import { toast } from "react-hot-toast";
 import { ProvinceData,CityData,SubdistrictData } from "../../api/IndonesianData";
 import { capitalizeFirstLetter } from "../../utils/stringProcess";
+import { useNavigate } from "react-router-dom";
 
 function CreateEvent() {
   const [loading,setLoading] = useState(false)
   const [category,setCategory] = useState([])
-  
+  const navigate = useNavigate()
   const [data,setData] = useState({
     title:"",
     price:"",
@@ -57,7 +58,6 @@ function CreateEvent() {
     axios
     .get('/categories/')
     .then((res)=>{
-      console.log(res.data)
       setCategory(res.data.data)
     })
     .catch((err)=>console.log(err.response))
@@ -84,7 +84,10 @@ function CreateEvent() {
     axios
       .post('/events/',formData)
       .then((res)=>console.log(res.data))
-      .then(()=>toast.success("Event Berhasil dibuat"))
+      .then(()=>{
+        toast.success("Event Berhasil dibuat")
+        navigate('/myEvent')
+      })
       .catch((err)=>{
         console.log(err.response.data)
         toast.error("Gagal Membuat Event")
