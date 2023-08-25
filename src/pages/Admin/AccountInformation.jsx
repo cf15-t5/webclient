@@ -11,7 +11,7 @@ import TransactionCard from "../../components/TransactionCard";
 const AccountInformation = () => {
   const { user_id } = useParams();
   const [data, setdata] = useState(null);
-  const [transactionHistory, setTransactionHistory] = useState([]);
+  const [transactionHistory, setTransactionHistory] = useState(null);
   const [dateOrder, setdateOrder] = useState("Terbaru");
 
   useEffect(() => {
@@ -157,7 +157,7 @@ const AccountInformation = () => {
 
         {/* ACTIVITY */}
         <div className="flex flex-col justify-start items-start bg-white p-5 rounded-lg w-full">
-          {data !== null && transactionHistory.length !== 0 ? (
+          {data !== null && transactionHistory !== null ? (
             <div className="w-full">
               <div className="px-4 sm:px-0">
                 <h3 className="text-base font-semibold leading-7 text-gray-900">
@@ -177,12 +177,18 @@ const AccountInformation = () => {
                   />
                 </div>
                 <div className="flex flex-col w-full gap-2 h-[50vh] overflow-y-auto bg-gray-100 rounded-lg p-5">
-                  {transactionHistory.map((history) => (
-                    <TransactionCard
-                      {...history}
-                      key={history.transaction_id}
-                    />
-                  ))}
+                  {transactionHistory.length !== 0 ? (
+                    transactionHistory.map((history) => (
+                      <TransactionCard
+                        {...history}
+                        key={history.transaction_id}
+                      />
+                    ))
+                  ) : (
+                    <p className="text-center">
+                      Tidak ada transaksi pada akun ini
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
