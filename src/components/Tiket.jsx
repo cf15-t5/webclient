@@ -5,13 +5,13 @@ function Tiket(props) {
   return (
     <div className='bg-white flex flex-wrap text-sm justify-center rounded my-3 md:flex-nowrap'>
       <div className='w-[200px]'>
-        <img src={formatPosterURL(props.event.poster_path)} className='h-32 w-full flex-grow flex-1 object-cover rounded' alt='Poster'/>
+        <img src={formatPosterURL(props.event?.poster_path)} className='h-32 w-full flex-grow flex-1 object-cover rounded' alt='Poster'/>
       </div>
       <div className='m-3 flex-grow'>
-        <h6 className='font-bold'>{props.event.title}</h6>
+        <h6 className='font-bold'>{props.event?.title}</h6>
         <div>
           <span className='md:inline'>Tanggal Pelaksanaan : </span>
-          <span>{dateToDDMonthYYYY(props.event.date_of_event)}</span>
+          <span>{dateToDDMonthYYYY(props.event?.date_of_event)}</span>
         </div>
         <div>
           <span className='md:inline'>Tanggal Pembelian   : </span>

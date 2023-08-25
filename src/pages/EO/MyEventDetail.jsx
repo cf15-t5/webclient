@@ -8,7 +8,6 @@ const MyEventDetail = () => {
   const [data, setData] = useState(null);
   const [loadingPage, setloadingPage] = useState(false);
   const [loadingDelete, setloadingDelete] = useState(false);
-  const [kode,setKode] =useState('')
   const navigate = useNavigate();
   const { event_id } = useParams();
 

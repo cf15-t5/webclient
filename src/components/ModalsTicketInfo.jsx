@@ -5,18 +5,18 @@ function ModalsTicketInfo({setShow,data}) {
   return (
     <div className="fixed z-20 inset-0 flex items-center justify-center backdrop-filter backdrop-blur-sm ">
       <div className="bg-white p-5 rounded-md w-[400px] drop-shadow-2xl">
-        <h2 className=" text-xl font-semibold mb-4">{data.event.title}</h2>
+        <h2 className=" text-xl font-semibold mb-4">{data.event?.title}</h2>
         <div>
           <table className='my-5'>
             <tr>
               <td>Tanggal Pelaksanaan</td>
               <td>:</td>
-              <td>{dateToDDMonthYYYY(data.event.date_of_event)}</td>
+              <td>{dateToDDMonthYYYY(data.event?.date_of_event)}</td>
             </tr>
             <tr>
               <td>Lokasi</td>
               <td>:</td>
-              <td>{data.event.address}</td>
+              <td>{data.event?.address}</td>
             </tr>
             <tr>
               <td>Nama</td>
@@ -31,7 +31,7 @@ function ModalsTicketInfo({setShow,data}) {
             <tr>
               <td>Harga</td>
               <td>:</td>
-              <td>{formatToIDRCurrency(data.event.price)}</td>
+              <td>{formatToIDRCurrency(data.event?.price)}</td>
             </tr>
           </table>
           <h2 className='text-center bg-primary-500 p-2 text-white font-bold rounded'>Kode Tiket : {data.ticket_code}</h2>
