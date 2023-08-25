@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import useAuth from "../context/AuthContext";
+import axios from "../api/axios";
 
 function NavigationBar() {
   const [open, setOpen] = useState(false);
+  const [userLogin,setUserLogin] = useState()
 
   const userRole = {
     User: "USER",
@@ -11,8 +12,17 @@ function NavigationBar() {
     Admin: "ADMIN",
   };
 
-  const { getData } = useAuth()
-  const userLogin = getData()
+  useEffect(()=>{
+    axios
+    .get('/auth/me')
+    .then((res)=>{
+      setUserLogin(res.data.data)
+    })
+    .catch((err)=>{
+      console.log(err.response)
+    })
+  },[])
+
   const FirstNameUser = userLogin?.name.split(" ")[0]
   return (
     <>
