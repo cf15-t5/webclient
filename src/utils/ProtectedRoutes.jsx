@@ -9,7 +9,6 @@ const ProtectedRoutes = ({ role }) => {
       .get(`/auth/me`)
       .then((res) => {
         setUserRole(res.data.data.role);
-        console.log(res.data.data.role);
       })
       .catch(() => {
         setUserRole("UNREGISTERED");

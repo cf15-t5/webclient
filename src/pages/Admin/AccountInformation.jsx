@@ -177,8 +177,11 @@ const AccountInformation = () => {
                   />
                 </div>
                 <div className="flex flex-col w-full gap-2 h-[50vh] overflow-y-auto bg-gray-100 rounded-lg p-5">
-                  {transactionHistory.map((history, index) => (
-                    <TransactionCard {...history} key={index} />
+                  {transactionHistory.map((history) => (
+                    <TransactionCard
+                      {...history}
+                      key={history.transaction_id}
+                    />
                   ))}
                 </div>
               </div>

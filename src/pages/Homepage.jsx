@@ -72,8 +72,8 @@ function Homepage() {
                 }}
               >
                 <option value={""}>Pilih kategori</option>
-                {listKategori.map((kategori, index) => (
-                  <option key={index} value={kategori.name}>
+                {listKategori.map((kategori) => (
+                  <option key={kategori.category_id} value={kategori.name}>
                     {kategori.name}
                   </option>
                 ))}

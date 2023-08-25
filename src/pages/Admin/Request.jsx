@@ -1,8 +1,6 @@
-// import React, { useEffect, useState } from "react";
 import { useEffect, useState } from "react";
-import EORequestCard from "../../components/EORequestCard";
-import EventRequestCard from "../../components/EventRequestCard";
 import axios from "../../api/axios";
+import RequestList from "../../Lists/RequestList";
 
 function Request() {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -92,9 +90,9 @@ function Request() {
     <div className="flex flex-col w-full min-h-screen py-5 px-5 sm:px-12 gap-5">
       {/* TAB */}
       <div className="flex flex-row border-b-2 border-black border-opacity-20">
-        {tabList.map((tab, index) => (
+        {tabList.map((tab) => (
           <button
-            key={index}
+            key={tab.tabId}
             onClick={() => {
               setSelectedTab(tab.tabId);
               setData([]);
@@ -111,57 +109,7 @@ function Request() {
       </div>
 
       {/* DATA */}
-      {loading ? (
-        <p>Loading...</p>
-      ) : data ? (
-        data.length !== 0 ? (
-          selectedTab === 0 ? (
-            <div className="flex flex-col justify-center items-center w-full gap-3">
-              {data.pending.length !== 0 ? (
-                data.pending.map((eventData, index) => (
-                  <EORequestCard key={index} {...eventData} />
-                ))
-              ) : (
-                <p>Tidak ada permintaan untuk Event Organizer</p>
-              )}
-              <div className="border-b-2 border-black border-opacity-10 w-full" />
-              {data.nonPending.length !== 0 ? (
-                data.nonPending.map((eventData, index) => (
-                  <EORequestCard key={index} {...eventData} />
-                ))
-              ) : (
-                <p>Tidak ada riwayat untuk Event Organizer</p>
-              )}
-            </div>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
-                {data.pending.length !== 0 ? (
-                  data.pending.map((eventData, index) => (
-                    <EventRequestCard key={index} {...eventData} />
-                  ))
-                ) : (
-                  <p>Tidak ada permintaan untuk Event</p>
-                )}
-              </div>
-              <div className="border-b-2 border-black border-opacity-10 w-full" />
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
-                {data.nonPending.length !== 0 ? (
-                  data.nonPending.map((eventData, index) => (
-                    <EventRequestCard key={index} {...eventData} />
-                  ))
-                ) : (
-                  <p>Tidak ada riwayat untuk Event</p>
-                )}
-              </div>
-            </>
-          )
-        ) : (
-          <p>Nothing to show here</p>
-        )
-      ) : (
-        <p>Nothing to show here</p>
-      )}
+      <RequestList loading={loading} data={data} selectedTab={selectedTab} />
     </div>
   );
 }
