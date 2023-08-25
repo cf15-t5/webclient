@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import { toast } from "react-hot-toast";
-import ModalsAdd from "../../components/ModalsAdd";
+import ModalsInput from "../../components/ModalsInput";
 
 function Categories() {
   const [categories, setCategories] = useState([]);
@@ -79,7 +79,7 @@ function Categories() {
           <p className="font-bold">+ Tambah Kategori</p>
         </div>
         {showAdd && (
-          <ModalsAdd
+          <ModalsInput
             title="Tambah Kategori"
             onSubmit={createCategory}
             setShow={setShowAdd}
@@ -111,7 +111,7 @@ function Categories() {
           );
         })}
         {showUpdate && (
-          <ModalsAdd
+          <ModalsInput
             title="Edit Category"
             onSubmit={updateCategory}
             value={selectedCategory.name}

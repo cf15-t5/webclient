@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ModalsAdd({title,onSubmit,setShow,value,setValue}) {
+function ModalsInput({title,onSubmit,setShow,value,setValue}) {
   return (
     <div className="fixed z-20 mt-24 inset-0 flex items-start justify-center backdrop-filter backdrop-blur-sm">
       <div className="bg-white p-5 rounded-md w-[400px]">
@@ -17,4 +17,4 @@ function ModalsAdd({title,onSubmit,setShow,value,setValue}) {
   )
 }
 
-export default ModalsAdd
+export default ModalsInput
