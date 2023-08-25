@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import iconMoney from "../assets/iconMoney.png";
 import {
   formatToIDRCurrency,
   capitalizeFirstLetter,
@@ -29,7 +28,7 @@ function TransactionCard(props) {
       <div className="flex flex-row justify-center items-center gap-4">
         <img
           src={
-            props.type === "buy" ? formatPosterURL(data.poster_path) : iconMoney
+            props.type === "buy" ? formatPosterURL(data.poster_path) : "/icons/iconMoney.png"
           }
           alt="poster"
           className={

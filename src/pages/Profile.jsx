@@ -1,7 +1,6 @@
 import React from 'react'
 import Wallet from '../components/Wallet'
 import DetailAkun from '../components/DetailAkun'
-import iconLogout from '../assets/iconLogout.png'
 import useAuth from '../context/AuthContext'
 
 function Profile() {
@@ -16,7 +15,7 @@ function Profile() {
         <div className='col-span-3 md:col-span-1 mt-3 md:mt-0'>
             <DetailAkun/>
           <button onClick={()=>signOut()} className='mt-3 bg-white hover:bg-gray-200 rounded-xl py-2 w-full text-start'>
-            <img className='inline ms-3' src={iconLogout} alt='iconLogout'/>
+            <img className='inline ms-3' src='/icons/iconLogout.png' alt='iconLogout'/>
             <span className='ms-4'>Log Out</span>
           </button>
         </div>
