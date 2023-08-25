@@ -1,10 +1,14 @@
 import React from "react";
 import EODefaultProfile from "../assets/iconBuilding.png";
 import UserDefaultProfile from "../assets/iconProfile.png";
+import { Link } from "react-router-dom";
 
-const DataCard = ({ name, email, imageUrl = null, role }) => {
+const DataCard = ({ name, email, imageUrl = null, role, user_id }) => {
   return (
-    <div className="flex flex-row justify-between items-center bg-white w-full rounded-md py-4 px-4 shadow-md">
+    <Link
+      to={`/data/${user_id}`}
+      className="flex flex-row justify-between items-center bg-white w-full rounded-md py-4 px-4 shadow-md"
+    >
       <div className="flex flex-row justify-center items-center gap-4">
         <img
           src={
@@ -22,7 +26,7 @@ const DataCard = ({ name, email, imageUrl = null, role }) => {
           <p>Email : {email}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

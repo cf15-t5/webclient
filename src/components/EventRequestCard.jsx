@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   dateToDDMonthYYYY,
   formatPosterURL,
-  // truncateTitle,
+  truncateTitle,
 } from "../utils/stringProcess";
 
 const EventRequestCard = ({
@@ -26,7 +26,7 @@ const EventRequestCard = ({
       />
       <div className="flex flex-col justify-between items-start w-full h-full p-3 gap-3 text-left">
         <div className="flex flex-col justify-center items-start">
-          <p className="font-bold leading-4">{title}</p>
+          <p className="font-bold leading-4">{truncateTitle(title)}</p>
           <div className="py-1 text-[14px]">
             <p>{dateToDDMonthYYYY(date_of_event)}</p>
             <p>{address}</p>

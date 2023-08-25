@@ -1,32 +1,77 @@
-import React, { useEffect, useState } from 'react'
-import CardEvent from '../components/CardEvent'
-import { NavLink } from 'react-router-dom'
-import axios from '../api/axios';
-function EventList() {
-  const [eventData,setEventData] = useState([])
-  useEffect(()=>{
+import React, { useEffect, useState } from "react";
+import CardEvent from "../components/CardEvent";
+import { NavLink } from "react-router-dom";
+import axios from "../api/axios";
+import { toast } from "react-hot-toast";
+import { isDateExceed } from "../utils/dateProcess";
+function EventList({ filter }) {
+  const [loading, setLoading] = useState(true);
+  const [eventData, setEventData] = useState([]);
+  const [displayData, setDisplayData] = useState([]);
+
+  useEffect(() => {
     axios
-    .get('/events/')
-    .then(res=>setEventData(res.data.data))
-    .catch((err)=>console.log(err.response))
-  },[])
+      .get("/events/")
+      .then((res) => {
+        setEventData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        toast.error("Error Fetch Data");
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    let newData = [...eventData];
+    if (filter.kategori !== "") {
+      newData = newData.filter(
+        (data) => data.category.name === filter.kategori
+      );
+    }
+    if (filter.namaEvent !== "") {
+      newData = newData.filter((data) =>
+        data.title?.toLowerCase().includes(filter.namaEvent.toLowerCase())
+      );
+    }
+    if (filter.lokasi !== "") {
+      newData = newData.filter((data) =>
+        data.address?.toLowerCase().includes(filter.lokasi.toLowerCase())
+      );
+    }
+    if (filter.tanggal !== "") {
+      newData = newData.filter((data) =>
+        isDateExceed(data.date_of_event, filter.tanggal)
+      );
+    }
+    setDisplayData(newData);
+  }, [
+    eventData,
+    filter.kategori,
+    filter.lokasi,
+    filter.tanggal,
+    filter.namaEvent,
+  ]);
+
+  if (loading) return <p className="text-center">Loading....</p>;
   return (
     <div className="flex flex-wrap justify-center gap-5 h-full">
-      {eventData?.map((event) => {
+      {displayData?.map((event) => {
         return (
           <NavLink to={`/event/${event.event_id}`} key={event.event_id}>
-            <CardEvent 
-              Img={event.poster_path} 
-              EventTitle={event.title} 
-              Date_of_event={event.date_of_event}   
-              Price={event.price} 
-              Location={event.address} 
-              Ticket={event.number_of_ticket}/>
+            <CardEvent
+              Img={event.poster_path}
+              EventTitle={event.title}
+              Date_of_event={event.date_of_event}
+              Price={event.price}
+              Location={event.address}
+              Ticket={event.number_of_ticket}
+            />
           </NavLink>
         );
       })}
     </div>
-  )
+  );
 }
 
-export default EventList  
+export default EventList;

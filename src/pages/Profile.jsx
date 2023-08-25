@@ -3,11 +3,9 @@ import Wallet from '../components/Wallet'
 import DetailAkun from '../components/DetailAkun'
 import iconLogout from '../assets/iconLogout.png'
 import useAuth from '../context/AuthContext'
-import DetailAkunEO from '../components/DetailAkunEO'
-function Profile() {
-  const { getData,signOut} = useAuth()
-  const userLogin = getData()
 
+function Profile() {
+  const { signOut} = useAuth()
   return (
     <section className='p-3 mx-5'>
       <h5>Detail Akun</h5>
@@ -16,14 +14,7 @@ function Profile() {
           <Wallet/>
         </div>
         <div className='col-span-3 md:col-span-1 mt-3 md:mt-0'>
-          {userLogin?.role==='EVENT_ORGANIZER'?
-            <DetailAkunEO 
-              name={userLogin?.name} 
-              email={userLogin?.email}/>:
-            <DetailAkun 
-              name={userLogin?.name} 
-              email={userLogin?.email}/>
-          }
+            <DetailAkun/>
           <button onClick={()=>signOut()} className='mt-3 bg-white hover:bg-gray-200 rounded-xl py-2 w-full text-start'>
             <img className='inline ms-3' src={iconLogout} alt='iconLogout'/>
             <span className='ms-4'>Log Out</span>

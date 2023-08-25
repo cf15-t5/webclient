@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "../../api/axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   dateToDDMonthYYYY,
   formatPosterURL,
@@ -11,8 +11,8 @@ import {
 const EventApproval = () => {
   const [data, setData] = useState(null);
   const [loadingPage, setloadingPage] = useState(false);
-  // const [loadingApprove, setloadingApprove] = useState(false);
-  // const navigate = useNavigate();
+  const [loadingApprove, setloadingApprove] = useState(false);
+  const navigate = useNavigate();
   const { event_id } = useParams();
 
   useEffect(() => {
@@ -32,12 +32,40 @@ const EventApproval = () => {
   // Function
   const handleApproveButton = () => {
     // do something here
-    toast.success("Approved!");
+    setloadingApprove(true);
+    const data = {
+      id: event_id,
+      status: "APPROVED",
+    };
+    axios
+      .post("/events/verify", data)
+      .then(() => {
+        toast.success("Berhasil menyetujui");
+        navigate("/request");
+      })
+      .catch((err) => {
+        toast.error("Proses gagal");
+      })
+      .finally(setloadingApprove(false));
   };
 
   const handleRejectButton = () => {
     // do something here
-    toast.success("Rejected!");
+    setloadingApprove(true);
+    const data = {
+      id: event_id,
+      status: "REJECTED",
+    };
+    axios
+      .post("/events/verify", data)
+      .then(() => {
+        toast.success("Berhasil menolak");
+        navigate("/request");
+      })
+      .catch((err) => {
+        toast.error("Proses gagal");
+      })
+      .finally(setloadingApprove(false));
   };
 
   if (loadingPage) {
@@ -109,13 +137,15 @@ const EventApproval = () => {
             {data.status === "PENDING" ? (
               <div className="flex flex-row justify-center items-center gap-2 text-white font-medium text-[14px]">
                 <button
-                  className="bg-green-500 py-1 w-[80px] rounded-md hover:scale-105 active:scale-95 transition-all"
+                  disabled={loadingApprove}
+                  className="bg-green-500 py-1 w-[80px] rounded-md hover:scale-105 active:scale-95 transition-all disabled:cursor-not-allowed disabled:opacity-70"
                   onClick={handleApproveButton}
                 >
                   Ya
                 </button>
                 <button
-                  className="bg-red-500 py-1 w-[80px] rounded-md hover:scale-105 active:scale-95 transition-all"
+                  disabled={loadingApprove}
+                  className="bg-red-500 py-1 w-[80px] rounded-md hover:scale-105 active:scale-95 transition-all disabled:cursor-not-allowed disabled:opacity-70"
                   onClick={handleRejectButton}
                 >
                   Tidak

@@ -24,8 +24,14 @@ export function dateToDDMonthYYYY(dateString) {
   ];
 
   return `${dateObj.getDate()} ${
-    monthNames[dateObj.getMonth() + 1]
+    monthNames[dateObj.getMonth()]
   } ${dateObj.getFullYear()}`;
+}
+
+export function dateToHHMMSS(dateString, timezone) {
+  const date = new Date(dateString);
+  const timezoneDate = new Date(date.getTime() + timezone * 60 * 60 * 1000);
+  return timezoneDate.toLocaleTimeString();
 }
 
 export function formatToIDRCurrency(number) {
@@ -48,17 +54,18 @@ export function formatPosterURL(posterUrl) {
 }
 
 export function capitalizeFirstLetter(string) {
-  if(string) return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
+  if (string)
+    return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
 }
 
-export function sliceAddress(address){
-  if(address) {
-    const [detail,sub,city,prov] = address.split(",")
+export function sliceAddress(address) {
+  if (address) {
+    const [detail, sub, city, prov] = address.split(",");
     return {
-      detail:detail,
-      sub:sub,
-      city:city,
-      prov:prov
-    }
+      detail: detail,
+      sub: sub,
+      city: city,
+      prov: prov,
+    };
   }
 }

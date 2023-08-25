@@ -16,8 +16,8 @@ const MyEventCard = ({
   address,
   price,
   number_of_ticket,
-  terjual = 0,
-  peserta = 0,
+  ticket_count,
+  attendances_count,
 }) => {
   return (
     <Link
@@ -47,13 +47,13 @@ const MyEventCard = ({
             <div className="flex flex-row justify-between w-28">
               <p>Terjual</p>
               <p className="font-bold">
-                {terjual}/{number_of_ticket}
+                {ticket_count}/{number_of_ticket}
               </p>
             </div>
             <div className="flex flex-row justify-between w-28">
               <p>Peserta</p>
               <p className="font-bold">
-                {peserta}/{number_of_ticket}
+                {attendances_count}/{number_of_ticket}
               </p>
             </div>
           </div>
