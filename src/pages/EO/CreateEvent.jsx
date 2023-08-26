@@ -78,13 +78,10 @@ function CreateEvent() {
   async function submitCreateEvent(e) {
     e.preventDefault();
     setLoading(true);
-    //Show Data
-    // for (const pair of formData.entries()) {
-    //   console.log(pair[0], pair[1]);
-    // }
+
     axios
       .post("/events/", formData)
-      .then((res) => console.log(res.data))
+      .then((res) => {})
       .then(() => {
         toast.success("Event Berhasil dibuat");
         navigate("/myEvent");

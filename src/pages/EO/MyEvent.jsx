@@ -22,10 +22,10 @@ function MyEvent() {
     })
     .finally(()=>setLoading(false))
   }, []);
-  
-  function CekInEvent(e){
-    e.preventDefault()
-    if(!code) return toast.error("Silahkan Input Kode")
+
+  function CekInEvent(e) {
+    e.preventDefault();
+    if (!code) return toast.error("Silahkan Input Kode");
     axios
     .put('/tickets/attend',{ticket_code:code.replace(/\s/g, "")})
     .then((res)=>{
@@ -44,15 +44,20 @@ function MyEvent() {
       {/* TAB */}
       <div className="flex flex-row justify-between border-b-2 border-black border-opacity-20 text-[24px] py-3">
         Event Saya
-        <button onClick={()=>setShow(true)} className="btn-primary text-xs py-1 px-4">Cek in Event</button>
+        <button
+          onClick={() => setShow(true)}
+          className="btn-primary text-xs py-1 px-4"
+        >
+          Cek in Event
+        </button>
       </div>
       {show && (
         <ModalsInput
-        title="Cek in Event"
-        onSubmit={CekInEvent}
-        setShow={setShow}
-        setValue={setCode}
-      />
+          title="Cek in Event"
+          onSubmit={CekInEvent}
+          setShow={setShow}
+          setValue={setCode}
+        />
       )}
       {/* DATA */}
       {!loading ? (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import DataCard from "../../components/DataCard";
 import axios from "../../api/axios";
+import DataCardList from "../../Lists/DataCardList";
 
 function Data() {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -69,11 +69,7 @@ function Data() {
 
       {/* DATA */}
       {data ? (
-        <div className="flex flex-col justify-center items-center w-full gap-3">
-          {displayData?.map((eventData) => (
-            <DataCard key={eventData.user_id} {...eventData} />
-          ))}
-        </div>
+        <DataCardList displayData={displayData} />
       ) : (
         <p>Nothing to show</p>
       )}

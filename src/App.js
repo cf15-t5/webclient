@@ -33,12 +33,20 @@ function App() {
             <Route index element={<Homepage />} />
             <Route path="/event/:id" element={<EventDetail />} />
             <Route path="/eventDetail" element={<EventDetail />} />
-            
-            <Route element={<ProtectedRoutes
-                  role={["USER", "ADMIN", "EVENT_ORGANIZER"]}/>
-              }>
+
+            <Route
+              element={
+                <ProtectedRoutes
+                  role={["USER", "ADMIN", "EVENT_ORGANIZER"]}
+                  redirectPage={"/login"}
+                />
+              }
+            >
               <Route path="/ticket" element={<TiketPage />} />
-              <Route path="/historyTransaction" element={<HistoryTransaction />}/>
+              <Route
+                path="/historyTransaction"
+                element={<HistoryTransaction />}
+              />
               <Route path="/profile" element={<Profile />} />
             </Route>
 
@@ -47,7 +55,10 @@ function App() {
               <Route path="/data" element={<Data />} />
               <Route path="/data/:user_id" element={<AccountInformation />} />
               <Route path="/request" element={<Request />} />
-              <Route path="/request/event/:event_id" element={<EventApproval />}/>
+              <Route
+                path="/request/event/:event_id"
+                element={<EventApproval />}
+              />
             </Route>
 
             <Route element={<ProtectedRoutes role={["EVENT_ORGANIZER"]} />}>

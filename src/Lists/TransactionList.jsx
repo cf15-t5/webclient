@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TransactionCard from "../components/TransactionCard";
-import axios from "../api/axios";
 
 function TransactionList() {
   const [data, setData] = useState([]);
@@ -14,13 +13,14 @@ function TransactionList() {
         console.log(err.response);
       });
   }, []);
+const TransactionList = ({ transactionHistory }) => {
   return (
-    <div className="flex flex-col justify-center items-center w-full gap-3">
-      {data.map((item) => {
-        return <TransactionCard {...item} key={item.transaction_id} />;
-      })}
-    </div>
+    <>
+      {transactionHistory.map((history) => (
+        <TransactionCard {...history} key={history.transaction_id} />
+      ))}
+    </>
   );
-}
+};
 
 export default TransactionList;

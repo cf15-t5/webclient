@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import Tiket from '../components/Tiket'
 import axios from '../api/axios'
 import ModalsTicketInfo from '../components/ModalsTicketInfo'
 import TiketList from '../Lists/TiketList'
 
 function TiketPage() {
-  const [show,setShow] = useState(false)
-  const [selected, setSelected] = useState()
-  const [ data , setData ] = useState([])
-  
-  useEffect(()=>{
-    axios
-    .get('/tickets/my')
-    .then((res)=>{
-      setData(res.data.data)
-    })
-    .catch((err)=>{
-      console.log(err.response)
-    })
-  },[])
+  const [show, setShow] = useState(false);
+  const [selected, setSelected] = useState();
+  const [data, setData] = useState([]);
 
-  function ticketDetail(data){
-    setSelected(data)
-    setShow(true)
+  useEffect(() => {
+    axios
+      .get("/tickets/my")
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  }, []);
+
+  function ticketDetail(data) {
+    setSelected(data);
+    setShow(true);
   }
 
   return (
@@ -38,9 +37,10 @@ function TiketPage() {
           />
         )}
 
+        {show && <ModalsTicketInfo data={selected} setShow={setShow} />}
       </div>
     </section>
-  )
+  );
 }
 
-export default TiketPage
+export default TiketPage;

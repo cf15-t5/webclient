@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CardEvent from "../components/CardEvent";
+import EventCard from "../components/EventCard";
 import axios from "../api/axios";
 import { toast } from "react-hot-toast";
 import { isDateExceed } from "../utils/dateProcess";
@@ -65,7 +65,7 @@ function EventList({ filter }) {
     <div className="flex flex-wrap gap-5 justify-center ">
       {displayData?.map((event) => {
         return (
-          <CardEvent
+          <EventCard
             id={event.event_id}
             Img={event.poster_path}
             EventTitle={event.title}
