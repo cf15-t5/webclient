@@ -6,7 +6,7 @@ import {
   formatToIDRCurrency,
 } from "../../utils/stringProcess";
 import Dropdown from "../../components/Dropdown";
-import TransactionCard from "../../components/TransactionCard";
+import TransactionList from "../../Lists/TransactionList";
 
 const AccountInformation = () => {
   const { user_id } = useParams();
@@ -178,12 +178,7 @@ const AccountInformation = () => {
                 </div>
                 <div className="flex flex-col w-full gap-2 h-[50vh] overflow-y-auto bg-gray-100 rounded-lg p-5">
                   {transactionHistory.length !== 0 ? (
-                    transactionHistory.map((history) => (
-                      <TransactionCard
-                        {...history}
-                        key={history.transaction_id}
-                      />
-                    ))
+                    <TransactionList transactionHistory={transactionHistory} />
                   ) : (
                     <p className="text-center">
                       Tidak ada transaksi pada akun ini

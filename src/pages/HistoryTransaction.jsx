@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TransactionList from "../Lists/TransactionList";
+import MyTransactionList from "../Lists/MyTransactionList";
 import Dropdown from "../components/Dropdown";
 
 function HistoryTransaction() {
@@ -20,7 +20,7 @@ function HistoryTransaction() {
             setValue={handleChangeDateOrder}
           />
         </div>
-        <TransactionList dateOrder={dateOrder} />
+        <MyTransactionList dateOrder={dateOrder} />
       </div>
     </section>
   );
