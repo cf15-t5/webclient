@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import EventList from "../Lists/EventList";
-import axios from "../api/axios";
+import CategoryDropdown from "../components/CategoryDropdown";
 
 function Homepage() {
   const [filter, setFilter] = useState({
@@ -9,34 +9,19 @@ function Homepage() {
     tanggal: "",
     lokasi: "",
   });
-  const [listKategori, setlistKategori] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      axios
-        .get(`/categories/`)
-        .then((res) => {
-          setlistKategori([...res.data.data]);
-        })
-        .catch((err) => {
-          console.log(err);
-          setlistKategori([]);
-        });
-    }
-
-    fetchData();
-  }, []);
 
   return (
     <section className="h-screen">
       <div className=" w-full h-3/4 relative">
         <img
-          src='/icons/imgHomepage.png'
+          src="/icons/imgHomepage.png"
           className="h-full w-full object-cover object-center absolute brightness-75"
           alt="poster"
         />
         <div className="h-full text-center flex items-center justify-center relative">
-          <h1 className="text-4xl mx-10 font-extrabold md:text-5xl font-sans text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-400">SELAMAT DATANG DI SETIKET</h1>
+          <h1 className="text-4xl mx-10 font-extrabold md:text-5xl font-sans text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-400">
+            SELAMAT DATANG DI SETIKET
+          </h1>
         </div>
       </div>
       <div className="md:mx-20 md:-mt-14 relative shadow-lg">
@@ -52,7 +37,7 @@ function Homepage() {
               <input
                 type="text"
                 id="nameEvent"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 d"
+                className="input-field py-2"
                 onChange={(e) => {
                   setFilter({ ...filter, namaEvent: e.target.value });
                 }}
@@ -69,17 +54,13 @@ function Homepage() {
               <select
                 value={filter.kategori}
                 id="location"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                className="input-field"
                 onChange={(e) => {
                   setFilter({ ...filter, kategori: e.target.value });
                 }}
               >
                 <option value={""}>Pilih kategori</option>
-                {listKategori.map((kategori) => (
-                  <option key={kategori.category_id} value={kategori.name}>
-                    {kategori.name}
-                  </option>
-                ))}
+                <CategoryDropdown isHomepage={true} />
               </select>
             </div>
             <div className="flex-grow">
@@ -92,7 +73,7 @@ function Homepage() {
               <input
                 type="date"
                 id="date"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 d"
+                className="input-field py-2"
                 onChange={(e) => {
                   setFilter({ ...filter, tanggal: e.target.value });
                 }}
@@ -109,7 +90,7 @@ function Homepage() {
               <input
                 type="text"
                 id="location"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 d"
+                className="input-field py-2"
                 onChange={(e) => {
                   setFilter({ ...filter, lokasi: e.target.value });
                 }}

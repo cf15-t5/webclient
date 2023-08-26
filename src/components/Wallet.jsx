@@ -40,25 +40,19 @@ function Wallet({data}) {
   }
 
   return (
-    <div className="bg-white px-4 py-6 rounded-xl">
+    <div className="bg-white px-4 py-6 rounded-xl shadow-md">
       <h6 className="inline">Balance</h6>
       <h6 className="inline font-bold ms-4">
         {formatToIDRCurrency(data?.balance)}
       </h6>
       <div className="relative my-3">
-        <label
-          for="value"
-          className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-        >
-          Nominal
-        </label>
         <input
           onChange={(e) => setValue(parseInt(e.target.value))}
           type="number"
           id="value"
           required
-          className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
+          className="input-field"
+          placeholder="Nominal"
         />
       </div>
       <div className="flex justify-end gap-3">

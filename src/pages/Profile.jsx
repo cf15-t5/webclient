@@ -32,9 +32,9 @@ function Profile() {
         <div className='col-span-3 md:col-span-1'>
           <Wallet data={data}/>
         </div>
-        <div className='col-span-3 md:col-span-1 mt-3 md:mt-0'>
+        <div className='col-span-3 md:col-span-2 lg:col-span-1 mt-3 md:mt-0'>
             <DetailAkun data={data}/>
-          <button onClick={()=>signOut()} className='mt-3 bg-white hover:bg-gray-200 rounded-xl py-2 w-full text-start'>
+          <button onClick={()=>signOut()} className='mt-3 bg-white hover:bg-gray-200 rounded-xl py-2 w-full text-start shadow-md'>
             <img className='inline ms-3' src='/icons/iconLogout.png' alt='iconLogout'/>
             <span className='ms-4'>Log Out</span>
           </button>

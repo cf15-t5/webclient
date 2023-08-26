@@ -8,11 +8,13 @@ import {
   capitalizeFirstLetter,
 } from "../utils/stringProcess";
 import { toast } from "react-hot-toast";
+import { getAuth } from "../utils/getAuth";
 
 function EventDetail() {
   const { id } = useParams();
   const [eventDetail, setEventDetail] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [userRole, setUserRole] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,13 +23,32 @@ function EventDetail() {
     });
   }, [id]);
 
+  useEffect(() => {
+    async function getRole() {
+      try {
+        const role = await getAuth();
+        setUserRole(role);
+      } catch (error) {
+        setUserRole("UNREGISTERED");
+      }
+    }
+    getRole();
+  }, []);
+
   function BuyTicket() {
-    if(eventDetail.status !== "APPROVED") return toast.error("Event tidak bisa dibeli")
+    if (userRole === "EVENT_ORGANIZER") {
+      return toast.error("Event Organizer tidak dapat membeli tiket");
+    } else if (userRole === "ADMIN") {
+      return toast.error("Admin tidak dapat membeli tiket");
+    }
+    if (eventDetail.status !== "APPROVED")
+      return toast.error("Event tidak bisa dibeli");
     setLoading(true);
     axios
       .post("/tickets/", { event_id: id })
       .then(() => {
         toast.success("Pembelian Berhasil");
+        navigate("/ticket");
       })
       .catch((err) => {
         if (err.response.status === 500) {
@@ -63,16 +84,23 @@ function EventDetail() {
             <h2 className="font-bold text-3xl">{eventDetail.title}</h2>
             <div className="my-3">
               <div>
-                <img className="inline" src='/icons/location.png' alt="iconLoc" />
+                <img
+                  className="inline"
+                  src="/icons/location.png"
+                  alt="iconLoc"
+                />
                 <span className="ms-2">{eventDetail.address}</span>
               </div>
               <div className="mt-2">
-                <img className="inline" src='/icons/calendar.png' alt="iconDate" />
+                <img
+                  className="inline"
+                  src="/icons/calendar.png"
+                  alt="iconDate"
+                />
                 <span className="ms-2">
                   {dateToDDMonthYYYY(eventDetail.date_of_event)}
                 </span>
               </div>
-              
             </div>
           </div>
 

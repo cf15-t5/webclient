@@ -50,7 +50,7 @@ function DetailAkun({data}) {
   }
 
   return (
-    <div className='bg-white p-4 rounded-xl flex justify-center flex-col'>
+    <div className='bg-white p-4 rounded-xl flex justify-center flex-col shadow'>
       <div className='self-center'>
         <img 
           src={isCompany(data.role)?"/icons/building-logo.png":"/icons/iconProfile.png"} 
