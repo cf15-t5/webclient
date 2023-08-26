@@ -1,9 +1,7 @@
 import React from "react";
-import EODefaultProfile from "../assets/iconBuilding.png";
-import UserDefaultProfile from "../assets/iconProfile.png";
 import { Link } from "react-router-dom";
 
-const DataCard = ({ name, email, imageUrl = null, role, user_id }) => {
+const DataCard = ({ name, email, role, user_id }) => {
   return (
     <Link
       to={`/data/${user_id}`}
@@ -11,13 +9,7 @@ const DataCard = ({ name, email, imageUrl = null, role, user_id }) => {
     >
       <div className="flex flex-row justify-center items-center gap-4">
         <img
-          src={
-            imageUrl === null
-              ? role === "USER"
-                ? UserDefaultProfile
-                : EODefaultProfile
-              : imageUrl
-          }
+          src={role === "USER" ? "/icons/iconProfile.png" : '/icons/building-logo.png'}
           alt="building"
           className="w-[40px]"
         />

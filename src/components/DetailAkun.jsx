@@ -1,33 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import iconProfileUser from '../assets/iconProfile.png'
-import iconProfileEO from '../assets/iconBuilding.png'
 import axios from '../api/axios'
 import { toast } from 'react-hot-toast'
 import { NavLink } from 'react-router-dom'
 
-function DetailAkun() {
-  const [data,setData] = useState({
+function DetailAkun({data}) {
+  const [value,setValue] = useState({
     name:"",
     email:"",
     password:"",
-    role:""
   })
-
   useEffect(()=>{
-    axios
-    .get('/auth/me')
-    .then((res)=>{
-      setData({
-        name:res.data.data.name,
-        email:res.data.data.email,
-        role:res.data.data.role
-      })
-    })
-  },[])
+    if (data) {
+      setValue({
+        name: data.name || "",
+        email: data.email || "",
+        password: "",
+      });
+    }
+  },[data])
 
   const handleChange=(e)=>{
     const {name,value} = e.target
-    setData((prev)=>{
+    setValue((prev)=>{
       return {
         ...prev,
         [name]:value
@@ -38,9 +32,9 @@ function DetailAkun() {
     e.preventDefault()
     axios
     .post('/users/update-profile',{
-      name:data.name,
-      email:data.email,
-      password:data.password
+      name:value.name,
+      email:value.email,
+      password:value.password
     })
     .then(()=>{
       toast.success("Data Berhasil diupdate")
@@ -59,7 +53,7 @@ function DetailAkun() {
     <div className='bg-white p-4 rounded-xl flex justify-center flex-col'>
       <div className='self-center'>
         <img 
-          src={isCompany(data.role)?iconProfileEO:iconProfileUser} 
+          src={isCompany(data.role)?"/icons/building-logo.png":"/icons/iconProfile.png"} 
           className='my-4 h-20' alt='iconProfile'
         />
       </div>
@@ -75,7 +69,7 @@ function DetailAkun() {
             id="name" 
             className="input-field" 
             name='name'
-            value={data?.name} 
+            value={value.name} 
             onChange={handleChange}
             required/>
         </div>
@@ -90,7 +84,7 @@ function DetailAkun() {
             id="email" 
             name='email'
             className="input-field" 
-            value={data?.email} 
+            value={value.email} 
             onChange={handleChange}
             required/>
         </div>

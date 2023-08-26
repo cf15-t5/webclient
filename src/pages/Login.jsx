@@ -1,35 +1,36 @@
 import React, { useState } from "react";
 import LoginImage from "../assets/imgHomepage.png";
-import EOLogoRegister from "../assets/eoRegister.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
-  const [loading,setLoading] = useState(false)
-  const Login = async (e)=>{
+  const [loading, setLoading] = useState(false);
+  const Login = async (e) => {
     e.preventDefault();
-    setLoading(true)
-    axios.post("/auth/login",data)
-    .then((res) => {
-      localStorage.setItem("SE_TIKET", res.data.data.token);
-      toast.success("Berhasil Login");
-      navigate('/')
-      window.location.reload()
-    })
-    .catch((err)=>{
-      console.log(err.response)
-      toast.error("Gagal Masuk")
-    })
-    .finally(()=>{setLoading(false)})
-  }
+    setLoading(true);
+    axios
+      .post("/auth/login", data)
+      .then((res) => {
+        localStorage.setItem("SE_TIKET", res.data.data.token);
+        toast.success("Berhasil Login");
+        navigate("/");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err.response);
+        toast.error("Gagal Masuk");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white">
@@ -90,7 +91,7 @@ const Login = () => {
             className="text-[14px] w-full flex flex-row justify-center items-center gap-2 p-2 bg-primary-100 rounded-md text-primary-500 mt-20 hover:bg-slate-100"
           >
             <img
-              src={EOLogoRegister}
+              src="/icons/eoRegister.png"
               className="w-[28px] h-auto"
               alt="iconEORegister"
             />

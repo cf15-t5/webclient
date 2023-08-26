@@ -17,7 +17,7 @@ function TiketPage() {
     .catch((err)=>{
       console.log(err.response)
     })
-  })
+  },[])
 
   function ticketDetail(data){
     setSelected(data)

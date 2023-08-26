@@ -29,7 +29,7 @@ const Dropdown = ({ options, value, setValue }) => {
         <div className="absolute right-0 transition-all shadow-lg z-10">
           <ul className=" bg-white rounded-md">
             {options.map((option) => (
-              <li>
+              <li key={option}>
                 <button
                   className="py-2 px-4 hover:bg-gray-50"
                   onClick={() => {

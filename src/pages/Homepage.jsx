@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import imageHome from "../assets/imgHomepage.png";
 import EventList from "../Lists/EventList";
 import axios from "../api/axios";
 
@@ -29,14 +28,19 @@ function Homepage() {
   }, []);
 
   return (
-    <section className="h-[80vh]">
-      <img
-        src={imageHome}
-        className="h-2/4 w-full object-cover object-center"
-        alt="poster"
-      />
-      <div className="w-screen relative">
-        <div className="bg-white w-full md:absolute mx-auto md:left-40 md:right-40 md:-top-12 md:rounded-lg md:w-fit ">
+    <section className="h-screen">
+      <div className=" w-full h-3/4 relative">
+        <img
+          src='/icons/imgHomePage.png'
+          className="h-full w-full object-cover object-center absolute brightness-75"
+          alt="poster"
+        />
+        <div className="h-full text-center flex items-center justify-center relative">
+          <h1 className="text-4xl mx-10 font-extrabold md:text-5xl font-sans text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-400">SELAMAT DATANG DI SETIKET</h1>
+        </div>
+      </div>
+      <div className="md:mx-20 md:-mt-14 relative shadow-lg">
+        <div className="bg-white w-full rounded-lg">
           <form className="flex gap-5 p-5 flex-wrap md:flex-nowrap">
             <div className="flex-grow">
               <label
@@ -63,7 +67,6 @@ function Homepage() {
                 Kategori
               </label>
               <select
-                defaultValue={""}
                 value={filter.kategori}
                 id="location"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
@@ -72,8 +75,8 @@ function Homepage() {
                 }}
               >
                 <option value={""}>Pilih kategori</option>
-                {listKategori.map((kategori, index) => (
-                  <option key={index} value={kategori.name}>
+                {listKategori.map((kategori) => (
+                  <option key={kategori.category_id} value={kategori.name}>
                     {kategori.name}
                   </option>
                 ))}
@@ -116,7 +119,7 @@ function Homepage() {
           </form>
         </div>
       </div>
-      <div className="md:px-16 py-3 md:py-20 bg-gray-200">
+      <div className="md:px-16 py-3 mt-10 bg-gray-200">
         <EventList filter={filter} />
       </div>
     </section>

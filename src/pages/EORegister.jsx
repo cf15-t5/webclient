@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import RegisterImage from "../assets/imgHomepage.png";
-import EOLogoRegister from "../assets/eoRegisterWaiting.png";
 import FormRegisterEO from "../components/register-form/FormRegisterEO";
 
 const EORegister = () => {
@@ -27,7 +26,7 @@ const EORegister = () => {
             </p>
             <button className="text-[14px] w-full flex flex-row justify-center items-center gap-2 p-2 bg-primary-100 rounded-md mt-5">
               <img
-                src={EOLogoRegister}
+                src="/icons/eoRegisterWaiting.png"
                 className="w-[28px] h-auto"
                 alt="iconEI"
               />

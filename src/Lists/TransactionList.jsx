@@ -17,8 +17,8 @@ function TransactionList() {
   // console.log(data)
   return (
     <div className="flex flex-col justify-center items-center w-full gap-3">
-      {data.map((item, index) => {
-        return <TransactionCard {...item} key={index} />;
+      {data.map((item) => {
+        return <TransactionCard {...item} key={item.transaction_id} />;
       })}
     </div>
   );

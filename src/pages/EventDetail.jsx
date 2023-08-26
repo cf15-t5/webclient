@@ -24,6 +24,7 @@ function EventDetail() {
   }, [id]);
 
   function BuyTicket() {
+    if(eventDetail.status !== "APPROVED") return toast.error("Event tidak bisa dibeli")
     setLoading(true);
     axios
       .post("/tickets/", { event_id: id })
@@ -40,6 +41,7 @@ function EventDetail() {
       })
       .finally(() => setLoading(false));
   }
+
   return (
     <section className="relative pb-[100px] md:pb-10 ">
       {/* Event Poster */}
@@ -74,7 +76,7 @@ function EventDetail() {
 
           <div className="bg-white fixed flex justify-between p-3 bottom-0 w-full md:bg-transparent md:relative md:inline md:w-fit">
             <h4 className="text-red-400 font-bold ms-2 md:ms-0 my-auto text-2xl mb-2">
-              IDR {formatToIDRCurrency(eventDetail.price)}
+              {formatToIDRCurrency(eventDetail.price)}
             </h4>
             <button
               onClick={() => BuyTicket()}

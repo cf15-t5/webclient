@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import MyEventCard from "../../components/MyEventCard";
 import axios from "../../api/axios";
-import ModalsAdd from "../../components/ModalsAdd";
+import ModalsInput from "../../components/ModalsInput";
 import { toast } from "react-hot-toast";
 
 function MyEvent() {
@@ -25,6 +25,7 @@ function MyEvent() {
     axios
     .put('/tickets/attend',{ticket_code:code})
     .then((res)=>{
+      console.log(res.data)
       toast.success('Berhasil Cek In')
       window.location.reload()
     })
@@ -42,7 +43,7 @@ function MyEvent() {
         <button onClick={()=>setShow(true)} className="btn-primary text-xs py-1 px-4">Cek in Event</button>
       </div>
       {show && (
-        <ModalsAdd
+        <ModalsInput
         title="Cek in Event"
         onSubmit={CekInEvent}
         setShow={setShow}

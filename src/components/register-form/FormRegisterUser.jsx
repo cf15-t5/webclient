@@ -1,5 +1,4 @@
 import React,{useState} from 'react'
-import EOLogoRegister from "../../assets/eoRegister.png";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast";
@@ -121,7 +120,7 @@ function FormRegisterUser() {
         className="text-[14px] w-full flex flex-row justify-center items-center gap-2 p-2 bg-primary-100 rounded-md text-primary-500 mt-5 hover:bg-blue-100"
       >
         <img
-          src={EOLogoRegister}
+          src="/icons/eoRegister.png"
           className="w-[28px] h-auto"
           alt="iconEO"
         />

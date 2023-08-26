@@ -52,9 +52,9 @@ function Data() {
     <div className="flex flex-col w-full min-h-screen py-5 px-5 sm:px-12 gap-5">
       {/* TAB */}
       <div className="flex flex-row border-b-2 border-black border-opacity-20">
-        {tabList.map((tab, index) => (
+        {tabList.map((tab) => (
           <button
-            key={index}
+            key={tab.tabId}
             onClick={() => setSelectedTab(tab.tabId)}
             className={` ${
               selectedTab === tab.tabId
@@ -70,8 +70,8 @@ function Data() {
       {/* DATA */}
       {data ? (
         <div className="flex flex-col justify-center items-center w-full gap-3">
-          {displayData?.map((eventData, index) => (
-            <DataCard key={index} {...eventData} />
+          {displayData?.map((eventData) => (
+            <DataCard key={eventData.user_id} {...eventData} />
           ))}
         </div>
       ) : (

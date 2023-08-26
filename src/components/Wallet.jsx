@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import axios from "../api/axios";
 import { toast } from "react-hot-toast";
-import useAuth from "../context/AuthContext";
 import { formatToIDRCurrency } from "../utils/stringProcess";
 
-function Wallet() {
+function Wallet({data}) {
   const [value, setValue] = useState(0);
   const [loading, setLoading] = useState("");
-  const { getData } = useAuth();
 
   function topUp() {
-    if (value < 0) return toast.error("Nominal tidak Valid");
+    if (value < 0 || !value) return toast.error("Nominal tidak Valid");
     setLoading(true);
     axios
       .post("/users/topup", { nominal: value })
@@ -26,7 +24,7 @@ function Wallet() {
   }
 
   function withdraw() {
-    if (value < 0) return toast.error("Nominal tidak Valid");
+    if (value < 0 || !value) return toast.error("Nominal tidak Valid");
     setLoading(true);
     axios
       .post("/users/withdraw", { nominal: value })
@@ -45,7 +43,7 @@ function Wallet() {
     <div className="bg-white px-4 py-6 rounded-xl">
       <h6 className="inline">Balance</h6>
       <h6 className="inline font-bold ms-4">
-        {formatToIDRCurrency(getData()?.balance)}
+        {formatToIDRCurrency(data?.balance)}
       </h6>
       <div className="relative my-3">
         <label
