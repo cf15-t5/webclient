@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import iconLocation from "../assets/carbon_location.png";
-import iconDate from "../assets/Vector.png";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "../api/axios";
 import {
@@ -64,13 +62,17 @@ function EventDetail() {
           <div className="mx-7 mt-5 md:m-3">
             <h2 className="font-bold text-3xl">{eventDetail.title}</h2>
             <div className="my-3">
-              <img className="inline" src={iconLocation} alt="iconLoc" />
-              <span className="ms-2">{eventDetail.address}</span>
-              <br />
-              <img className="ms-1 inline" src={iconDate} alt="iconDate" />
-              <span className="ms-3">
-                {dateToDDMonthYYYY(eventDetail.date_of_event)}
-              </span>
+              <div>
+                <img className="inline" src='/icons/location.png' alt="iconLoc" />
+                <span className="ms-2">{eventDetail.address}</span>
+              </div>
+              <div className="mt-2">
+                <img className="inline" src='/icons/calendar.png' alt="iconDate" />
+                <span className="ms-2">
+                  {dateToDDMonthYYYY(eventDetail.date_of_event)}
+                </span>
+              </div>
+              
             </div>
           </div>
 

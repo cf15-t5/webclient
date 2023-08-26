@@ -1,5 +1,4 @@
 import React from "react";
-import RegisterImage from "../assets/imgHomepage.png";
 import FormRegisterUser from "../components/register-form/FormRegisterUser";
 
 
@@ -8,7 +7,7 @@ const Register = () => {
     <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white">
       <div className="hidden sm:block w-[50%] max-w-[600px] bg-black h-screen">
         <img
-          src={RegisterImage}
+          src='/icons/imgHomepage.png'
           className="h-full object-cover"
           alt="registerImage"
         />

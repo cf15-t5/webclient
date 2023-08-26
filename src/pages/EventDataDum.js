@@ -1,11 +1,5 @@
 import React from 'react'
 
-import imageEvent1 from "../assets/exposter.png";
-import imageEvent2 from "../assets/imgHomepage.png";
-import imageEvent3 from "../assets/exposter2.png";
-import imageEvent4 from "../assets/exposter3.jpeg";
-import imageEvent5 from "../assets/exposter4.jpeg";
-
 export default function EventDataDum() {
   const data = [
     {
@@ -19,7 +13,7 @@ export default function EventDataDum() {
       "description": "event nya bagus",
       "event_id": 2,
       "number_of_ticket": 0,
-      "poster_path": imageEvent1,
+      "poster_path": '/dummy/exposter.png',
       "price": 1000,
       "status": "APPROVED",
       "title": "DEWA 19",
