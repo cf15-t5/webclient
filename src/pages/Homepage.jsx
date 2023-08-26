@@ -31,7 +31,7 @@ function Homepage() {
     <section className="h-screen">
       <div className=" w-full h-3/4 relative">
         <img
-          src='/icons/imgHomePage.png'
+          src='/icons/imgHomepage.png'
           className="h-full w-full object-cover object-center absolute brightness-75"
           alt="poster"
         />

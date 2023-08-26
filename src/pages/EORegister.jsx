@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import RegisterImage from "../assets/imgHomepage.png";
 import FormRegisterEO from "../components/register-form/FormRegisterEO";
 
 const EORegister = () => {
@@ -9,7 +8,7 @@ const EORegister = () => {
     <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
         <img
-          src={RegisterImage}
+          src='/icons/imgHomepage.png'
           className="h-full object-cover"
           alt="imageRegister"
         />

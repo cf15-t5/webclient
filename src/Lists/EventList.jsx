@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CardEvent from "../components/CardEvent";
-import { NavLink } from "react-router-dom";
 import axios from "../api/axios";
 import { toast } from "react-hot-toast";
 import { isDateExceed } from "../utils/dateProcess";

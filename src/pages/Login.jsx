@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import LoginImage from "../assets/imgHomepage.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { toast } from "react-hot-toast";
@@ -36,7 +35,7 @@ const Login = () => {
     <div className="flex flex-col sm:flex-row justify-center items-start w-full min-h-screen bg-white">
       <div className="hidden sm:block w-[50%] max-w-[600px] h-screen">
         <img
-          src={LoginImage}
+          src='/icons/imgHomepage.png'
           className="h-full object-cover"
           alt="loginImage"
         />
