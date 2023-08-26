@@ -3,27 +3,31 @@ import MyEventCard from "../../components/MyEventCard";
 import axios from "../../api/axios";
 import ModalsInput from "../../components/ModalsInput";
 import { toast } from "react-hot-toast";
-
+import loadingCircle from '../../Assets/loading.svg'
 function MyEvent() {
   const [data, setData] = useState();
   const [show,setShow] = useState(false)
   const [code,setCode] = useState('')
+  const [ loading, setLoading ] = useState(false)
+
   useEffect(() => {
+    setLoading(true)
     axios
-      .get("/events/my")
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .get("/events/my")
+    .then((res) => {
+      setData(res.data.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(()=>setLoading(false))
   }, []);
   
   function CekInEvent(e){
     e.preventDefault()
     if(!code) return toast.error("Silahkan Input Kode")
     axios
-    .put('/tickets/attend',{ticket_code:code})
+    .put('/tickets/attend',{ticket_code:code.replace(/\s/g, "")})
     .then((res)=>{
       console.log(res.data)
       toast.success('Berhasil Cek In')
@@ -51,14 +55,16 @@ function MyEvent() {
       />
       )}
       {/* DATA */}
-      {data ? (
+      {!loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 transition-all">
-          {data.map((eventData) => (
+          {data?.map((eventData) => (
             <MyEventCard key={eventData.event_id} {...eventData} />
           ))}
         </div>
       ) : (
-        <p>Nothing to show</p>
+        <div className="flex justify-center">
+          <img src={loadingCircle} alt="loadingCircle"/>
+        </div>
       )}
     </div>
   );

@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { truncateTitle,formatToIDRCurrency,dateToDDMonthYYYY,formatPosterURL, sliceAddress } from "../utils/stringProcess";
 import { NavLink } from "react-router-dom";
-function CardEvent({ id ,Img, EventTitle, Date_of_event, Location, Price, Ticket }) {
+function CardEvent({ id ,Img, EventTitle, Date_of_event, Location, Price, Ticket, SellTicket }) {
 
   const [ statusStyle , setStatusStyle ] = useState("text-green-400")  
   const [ status , setStatus ] = useState("Tersedia Sekarang")
+  console.log(Ticket)
 
   useEffect(()=>{
     const checkStatus = (Ticket) => {
-      if( Ticket <= 0 ){
+      if( Ticket == SellTicket ){
         setStatus("Tidak Tersedia")
         setStatusStyle("text-red-400")
       }

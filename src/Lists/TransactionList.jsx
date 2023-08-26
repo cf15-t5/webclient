@@ -14,7 +14,6 @@ function TransactionList() {
         console.log(err.response);
       });
   }, []);
-  // console.log(data)
   return (
     <div className="flex flex-col justify-center items-center w-full gap-3">
       {data.map((item) => {

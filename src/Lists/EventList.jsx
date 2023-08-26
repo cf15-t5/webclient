@@ -3,6 +3,7 @@ import CardEvent from "../components/CardEvent";
 import axios from "../api/axios";
 import { toast } from "react-hot-toast";
 import { isDateExceed } from "../utils/dateProcess";
+import loadingCircle from '../Assets/loading.svg'
 
 function EventList({ filter }) {
   const [loading, setLoading] = useState(true);
@@ -10,21 +11,21 @@ function EventList({ filter }) {
   const [displayData, setDisplayData] = useState([]);
 
   useEffect(() => {
+    setLoading(true)
     axios
-      .get("/events/")
-      .then((res) => {
-        const events = res.data.data
-        const eventApprove = events.filter(
-          (event) => event.status === "APPROVED"
-        );
-        setEventData(eventApprove);
-
-      })
-      .catch((err) => {
-        console.log(err.response);
-        toast.error("Error Fetch Data");
-      })
-      .finally(() => setLoading(false));
+    .get("/events/")
+    .then((res) => {
+      const events = res.data.data
+      const eventApprove = events.filter(
+        (event) => event.status === "APPROVED"
+      );
+      setEventData(eventApprove);
+    })
+    .catch((err) => {
+      console.log(err.response);
+      toast.error("Error Fetch Data");
+    })
+    .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -58,7 +59,8 @@ function EventList({ filter }) {
     filter.namaEvent,
   ]);
 
-  if (loading) return <p className="text-center">Loading....</p>;
+  if (loading) return <p className="flex justify-center"><img src={loadingCircle} alt="loadingCircle"/></p>;
+
   return (
     <div className="flex flex-wrap gap-5 justify-center ">
       {displayData?.map((event) => {
@@ -71,6 +73,7 @@ function EventList({ filter }) {
             Price={event.price}
             Location={event.address}
             Ticket={event.number_of_ticket}
+            SellTicket={event.ticket_count}
             key={event.event_id}
           />
         );
