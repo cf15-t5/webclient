@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import EventList from "../Lists/EventList";
-import axios from "../api/axios";
 import CategoryDropdown from "../components/CategoryDropdown";
 
 function Homepage() {
@@ -11,17 +10,18 @@ function Homepage() {
     lokasi: "",
   });
 
-
   return (
     <section className="h-screen">
       <div className=" w-full h-3/4 relative">
         <img
-          src='/icons/imgHomepage.png'
+          src="/icons/imgHomepage.png"
           className="h-full w-full object-cover object-center absolute brightness-75"
           alt="poster"
         />
         <div className="h-full text-center flex items-center justify-center relative">
-          <h1 className="text-4xl mx-10 font-extrabold md:text-5xl font-sans text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-400">SELAMAT DATANG DI SETIKET</h1>
+          <h1 className="text-4xl mx-10 font-extrabold md:text-5xl font-sans text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-400">
+            SELAMAT DATANG DI SETIKET
+          </h1>
         </div>
       </div>
       <div className="md:mx-20 md:-mt-14 relative shadow-lg">
@@ -60,7 +60,7 @@ function Homepage() {
                 }}
               >
                 <option value={""}>Pilih kategori</option>
-                <CategoryDropdown/>
+                <CategoryDropdown />
               </select>
             </div>
             <div className="flex-grow">

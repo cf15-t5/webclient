@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "../../api/axios";
 import { toast } from "react-hot-toast";
 import {
@@ -35,7 +35,7 @@ function CreateEvent() {
   };
 
   const provName = getName(ProvinceData(), data.address["idProvince"]);
-  
+
   const cityName = getName(
     CityData(data.address["idProvince"]),
     data.address["idCity"]
@@ -170,7 +170,7 @@ function CreateEvent() {
                 required
               >
                 <option value={null}>Pilih kategori</option>
-                <CategoryDropdown/>
+                <CategoryDropdown />
               </select>
             </div>
             <div>
