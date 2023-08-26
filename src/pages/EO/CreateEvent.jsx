@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import { toast } from "react-hot-toast";
 import {
@@ -8,10 +8,10 @@ import {
 } from "../../api/IndonesianData";
 import { capitalizeFirstLetter } from "../../utils/stringProcess";
 import { useNavigate } from "react-router-dom";
-import CategoryDropdown from "../../components/CategoryDropdown";
 
 function CreateEvent() {
   const [loading, setLoading] = useState(false);
+  const [category, setCategory] = useState([]);
   const navigate = useNavigate();
   const [data, setData] = useState({
     title: "",
@@ -35,12 +35,10 @@ function CreateEvent() {
   };
 
   const provName = getName(ProvinceData(), data.address["idProvince"]);
-
   const cityName = getName(
     CityData(data.address["idProvince"]),
     data.address["idCity"]
   );
-
   const subName = getName(
     SubdistrictData(data.address["idCity"]),
     data.address["idSub"]
@@ -64,6 +62,15 @@ function CreateEvent() {
       },
     }));
   };
+
+  useEffect(() => {
+    axios
+      .get("/categories/")
+      .then((res) => {
+        setCategory(res.data.data);
+      })
+      .catch((err) => console.log(err.response));
+  }, []);
 
   const formData = new FormData();
   formData.append("title", data.title);
@@ -137,7 +144,6 @@ function CreateEvent() {
                   id="dropzone-file"
                   type="file"
                   className="hidden"
-                  required
                   onChange={(e) => {
                     handleChange("poster", e.target.files[0]);
                   }}
@@ -170,7 +176,13 @@ function CreateEvent() {
                 required
               >
                 <option value={null}>Pilih kategori</option>
-                <CategoryDropdown />
+                {category.map((item) => {
+                  return (
+                    <option key={item.category_id} value={item.category_id}>
+                      {item.name}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div>

@@ -1,8 +1,8 @@
-import React,{ useState, useEffect } from 'react'
-import axios from '../api/axios';
+import React, { useState, useEffect } from "react";
+import axios from "../api/axios";
 
-function CategoryDropdown() {
-  const [ listKategori, setlistKategori ] = useState([]);
+function CategoryDropdown({ isHomepage = false }) {
+  const [listKategori, setlistKategori] = useState([]);
   useEffect(() => {
     axios
       .get(`/categories/`)
@@ -15,13 +15,14 @@ function CategoryDropdown() {
       });
   }, []);
 
-  return (
-    listKategori.map((kategori) => (
-      <option key={kategori.category_id} value={kategori.name}>
-        {kategori.name}
-      </option>
-    ))
-  )
+  return listKategori.map((kategori) => (
+    <option
+      key={kategori.category_id}
+      value={isHomepage ? kategori.name : kategori.category_id}
+    >
+      {kategori.name}
+    </option>
+  ));
 }
 
-export default CategoryDropdown
+export default CategoryDropdown;

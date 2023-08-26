@@ -60,7 +60,7 @@ function Homepage() {
                 }}
               >
                 <option value={""}>Pilih kategori</option>
-                <CategoryDropdown />
+                <CategoryDropdown isHomepage={true} />
               </select>
             </div>
             <div className="flex-grow">
