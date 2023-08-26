@@ -26,7 +26,7 @@ function NavigationBar() {
   const FirstNameUser = userLogin?.name.split(" ")[0];
   return (
     <>
-      <nav className="bg-white relative w-full z-20 top-0 left-0 border-b border-gray-200 ">
+      <nav className="bg-white sticky w-full z-20 top-0 left-0 border-b border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <NavLink to={"/"} className="flex items-center">
             <img
@@ -68,7 +68,7 @@ function NavigationBar() {
           </div>
           <div
             className={`items-center justify-between
-              ${open ? "" : "hidden" } w-full md:flex md:w-auto md:order-1 `}
+              ${open ? "" : "hidden"} w-full md:flex md:w-auto md:order-1 `}
           >
             <div className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
               <NavLink

@@ -70,7 +70,7 @@ const MyEventDetail = () => {
       </div>
 
       {/* FULL INFO */}
-      <div className="flex flex-col justify-start items-center w-full py-5 sm:px-16 sm:pt-10">
+      <div className="flex flex-col justify-start items-center w-full p-5 sm:px-16 sm:pt-10">
         <div className="flex flex-row justify-between items-start w-full border-b-[1px] border-black border-opacity-20 pb-5">
           <div className="flex flex-col justify-center items-start">
             <p className="text-[24px] font-bold leading-6">{data.title}</p>
