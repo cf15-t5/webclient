@@ -9,8 +9,6 @@ function TransactionList({ dateOrder }) {
     axios
       .get("/transactions/my")
       .then((res) => {
-        // const newData = [...res.data.data]
-
         setData(changeOrder([...res.data.data], dateOrder));
       })
       .catch((err) => {

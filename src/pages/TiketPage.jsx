@@ -15,7 +15,7 @@ function TiketPage() {
         setData(res.data.data);
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
       });
   }, []);
 
