@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import MyEventCard from "../../components/MyEventCard";
 import axios from "../../api/axios";
 import ModalsInput from "../../components/ModalsInput";
 import { toast } from "react-hot-toast";
