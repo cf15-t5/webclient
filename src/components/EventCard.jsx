@@ -19,7 +19,6 @@ function CardEvent({
 }) {
   const [statusStyle, setStatusStyle] = useState("text-green-400");
   const [status, setStatus] = useState("Tersedia Sekarang");
-  console.log(Ticket);
 
   useEffect(() => {
     const checkStatus = (Ticket) => {

@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "../../api/axios";
 import { dateToDDMonthYYYY, formatPosterURL } from "../../utils/stringProcess";
-import loadingCircle from '../../Assets/loading.svg'
+import loadingCircle from "../../Assets/loading.svg";
 
 const MyEventDetail = () => {
   const [data, setData] = useState(null);
@@ -15,14 +15,14 @@ const MyEventDetail = () => {
   useEffect(() => {
     setloadingPage(true);
     axios
-    .get(`/events/${event_id}`)
-    .then((res) => {
-      setData(res.data.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(setloadingPage(false));
+      .get(`/events/${event_id}`)
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(setloadingPage(false));
   }, [event_id]);
 
   // Function
@@ -43,10 +43,10 @@ const MyEventDetail = () => {
   if (loadingPage) {
     return (
       <div className="flex flex-col justify-center items-center w-full min-h-screen">
-        <img src={loadingCircle} alt="loadingCircle"/>
+        <img src={loadingCircle} alt="loadingCircle" />
       </div>
     );
-  } 
+  }
 
   return (
     <div className="flex flex-col justify-start items-center w-full min-h-screen">
@@ -119,13 +119,13 @@ const MyEventDetail = () => {
           <div className="text-right">
             <p>Tiket yang terjual</p>
             <p className="font-bold">
-              {data.ticket_count}/{data.number_of_ticket}
+              {data?.ticket_count}/{data?.number_of_ticket}
             </p>
           </div>
           <div className="text-right">
             <p>Informasi Peserta</p>
             <p className="font-bold">
-              {data.attendances_count}/{data.number_of_ticket}
+              {data?.attendances_count}/{data?.number_of_ticket}
             </p>
           </div>
         </div>

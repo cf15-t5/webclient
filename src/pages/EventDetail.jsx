@@ -8,11 +8,13 @@ import {
   capitalizeFirstLetter,
 } from "../utils/stringProcess";
 import { toast } from "react-hot-toast";
+import { getAuth } from "../utils/getAuth";
 
 function EventDetail() {
   const { id } = useParams();
   const [eventDetail, setEventDetail] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [userRole, setUserRole] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +23,24 @@ function EventDetail() {
     });
   }, [id]);
 
+  useEffect(() => {
+    async function getRole() {
+      try {
+        const role = await getAuth();
+        setUserRole(role);
+      } catch (error) {
+        setUserRole("UNREGISTERED");
+      }
+    }
+    getRole();
+  }, []);
+
   function BuyTicket() {
+    if (userRole === "EVENT_ORGANIZER") {
+      return toast.error("Event Organizer tidak dapat membeli tiket");
+    } else if (userRole === "ADMIN") {
+      return toast.error("Admin tidak dapat membeli tiket");
+    }
     if (eventDetail.status !== "APPROVED")
       return toast.error("Event tidak bisa dibeli");
     setLoading(true);
