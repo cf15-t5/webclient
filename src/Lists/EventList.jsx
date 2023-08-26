@@ -61,19 +61,19 @@ function EventList({ filter }) {
 
   if (loading) return <p className="text-center">Loading....</p>;
   return (
-    <div className="flex flex-wrap justify-center gap-5 h-full">
+    <div className="flex flex-wrap gap-5 justify-center ">
       {displayData?.map((event) => {
         return (
-          <NavLink to={`/event/${event.event_id}`} key={event.event_id}>
-            <CardEvent
-              Img={event.poster_path}
-              EventTitle={event.title}
-              Date_of_event={event.date_of_event}
-              Price={event.price}
-              Location={event.address}
-              Ticket={event.number_of_ticket}
-            />
-          </NavLink>
+          <CardEvent
+            id={event.event_id}
+            Img={event.poster_path}
+            EventTitle={event.title}
+            Date_of_event={event.date_of_event}
+            Price={event.price}
+            Location={event.address}
+            Ticket={event.number_of_ticket}
+            key={event.event_id}
+          />
         );
       })}
     </div>
