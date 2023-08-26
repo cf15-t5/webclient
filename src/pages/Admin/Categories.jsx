@@ -37,7 +37,6 @@ function Categories() {
 
   function createCategory(e) {
     e.preventDefault();
-    console.log("cek");
     axios
       .post(`/categories/`, { name: value })
       .then(() => {
@@ -45,8 +44,8 @@ function Categories() {
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err.response);
-        toast.error(err.response.data);
+        console.log(err.response.data.data);
+        toast.error(err.response.data.data)
       });
   }
 

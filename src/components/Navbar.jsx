@@ -13,7 +13,8 @@ function NavigationBar() {
   };
 
   useEffect(() => {
-    axios
+    async function getMe(){
+      axios
       .get("/auth/me")
       .then((res) => {
         setUserLogin(res.data.data);
@@ -21,9 +22,104 @@ function NavigationBar() {
       .catch((err) => {
         console.log(err.response);
       });
+    }
+    getMe()
   }, []);
 
   const FirstNameUser = userLogin?.name.split(" ")[0];
+
+  const renderAuthButtons = () =>{
+    if(!userLogin){
+      return (
+        <div className="flex">
+          <NavLink to={"/login"}>
+            <button className="hidden sm:block text-black hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3">
+              Masuk
+            </button>
+          </NavLink>
+          <NavLink to={"/register"}>
+            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 ">
+              Daftar
+            </button>
+          </NavLink>
+        </div>
+      )
+    }
+    return(
+      <NavLink to={"/profile"} className="self-center mr-3">
+        <p>Halo, {FirstNameUser}</p>
+      </NavLink>
+    )
+  }
+
+  const renderNavLinks = () =>{
+    if (userLogin?.role === userRole.Admin ){
+      return(
+        <>
+          <NavLink
+            to="/categories"
+            onClick={() => setOpen(false)}
+            className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
+          >
+            Kategori
+          </NavLink>
+          <NavLink
+            to="/data"
+            onClick={() => setOpen(false)}
+            className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
+          >
+            Data
+          </NavLink>
+          <NavLink
+            to="/request"
+            onClick={() => setOpen(false)}
+            className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
+          >
+            Permintaan
+          </NavLink>
+        </>
+      )
+    } else if (userLogin?.role === userRole.EO){
+      return (
+        <>
+          <NavLink
+            to="/myEvent"
+            onClick={() => setOpen(false)}
+            className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
+          >
+            Event Saya
+          </NavLink>
+          <NavLink
+            to="/createEvent"
+            onClick={() => setOpen(false)}
+            className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
+          >
+            Buat Event
+          </NavLink>
+        </>
+      )
+    } else if (userLogin?.role === userRole.User || !userLogin) {
+      return (
+        <>
+          <NavLink
+          to="/ticket"
+          onClick={() => setOpen(false)}
+          className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
+          >
+            Tiket
+          </NavLink>
+          <NavLink
+            to="/historyTransaction"
+            onClick={() => setOpen(false)}
+            className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
+          >
+            Riwayat Transaksi
+          </NavLink>
+        </>
+      )
+    }
+  }
+
   return (
     <>
       <nav className="bg-white sticky w-full z-20 top-0 left-0 border-b border-gray-200 ">
@@ -39,25 +135,7 @@ function NavigationBar() {
             </span>
           </NavLink>
           <div className="flex md:order-2 bg-pri">
-            {!userLogin ? (
-              <div className="flex">
-                <NavLink to={"/login"}>
-                  <button className="hidden sm:block text-black hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3">
-                    Masuk
-                  </button>
-                </NavLink>
-                <NavLink to={"/register"}>
-                  <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 ">
-                    Daftar
-                  </button>
-                </NavLink>
-              </div>
-            ) : (
-              <NavLink to={"/profile"} className="self-center mr-3">
-                <p>Halo, {FirstNameUser}</p>
-              </NavLink>
-            )}
-
+            {renderAuthButtons()}
             <button
               onClick={() => setOpen(!open)}
               className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
@@ -75,65 +153,8 @@ function NavigationBar() {
                 to="/"
                 onClick={() => setOpen(false)}
                 className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
-              ></NavLink>
-
-              {userLogin?.role === userRole.Admin ? (
-                <>
-                  <NavLink
-                    to="/categories"
-                    onClick={() => setOpen(false)}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
-                  >
-                    Kategori
-                  </NavLink>
-                  <NavLink
-                    to="/data"
-                    onClick={() => setOpen(false)}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
-                  >
-                    Data
-                  </NavLink>
-                  <NavLink
-                    to="/request"
-                    onClick={() => setOpen(false)}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
-                  >
-                    Permintaan
-                  </NavLink>
-                </>
-              ) : null}
-              {userLogin?.role === userRole.EO ? (
-                <>
-                  <NavLink
-                    to="/myEvent"
-                    onClick={() => setOpen(false)}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
-                  >
-                    Event Saya
-                  </NavLink>
-                  <NavLink
-                    to="/createEvent"
-                    onClick={() => setOpen(false)}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
-                  >
-                    Buat Event
-                  </NavLink>
-                </>
-              ) : null}
-              <NavLink
-                to="/ticket"
-                onClick={() => setOpen(false)}
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 "
-              >
-                Tiket
-              </NavLink>
-              <NavLink
-                to="/historyTransaction"
-                onClick={() => setOpen(false)}
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
-              >
-                Riwayat Transaksi
-              </NavLink>
+              >Home</NavLink>
+              {renderNavLinks()}
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import TransactionCard from "../components/TransactionCard";
 
-const TransactionList = ({ transactionHistory }) => {
+function TransactionList({ transactionHistory }) {
   return (
     <>
       {transactionHistory.map((history) => (
