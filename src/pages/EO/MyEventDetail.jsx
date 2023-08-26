@@ -39,8 +39,6 @@ const MyEventDetail = () => {
       .finally(setloadingDelete(false));
   };
 
-  
-
   if (loadingPage) {
     return (
       <div className="flex flex-col justify-center items-center w-full min-h-screen">
@@ -72,7 +70,7 @@ const MyEventDetail = () => {
       </div>
 
       {/* FULL INFO */}
-      <div className="flex flex-col justify-start items-center w-full p-5 sm:px-16 sm:py-10 ">
+      <div className="flex flex-col justify-start items-center w-full py-5 sm:px-16 sm:pt-10">
         <div className="flex flex-row justify-between items-start w-full border-b-[1px] border-black border-opacity-20 pb-5">
           <div className="flex flex-col justify-center items-start">
             <p className="text-[24px] font-bold leading-6">{data.title}</p>
@@ -98,7 +96,7 @@ const MyEventDetail = () => {
           </div>
 
           {/* APPROVAL INFO */}
-          <div className="flex flex-col justify-start items-end">
+          <div className="hidden md:flex flex-col justify-start items-end">
             <p>Tiket yang terjual</p>
             <p className="font-bold">
               {data.ticket_count}/{data.number_of_ticket}
@@ -115,10 +113,30 @@ const MyEventDetail = () => {
           <p className="text-[20px] font-bold">Deskripsi</p>
           <p>{data.description}</p>
         </div>
+      </div>
 
-        {/* HARGA TIKET */}
-        <div className="flex flex-row justify-end items-center w-full py-5 gap-3 text-white">
-          <Link to={`/editEvent/${event_id}`} className="bg-primary-500 py-2 px-4 rounded-md">
+      {/* FOOTER */}
+      <div className="sticky md:relative bottom-0 bg-white md:bg-transparent flex flex-row justify-between md:justify-end items-center w-full px-5 py-2 sm:px-16">
+        <div className="md:hidden flex flex-col justify-start items-end">
+          <div className="text-right">
+            <p>Tiket yang terjual</p>
+            <p className="font-bold">
+              {data.ticket_count}/{data.number_of_ticket}
+            </p>
+          </div>
+          <div className="text-right">
+            <p>Informasi Peserta</p>
+            <p className="font-bold">
+              {data.attendances_count}/{data.number_of_ticket}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row justify-center items-end py-5 gap-3 text-white">
+          <Link
+            to={`/editEvent/${event_id}`}
+            className="bg-primary-500 py-2 px-4 rounded-md"
+          >
             Edit Event
           </Link>
           <button
